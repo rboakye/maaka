@@ -66,8 +66,7 @@ capybara-*.html
 rerun.txt
 pickle-email-*.html
 .project
-config/initializers/secret_token.rb
-
+.env
 config/settings.local.yml
 config/settings/*.local.yml
 config/environments/*.local.yml
