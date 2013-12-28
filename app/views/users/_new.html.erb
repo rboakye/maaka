@@ -1,0 +1,9 @@
+<h1>Sign Up</h1>
+<%= form_for @user, :html => {:class => "new_user form-horizontal"} do |f|%>
+    <%= render 'error_message', locals: @user %>
+    <%= render :partial => 'users/form', :locals => {:f => f} %>
+    <hr>
+    <div class="actions col-lg-8">
+      <%= f.submit 'Sign Up', :class => 'btn btn-lg btn-primary' %>
+    </div>
+<% end %>

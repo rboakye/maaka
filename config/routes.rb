@@ -1,5 +1,11 @@
-Maaka::Application.routes.draw do
+Makasa::Application.routes.draw do
+  get "access/index"
+  get "access/login"
   resources :users
+
+  get "logout" => 'access#logout'
+
+  post "access/attempt_login" => 'access#attempt_login'
 
   root 'users#index'
 

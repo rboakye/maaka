@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Maaka::Application.load_tasks
+Makasa::Application.load_tasks
