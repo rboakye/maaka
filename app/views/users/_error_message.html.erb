@@ -1,7 +1,11 @@
 <% if @user.errors.any? %>
     <div class="alert alert-info">
-      <h2><%= pluralize(@user.errors.count, "error") %> happened</h2>
+      <% if @user.errors.count > 1%>
+      <h2><%= pluralize(@user.errors.count, "error") %> on input fields</h2>
       <p>There was a problem with the following fields:</p>
+    <% else %>
+         <h2> 1 Field not valid</h2>
+    <% end %>
       <ul>
         <% @user.errors.full_messages.each do |m| %>
             <li><%= m %></li>
