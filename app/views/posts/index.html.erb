@@ -1,0 +1,33 @@
+<h1>Listing posts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Post by</th>
+      <th>Post content</th>
+      <th>Is private</th>
+      <th>Post uuid</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= post.post_by %></td>
+        <td><%= post.post_content %></td>
+        <td><%= post.is_private %></td>
+        <td><%= post.post_uuid %></td>
+        <td><%= link_to 'Show', post %></td>
+        <td><%= link_to 'Edit', edit_post_path(post) %></td>
+        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Post', new_post_path %>

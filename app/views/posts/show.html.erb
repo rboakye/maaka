@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Post by:</strong>
+  <%= @post.post_by %>
+</p>
+
+<p>
+  <strong>Post content:</strong>
+  <%= @post.post_content %>
+</p>
+
+<p>
+  <strong>Is private:</strong>
+  <%= @post.is_private %>
+</p>
+
+<p>
+  <strong>Post uuid:</strong>
+  <%= @post.post_uuid %>
+</p>
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>

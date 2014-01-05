@@ -31,6 +31,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         session[:user_id] = @user.id
+        UserMailer.welcome_email(@user).deliver
         format.html { redirect_to root_path, notice: 'User was successfully created.' }
         format.json { render action: 'index', status: :created, location: @user }
       else

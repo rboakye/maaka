@@ -1,4 +1,10 @@
 Makasa::Application.routes.draw do
+  get "my_post/index"
+  get "my_post/show"
+  get "my_post/new"
+  get "my_post/edit"
+  resources :posts
+
   get "access/index"
   get "access/login"
   resources :users
