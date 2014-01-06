@@ -4,7 +4,13 @@
   <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
 </head>
 <body>
-<h1>Thanks for signing up, <%= @user.first_name %>!</h1>
-<p>Thanks for joining Makasa community. Now sign in and share awesome things with the world!</p>
+<div>
+  <div>
+    <h1>Thanks for signing up, <%= @user.first_name %>!</h1>
+    <div><%= image_tag attachments['makasa_logo.png'].url, class: 'img-rounded' %></div>
+    <h2>You're now part of Makasa community. Now sign in and share awesome things with the world!</h2>
+    <h2><a class="btn btn-primary btn-lg" href="<%= @url %>" role="button">Sign In &raquo;</a></h2>
+  </div>
+</div>
 </body>
 </html>
