@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140102172109) do
+ActiveRecord::Schema.define(version: 20140108072934) do
 
   create_table "posts", force: true do |t|
     t.string   "post_by",                      null: false
@@ -31,6 +31,10 @@ ActiveRecord::Schema.define(version: 20140102172109) do
     t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "current_city"
+    t.string   "phone"
+    t.string   "gender"
+    t.text     "about_me"
   end
 
 end
