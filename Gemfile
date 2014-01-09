@@ -46,6 +46,16 @@ group :production do
   gem 'pg'
   gem 'rails_12factor'
 end
+
+gem 'paperclip'
+
+gem 'aws-sdk'
+
+gem 'devise', '3.0.0.rc'
+
+gem 'protected_attributes'
+
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
