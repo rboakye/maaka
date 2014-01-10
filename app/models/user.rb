@@ -1,7 +1,5 @@
 class User < ActiveRecord::Base
   has_secure_password
-  attr_accessible :avatar
-
 
   EMAIL_REGEX = /\A[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}\Z/i
   validates :first_name, :presence => true,
@@ -21,8 +19,8 @@ class User < ActiveRecord::Base
 
   validates :password_confirmation, presence: true, if: :password_digest_changed?
 
-  validates_exclusion_of :password, in: ->(user) { [user.login_name, user.first_name] },
-                         message: 'should not be the same as your login name or first name'
+#  validates_exclusion_of :password, in: ->(user) { [user.login_name, user.first_name] },
+#                         message: 'should not be the same as your login name or first name'
 
 
   # This method associates the attribute ":avatar" with a file attachment
@@ -32,4 +30,5 @@ class User < ActiveRecord::Base
       medium: '300x300>'
   }
 
+  validates_attachment :avatar, :size => { :in => 0..10.megabytes }
 end

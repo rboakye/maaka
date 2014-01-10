@@ -51,9 +51,9 @@ gem 'paperclip'
 
 gem 'aws-sdk'
 
-gem 'devise', '3.0.0.rc'
+#gem 'devise', '3.0.0.rc'
 
-gem 'protected_attributes'
+#gem 'protected_attributes'
 
 
 # Use unicorn as the app server

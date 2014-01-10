@@ -31,7 +31,11 @@
   <div class="row">
     <div class="col-xs-6 col-sm-12 col-md-12 text-center">
       <div class="personal-image">
-        <%= image_tag @user.avatar.url(:medium), class: "avatar img-thumbnail", alt: "avatar" %>
+        <% if @user.avatar_file_name?%>
+            <%= image_tag @user.avatar.url(:medium), class: "avatar img-thumbnail", alt: "#{@user.first_name}" %>
+      <% else %>
+            <%= image_tag "mystery_man.jpg", class: "avatar img-thumbnail", alt: "avatar" %>
+        <% end %>
         <p>Upload a different photo...</p>
         <%= form_for @user do |f|%>
             <div class="field">
