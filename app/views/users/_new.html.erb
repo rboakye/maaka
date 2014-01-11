@@ -1,4 +1,7 @@
-<h1>Sign Up</h1>
+<div class="page-header">
+  <h1>Sign Up <small>It is Free and Fun</small></h1>
+</div>
+
 <%= form_for @user, :html => {:class => "new_user form-horizontal"} do |f|%>
     <%= render 'error_message', locals: @user %>
     <%= render :partial => 'users/form', :locals => {:f => f} %>

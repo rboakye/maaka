@@ -1,4 +1,13 @@
 //
+#startup{
+ //margin-top: 2px;
+}
+
+.alert-danger, .alert-success{
+  margin-top: 50px;
+  margin-bottom: 0px;
+}
+
 #main-title{
     font-size: 24px !important;
 }
@@ -8,11 +17,27 @@
 }
 
 #main-wrapper{
-  margin-top: 60px;
+  margin-top: 0px;
+}
+
+#error_message ul{
+ list-style: none;
+}
+
+#error_message ul li{
+  margin: 10px 0px;
+}
+
+#error_message{
+  background-color: #b9d2e6;
+}
+
+.sign-up-form small{
+  color: #208079;
 }
 
 .profile-user-info-striped {
-  border: 1px solid #DCEBF7;
+  border: 1px solid #58d3f7;
 }
 
 .profile-user-info {

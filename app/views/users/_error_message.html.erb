@@ -1,14 +1,16 @@
 <% if @user.errors.any? %>
-    <div class="alert alert-info">
+    <div id="error_message" class="alert alert-info">
       <% if @user.errors.count > 1%>
-      <h2><%= pluralize(@user.errors.count, "error") %> on input fields</h2>
+      <h2><%= pluralize(@user.errors.count, "error") %> on sign up fields</h2>
       <p>There was a problem with the following fields:</p>
     <% else %>
-         <h2> 1 Field not valid</h2>
+       <ul>
+          <li class="text-danger"> 1 Field not valid</li>
+       </ul>
     <% end %>
       <ul>
         <% @user.errors.full_messages.each do |m| %>
-            <li><%= m %></li>
+            <li class="text-danger"><%= m %></li>
         <% end %>
       </ul>
     </div>

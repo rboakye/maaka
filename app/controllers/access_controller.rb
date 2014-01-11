@@ -13,10 +13,10 @@ class AccessController < ApplicationController
       # mark user as logged in
       session[:user_id] = authorized_user.id
       @user_session = UserSession.new(session[:user_id])
-      flash[:notice] = "You are now logged in."
+      flash[:notice] = "#{authorized_user.first_name}, you are now logged in "
       redirect_to controller: 'users', action: 'index'
     else
-      flash[:notice] = "Invalid username/password combination."
+      flash[:error] = "Invalid username/password combination."
       redirect_to controller: 'users', action: 'index'
     end
   end
@@ -26,7 +26,7 @@ class AccessController < ApplicationController
     session[:user_id] = nil
     session[:last_seen] = nil
     session[:username] = nil
-    flash[:notice] = "Logged out"
+    flash[:notice] = "Logged out successfully"
     redirect_to controller: 'users', action: 'index'
   end
 end

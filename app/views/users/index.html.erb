@@ -1,10 +1,11 @@
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <% if @user_logged_in %>
-<div class="jumbotron">
+<div id="welcome_banner" class="jumbotron">
       <div class="container">
         <h1>Welcome to Ma'kasa</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        <p><a class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>
+        <p>Need help navigating the system, click on the learn more button below or find the help menu under settings</p>
+        <p>Now you're part of this community, Kasa to the world</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
       </div>
 </div>
 <% end %>
@@ -14,7 +15,7 @@
       <div class="col-lg-6">
 
       </div>
-      <div class="col-lg-6">
+      <div class="col-lg-6 sign-up-form">
         <%= render partial: 'users/new' %>
       </div>
   <% else %>
