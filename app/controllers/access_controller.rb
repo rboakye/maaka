@@ -21,7 +21,7 @@ class AccessController < ApplicationController
       flash[:notice] = "#{authorized_user.first_name}, you are now logged in "
       redirect_to controller: 'users', action: 'index'
     else
-      flash[:error] = "Invalid username/password combination."
+      flash[:error] = "Invalid email/password combination."
       redirect_to controller: 'users', action: 'index'
     end
   end
@@ -42,6 +42,7 @@ class AccessController < ApplicationController
     session[:last_seen] = nil
     session[:user_session] = nil
     if session[:timed_out] = true
+      session[:timed_out] = false
       redirect_to controller: 'access', action: 'login_access'
     else
       redirect_to controller: 'users', action: 'index'

@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
 
   def session_active
     if session[:last_seen]
-      if session[:last_seen] < 180.minutes.ago
+      if session[:last_seen] < 240.minutes.ago
         session[:last_seen] = Time.now
         session[:timed_out] = true
         redirect_to controller: :access, action: :logout
