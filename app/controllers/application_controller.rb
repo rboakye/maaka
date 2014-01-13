@@ -2,22 +2,35 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  before_action :confirm_valid_session, :except => [:login, :attempt_alt_login]
-  before_action :session_active, :except => [:login, :attempt_alt_login]
+  before_action :confirm_valid_session, :except => [:attempt_alt_login, :logout, :login_access]
+  before_action :session_active, :except => [:attempt_alt_login,:login_access]
 
   class UserSession
-    attr_accessor :user_id
-    def initialize(id)
-      @user_id = id
+    attr_accessor :user_id, :is_active
+    def initialize(user_id)
+      @user_id = user_id
+      @is_active = false
     end
   end
 
+
+  private
+
   def confirm_valid_session
     if session[:user_id]
+      if session[:user_session] == nil
+        session[:user_session] = UserSession.new(nil)
+      else
+        @user_session = session[:user_session]
+      end
       user_info
-      true
+      return true
     else
-      false
+      if session[:user_session]
+        flash[:error] = 'login is required to access Makasa'
+        redirect_to controller: :access, action: :login_access
+      end
+      return false
     end
   end
 
@@ -34,9 +47,9 @@ class ApplicationController < ActionController::Base
 
   def session_active
     if session[:last_seen]
-      if session[:last_seen] < 60.minutes.ago
+      if session[:last_seen] < 2.minutes.ago
         session[:last_seen] = Time.now
-        @timed_out = true
+        session[:timed_out] = true
         redirect_to controller: :access, action: :logout
       else
         session[:last_seen] = Time.now
@@ -44,5 +57,13 @@ class ApplicationController < ActionController::Base
     else
       session[:last_seen] = Time.now
     end
+  end
+
+  def set_access_params
+    @user_session = UserSession.new(session[:user_id])
+    @user_session.user_id = session[:user_id]
+    @user_session.is_active = true
+    session[:user_session] = @user_session
+    session[:timed_out] = false
   end
 end

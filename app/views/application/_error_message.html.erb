@@ -1,0 +1,10 @@
+<% if object.errors.any? %>
+    <div id="error_message" class="alert alert-info">
+      <h2><%= pluralize(object.errors.count, "error") %> on sign up form</h2>
+      <ul>
+        <% object.errors.full_messages.each do |m| %>
+            <li class="text-danger"><%= m %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>

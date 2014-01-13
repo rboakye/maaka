@@ -2,11 +2,12 @@
     <div class="panel-heading">
       <strong>Basic Information</strong>
       <div class="pull-right">
-        <strong>Last Update on </strong> <%=  @user.updated_at.in_time_zone('Eastern Time (US & Canada)').to_s(:long) %> EST
+        <strong>Last Update: </strong> <span class="text-primary"><%=  time_ago_in_words(@user.updated_at) %> ago </span>
       </div>
     </div>
   <%= form_for @user, :html => {:class => "form-horizontal form-border"} do |f| %>
-    <div class="panel-body">
+      <%= error_messages_for(@user) %>
+      <div class="panel-body">
       <div class="form-group">
         <label class="control-label col-md-2">First Name</label>
         <div class="col-md-10">
@@ -50,6 +51,12 @@
             <span class="custom-radio"></span>
             Female
           </label>
+        </div><!-- /.col -->
+      </div><!-- /form-group -->
+      <div class="form-group">
+        <label class="control-label col-md-2">Birth Date</label>
+        <div class="col-md-10">
+          <%= f.date_select :birth_date, {order: [:day,:month,:year], start_year: 1950}, {:class => 'form-control col-md-3 input-lg date_field'} %>
         </div><!-- /.col -->
       </div><!-- /form-group -->
       <div class="form-group">

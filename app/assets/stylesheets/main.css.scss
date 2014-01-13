@@ -1,6 +1,15 @@
-//
+//Application main css
+body{
+  margin-top: 50px;
+}
+
 #startup{
  //margin-top: 2px;
+}
+
+.date_field{
+  width: auto !important;
+  margin-right: 20px !important;
 }
 
 .alert-danger, .alert-success{
@@ -32,8 +41,17 @@
   background-color: #b9d2e6;
 }
 
+.field_with_errors .form-control{
+  border-color: #A94442;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+}
+
 .sign-up-form small{
   color: #208079;
+}
+
+.sign-up-button{
+  margin-top: 6px;
 }
 
 .profile-user-info-striped {

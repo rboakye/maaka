@@ -1,5 +1,10 @@
 class AccessController < ApplicationController
+  layout 'login'
+
   def index
+  end
+
+  def login_access
   end
 
   def attempt_login
@@ -12,7 +17,7 @@ class AccessController < ApplicationController
     if authorized_user
       # mark user as logged in
       session[:user_id] = authorized_user.id
-      @user_session = UserSession.new(session[:user_id])
+      set_access_params
       flash[:notice] = "#{authorized_user.first_name}, you are now logged in "
       redirect_to controller: 'users', action: 'index'
     else
@@ -23,10 +28,23 @@ class AccessController < ApplicationController
 
   def logout
     # mark user as logged out
+    if session[:user_session] != nil
+      if session[:user_session].is_active
+        if session[:timed_out]
+          flash[:error] = "You being logged out"
+        else
+          flash[:notice] = "Logged out successfully"
+        end
+        session[:user_session].is_active = false
+      end
+    end
     session[:user_id] = nil
     session[:last_seen] = nil
-    session[:username] = nil
-    flash[:notice] = "Logged out successfully"
-    redirect_to controller: 'users', action: 'index'
+    session[:user_session] = nil
+    if session[:timed_out] = true
+      redirect_to controller: 'access', action: 'login_access'
+    else
+      redirect_to controller: 'users', action: 'index'
+    end
   end
 end

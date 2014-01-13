@@ -3,7 +3,7 @@
 </div>
 
 <%= form_for @user, :html => {:class => "new_user form-horizontal"} do |f|%>
-    <%= render 'error_message', locals: @user %>
+    <%= error_messages_for(@user) %>
     <%= render :partial => 'users/form', :locals => {:f => f} %>
     <hr>
     <div class="actions col-lg-8">
