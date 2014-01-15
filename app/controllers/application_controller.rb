@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
   private
 
   def confirm_valid_session
+    url = request.original_url
     if session[:user_id]
       if session[:user_session] == nil
         @user_session = UserSession.new(session[:user_id])
@@ -27,8 +28,9 @@ class ApplicationController < ActionController::Base
         @user_session = session[:user_session]
       end
       user_info
+      @user_session.timed_out = false
       return true
-    elsif request.original_url == root_url
+    elsif url == root_url || url == users_url || url == new_user_url
       return false
     else
       flash[:error] = 'login is required to access Makasa'
