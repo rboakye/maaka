@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140112070707) do
+ActiveRecord::Schema.define(version: 20140116035225) do
 
   create_table "posts", force: true do |t|
     t.string   "post_by",                      null: false
@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(version: 20140112070707) do
     t.string   "first_name",          null: false
     t.string   "last_name",           null: false
     t.string   "email",               null: false
-    t.string   "login_name"
     t.string   "user_uuid",           null: false
     t.string   "password_digest"
     t.datetime "created_at"
@@ -40,6 +39,7 @@ ActiveRecord::Schema.define(version: 20140112070707) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.date     "birth_date"
+    t.string   "user_name"
   end
 
 end

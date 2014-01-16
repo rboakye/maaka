@@ -28,6 +28,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.user_uuid = SecureRandom.uuid.to_s
+    @user.user_name = generate_user_name(@user)
     respond_to do |format|
       if @user.save
         session[:user_id] = @user.id
@@ -78,6 +79,6 @@ class UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :login_name, :user_uuid, :password, :password_confirmation, :about_me, :phone, :current_city, :gender, :avatar, :birth_date)
+    params.require(:user).permit(:first_name, :last_name, :email, :user_name, :user_uuid, :password, :password_confirmation, :about_me, :phone, :current_city, :gender, :avatar, :birth_date)
   end
 end

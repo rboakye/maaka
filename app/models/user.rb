@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 
   validates_format_of :email, without: /NOSPAM/
 
-  validates_uniqueness_of :login_name, :message => "has already been taken"
+  validates_uniqueness_of :user_name, :message => "has already been taken"
 
   validates :password, length: { minimum: 6 },
             if: :password_digest_changed?

@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
     @current_user = User.find(session[:user_id])
     if @current_user
       @user_fullname = @current_user.first_name + ' ' + @current_user.last_name
-      @username = @current_user.login_name
+      @username = @current_user.user_name
       @user_email = @current_user.email
       @user_guid = @current_user.user_uuid
       @user_logged_in = true
