@@ -36,6 +36,7 @@ class ApplicationController < ActionController::Base
       flash[:error] = 'login is required to access Makasa'
       @user_logged_in = false
       redirect_to controller: :access, action: :login_access
+      return false
     end
   end
 
@@ -54,7 +55,9 @@ class ApplicationController < ActionController::Base
     if session[:last_seen]
       if session[:last_seen] < 240.minutes.ago
         session[:last_seen] = Time.now
-        @user_session.timed_out = true
+        if @user_session
+          @user_session.timed_out = true
+        end
         redirect_to controller: :access, action: :logout
       else
         session[:last_seen] = Time.now
