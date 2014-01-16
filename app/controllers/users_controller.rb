@@ -60,6 +60,27 @@ class UsersController < ApplicationController
     end
   end
 
+
+ def avatar_update
+      @user = User.find(params[:id])
+      has_image = true
+      if params[:user] == nil
+        has_image = false
+      end
+      respond_to do |format|
+        if has_image
+          @user.update(user_params)
+          flash[:notice] = "#{@user.first_name}, you have successfully updated your Profile Picture "
+          format.html { redirect_to user_path(id: @user.id)}
+          format.json { head :no_content }
+        else
+          flash[:error] = "#{@user.first_name}, please choose a file to upload"
+          format.html { redirect_to action: 'show' }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
+    end
+  end
+
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy

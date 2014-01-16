@@ -37,7 +37,7 @@
             <%= image_tag "mystery_man.jpg", class: "avatar img-thumbnail", alt: "avatar" %>
         <% end %>
         <p>Upload a different photo...</p>
-        <%= form_for @user do |f|%>
+        <%= form_for @user, url: {action: "avatar_update", id: @user.id} do |f|%>
             <div class="field">
               <%= f.file_field :avatar %>
             </div>
