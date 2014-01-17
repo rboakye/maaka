@@ -1,24 +1,61 @@
-<!-- Main jumbotron for a primary marketing message or call to action -->
-<% if @user_logged_in %>
-<div id="welcome_banner" class="jumbotron">
-      <div class="container">
-        <h1>Welcome to Ma'kasa</h1>
-        <p>Need help navigating the system, click on the learn more button below or find the help menu under settings</p>
-        <p>Now you're part of this community, Kasa to the world</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-      </div>
-</div>
-<% end %>
+<div id="user_wrapper" class="row">
+ <div class="col-md-2">
+   <div class="thumbnail">
+       <%= user_image(@user,'medium') %>
+     <div class="caption">
+       <h5 class="text-center"><%= @user_fullname %></h5>
+       <p class="text-center">
+         <a href="#" class="btn btn-primary btn-sm" role="button">Button</a>
+         <a href="#" class="btn btn-default btn-sm" role="button">Button</a>
+       </p>
+     </div>
+   </div>
+ </div>
 
-<div class="row">
-  <% if @user_logged_in == nil %>
-      <div class="col-lg-6">
+ <div class="col-md-10">
+   <div class="panel panel-default">
+     <%= form_for @kasa do |f| %>
+         <%= f.hidden_field :post_by, value: @user_guid  %>
+     <div class="panel-body padding-xs">
+       <%= f.text_area :post_content, class: "form-control no-border no-shadow", placeholder: "What's on your mind?", rows: "2" %>
+     </div>
+     <div class="panel-footer clearfix">
+       <%= f.submit 'Kasa', class: "btn btn-md btn-info pull-right" %>
+     </div>
+     <% end %>
+   </div><!-- /panel -->
 
-      </div>
-      <div class="col-lg-6 sign-up-form">
-        <%= render partial: 'users/new'%>
-      </div>
-  <% else %>
-      <div class="col-lg-12"></div>
-  <% end %>
+   <div class="row">
+     <% @kasas.each do |kasa|%>
+         <div class="col-md-12 timeline-item">
+           <div class="timeline-info">
+             <div class="media">
+               <%= user_image(@user,'thumb') %>
+             </div>
+           </div>
+           <div class="">
+           <div class="panel panel-default timeline-panel">
+             <div class="panel-heading">
+               <span class="text-info"><%= username_by_guid(kasa.post_by) %></span>
+               <small class="pull-right text-muted">
+                 <i class="fa fa-clock-o"></i>
+                 <%= time_ago_in_words(kasa.created_at)%> ago
+               </small>
+             </div>
+             <div class="panel-body">
+               <p>
+                 <%= kasa.post_content %>
+               </p>
+               <a class="btn btn-xs btn-default">Read more</a>
+               <a class="btn btn-xs btn-default"><i class="fa fa-reply"></i> comment</a>
+             </div>
+           </div><!-- /panel -->
+           </div>
+         </div>
+     <% end %>
+   </div>
+
+ </div>
+
 </div>
+

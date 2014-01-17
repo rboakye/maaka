@@ -19,7 +19,7 @@ class AccessController < ApplicationController
       session[:user_id] = authorized_user.id
       session[:last_seen] = Time.now
       flash[:notice] = "#{authorized_user.first_name}, you are now logged in "
-      redirect_to controller: 'users', action: 'index'
+      redirect_to root_path
     else
       flash[:error] = "Invalid email/password combination."
       redirect_to controller: 'access', action: 'login_access'

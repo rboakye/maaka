@@ -51,6 +51,8 @@ gem 'paperclip'
 
 gem 'aws-sdk'
 
+gem "font-awesome-rails", "~> 4.0.3.1"
+
 #gem 'devise', '3.0.0.rc'
 
 #gem 'protected_attributes'

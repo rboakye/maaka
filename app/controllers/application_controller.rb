@@ -47,6 +47,7 @@ class ApplicationController < ActionController::Base
       @username = @current_user.user_name
       @user_email = @current_user.email
       @user_guid = @current_user.user_uuid
+      @user_id = @current_user.id
       @user_logged_in = true
     end
   end

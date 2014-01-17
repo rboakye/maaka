@@ -1,24 +1,25 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Post by:</strong>
-  <%= @post.post_by %>
-</p>
-
-<p>
-  <strong>Post content:</strong>
-  <%= @post.post_content %>
-</p>
-
-<p>
-  <strong>Is private:</strong>
-  <%= @post.is_private %>
-</p>
-
-<p>
-  <strong>Post uuid:</strong>
-  <%= @post.post_uuid %>
-</p>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+<div class="row" id="posts">
+  <div class="timeline-item">
+    <div class="timeline-info">
+      <div class="timeline-icon bg-grey">
+        <%= image_tag 'mystery_man.jpg', class: "avatar img-thumbnail" %>
+      </div>
+    </div>
+    <div class="panel panel-default timeline-panel">
+      <div class="panel-heading">
+        <%= @post.post_by %>
+        <small class="pull-right text-muted">
+          <i class="fa fa-clock-o"></i>
+          <%= time_ago_in_words(@post.created_at)%>
+        </small>
+      </div>
+      <div class="panel-body">
+        <p>
+          <%= @post.post_content %>
+        </p>
+        <a class="btn btn-xs btn-default">Read more</a>
+        <a class="btn btn-xs btn-default"><i class="fa fa-reply"></i> comment</a>
+      </div>
+    </div><!-- /panel -->
+  </div>
+</div>

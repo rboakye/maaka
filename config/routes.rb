@@ -15,9 +15,11 @@ Makasa::Application.routes.draw do
 
   post "access/attempt_login" => 'access#attempt_login'
 
-  root 'users#index'
+  root 'posts#index'
 
   patch 'users/:id/avatar_update' => 'users#avatar_update'
+
+  get ":username" => 'users#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

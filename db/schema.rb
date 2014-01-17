@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140116035225) do
+ActiveRecord::Schema.define(version: 20140117052732) do
 
   create_table "posts", force: true do |t|
     t.string   "post_by",                      null: false
@@ -21,6 +21,15 @@ ActiveRecord::Schema.define(version: 20140116035225) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "user_posts", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_posts", ["user_id", "post_id"], name: "index_user_posts_on_user_id_and_post_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "first_name",          null: false

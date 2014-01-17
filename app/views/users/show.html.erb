@@ -65,31 +65,19 @@
 
       <div class="panel panel-default fadeInDown animation-delay3">
         <div class="panel-heading">
-          <i class="fa fa-twitter"></i> Latest Tweets
+          <i class="fa fa-globe text-success"></i>
+          <span class="text-primary">Latest Kasa's</span>
         </div>
         <ul class="list-group">
+          <% @my_kasas.each do |kasa| %>
           <li class="list-group-item">
-            <p>Welcome <a class="text-info" href="#"><%= @user.first_name + ' ' + @user.last_name%></a> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <small class="block text-muted">
-              <i class="fa fa-clock-o"></i> 6 minutes ago
+              <%= kasa.post_content %>
+            <small class="text-info">
+              <i class="fa fa-clock-o"></i>
+              <%= time_ago_in_words(kasa.created_at)%> ago
             </small>
           </li>
-          <li class="list-group-item">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <a class="text-info" href="#">@Jand Doe</a></p>
-            <small class="block text-muted">
-              <i class="fa fa-clock-o"></i> 41 minutes ago
-            </small>
-          </li>
-          <li class="list-group-item"> <p><a class="text-info" href="#">@Bill Doe</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eros nibh, viverra a dui a, gravida varius velit.</p>
-            <small class="block text-muted">
-              <i class="fa fa-clock-o"></i> 1 hour ago
-            </small>
-          </li>
-          <li class="list-group-item"> <p><a class="text-info" href="#">@John Doe</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <small class="block text-muted">
-              <i class="fa fa-clock-o"></i> 2 hours ago
-            </small>
-          </li>
+         <% end %>
         </ul><!-- /list-group -->
       </div><!-- /panel -->
     </div><!-- /.col -->
@@ -97,15 +85,6 @@
 </div><!-- /tab1 -->
 <div id="edit" class="tab-pane fade">
   <%= render 'edit', :locals => @user %>
-
-  <div class="panel panel-default">
-    <div class="panel-body padding-xs">
-      <textarea placeholder="What's on your mind?" rows="2" class="form-control no-border no-shadow"></textarea>
-    </div>
-    <div class="panel-footer clearfix">
-      <a class="btn btn-xs btn-success pull-right">Post</a>
-    </div>
-  </div><!-- /panel -->
   <div class="panel panel-default">
     <div class="panel-heading">
       About Me

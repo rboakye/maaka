@@ -5,13 +5,15 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
-    @user = User.new
+    @user = User.where(user_name: params[:username]).first
+    @kasas = @user.posts
+    @kasa = Post.new
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
+    @my_kasas = @user.posts
   end
 
   # GET /users/new
