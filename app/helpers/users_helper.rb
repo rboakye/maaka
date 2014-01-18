@@ -5,10 +5,13 @@ module UsersHelper
     # create username from first and last name
     first = user.first_name[0,1].downcase
     middle = user.last_name.downcase
-
-    match_users = User.all
-    last = rand(1..100).to_s
-    username = first + middle + last
+    same_name_users = User.search_username(first+middle)
+    if same_name_users.size > 0
+      last = same_name_users.size + 1.to_s
+      username = first + middle + last
+    else
+      username = first + middle
+    end
     return username
   end
 
@@ -32,4 +35,4 @@ module UsersHelper
      return user
   end
 
-  end
+end

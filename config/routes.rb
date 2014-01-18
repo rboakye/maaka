@@ -19,6 +19,8 @@ Makasa::Application.routes.draw do
 
   patch 'users/:id/avatar_update' => 'users#avatar_update'
 
+  patch 'users/:id/password_update' => 'users#password_update'
+
   get ":username" => 'users#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

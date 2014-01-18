@@ -1,25 +1,33 @@
 <ul class="tab-bar grey-tab">
   <li class="active">
     <a data-toggle="tab" href="#my_profile">
-        <span class="block text-center">
-            <span class="glyphicon glyphicon-home"></span>
-        </span>
+      <div class="block text-center">
+        <i class="fa fa-home fa-2x"></i>
+      </div>
       My Profile
     </a>
   </li>
   <li class="">
     <a data-toggle="tab" href="#edit">
-        <span class="block text-center">
-            <span class="glyphicon glyphicon-edit"></span>
-        </span>
+      <div class="block text-center">
+        <i class="fa fa-edit fa-2x"></i>
+      </div>
       Edit Profile
     </a>
   </li>
   <li class="">
+    <a data-toggle="tab" href="#password_edit">
+        <div class="block text-center">
+            <i class="fa fa-key fa-2x"></i>
+        </div>
+      Change Password
+    </a>
+  </li>
+  <li class="">
     <a data-toggle="tab" href="#message">
-        <span class="block text-center">
-            <span class="glyphicon glyphicon-envelope"></span>
-        </span>
+      <div class="block text-center">
+        <i class="fa fa-envelope fa-2x"></i>
+      </div>
       Messages
     </a>
   </li>
@@ -27,7 +35,7 @@
 
 <div class="padding-md">
 <div class="row">
-<div class="col-md-3 col-sm-3">
+<div class="col-md-2">
   <div class="row">
     <div class="col-xs-6 col-sm-12 col-md-12 text-center">
       <div class="personal-image">
@@ -49,7 +57,7 @@
     <!-- /.col -->
   </div><!-- /.row -->
 </div><!-- /.col -->
-<div class="col-md-9 col-sm-9">
+<div class="col-md-10 col-sm-10">
 <div class="tab-content">
 <div id="my_profile" class="tab-pane fade active in">
   <div class="row">
@@ -99,20 +107,59 @@
     </div><!-- /panel -->
   <% end %>
 </div><!-- /tab2 -->
-<div id="message" class="tab-pane fade">
+<div id="password_edit" class="tab-pane fade">
   <div class="panel panel-default">
     <div class="panel-heading">
-      Messages
+      Change Password
     </div>
-    <div class="panel-body padding-xs">
-
+      <%= form_for @user, url: {action: "password_update", id: @user.id} do |f| %>
+        <div class="panel-body padding-xs">
+        <%= error_messages_for(@user) %>
+          <div class="col-md-10 pass_field">
+        <div class="form-group">
+          <label class="control-label col-md-3">Current Password</label>
+          <div class="col-md-9">
+            <input class="form-control input-lg" type="password" name="old_password">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-10 pass_field">
+      <div class="form-group">
+        <label class="control-label col-md-3">Password</label>
+        <div class="col-md-9">
+          <%= f.password_field :password, :class => 'form-control input-lg' %>
+        </div>
+      </div>
+      </div>
+      <div class="col-md-10 pass_field">
+      <div class="form-group">
+        <label class="control-label col-md-3">Confirm Password</label>
+        <div class="col-md-9">
+          <%= f.password_field :password_confirmation, :class => 'form-control input-lg' %>
+        </div>
+      </div>
+    </div>
     </div>
     <div class="panel-footer clearfix">
+      <%= f.submit "Update",class: "btn btn-primary btn-md pull-right" %>
     </div>
-  </div><!-- /panel -->
+    <% end %>
+    </div><!-- /panel -->
+  </div><!-- /tab3 -->
+  <div id="message" class="tab-pane fade">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Messages
+      </div>
+      <div class="panel-body padding-xs">
+
+      </div>
+      <div class="panel-footer clearfix">
+      </div>
+    </div><!-- /panel -->
 
 
-</div><!-- /tab3 -->
+  </div><!-- /tab4 -->
 </div><!-- /tab-content -->
 </div><!-- /.col -->
 </div><!-- /.row -->

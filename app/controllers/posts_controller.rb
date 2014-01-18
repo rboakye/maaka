@@ -31,10 +31,12 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
         create_join(@post.id, @user_id)
-        format.html { redirect_to controller: 'posts', action: 'index', notice: "Your new 'Kasa' was successfully created." }
+        flash[:notice] = "#{@user_fullname}, your new kasa was successful"
+        format.html { redirect_to controller: 'posts', action: 'index' }
         format.json { render action: 'show', status: :created, location: @post }
       else
-        format.html { redirect_to controller: 'posts', action: 'index', error: "Creating new 'Kasa' Failed" }
+        flash[:error] = "#{@user.first_name}, creating new kasa failed "
+        format.html { redirect_to controller: 'posts', action: 'index'}
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end

@@ -71,8 +71,11 @@ class UsersController < ApplicationController
       end
       respond_to do |format|
         if has_image
-          @user.update(user_params)
-          flash[:notice] = "#{@user.first_name}, you have successfully updated your Profile Picture "
+          if @user.update(user_params)
+            flash[:notice] = "#{@user.first_name}, you have successfully updated your Profile Picture "
+          else
+            flash[:error] = "#{@user.first_name}, photo update fails"
+          end
           format.html { redirect_to user_path(id: @user.id)}
           format.json { head :no_content }
         else
@@ -80,6 +83,27 @@ class UsersController < ApplicationController
           format.html { redirect_to action: 'show' }
           format.json { render json: @user.errors, status: :unprocessable_entity }
         end
+    end
+ end
+
+  def password_update
+    @user = User.find(params[:id])
+    authorized_user = @user.authenticate(params[:old_password])
+    respond_to do |format|
+      if authorized_user && pass_help
+        if @user.update(user_params)
+          UserMailer.password_change_email(@user).deliver
+          flash[:notice] = "#{@user.first_name}, you have successfully updated your password"
+        else
+          flash[:error] = "#{@user.first_name}, password update fails, wrong password combinations"
+        end
+        format.html { redirect_to user_path(id: @user.id)}
+        format.json { head :no_content }
+      else
+        flash[:error] = "#{@user.first_name}, password update failed, wrong password combination"
+        format.html { redirect_to action: 'show', :password => "failed" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -100,8 +124,16 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def pass_help
+    if params[:user][:password] != "" && params[:user][:password_confirmation] != "" && params[:user][:password] == params[:user][:password_confirmation] && params[:user][:password].size >= 6
+      return true
+    else
+      return false
+    end
+  end
+
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :user_name, :user_uuid, :password, :password_confirmation, :about_me, :phone, :current_city, :gender, :avatar, :birth_date)
+    params.require(:user).permit(:first_name, :last_name, :email, :user_name, :user_uuid, :old_password, :password, :password_confirmation, :about_me, :phone, :current_city, :gender, :avatar, :birth_date)
   end
 end
