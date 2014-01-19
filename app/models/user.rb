@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  before_save { |user| user.user_name = user.user_name.downcase }
   has_secure_password
   has_many :user_posts, dependent: :destroy
   has_many :posts, through: :user_posts
@@ -37,6 +38,6 @@ class User < ActiveRecord::Base
   validates_attachment :avatar, :size => { :in => 0..10.megabytes }
 
 
-  scope :search_username, lambda{ |query| where("user_name like ?", "%#{query}%")}
+  scope :search_username, lambda{ |query| where("user_name like ?", "#{query}%")}
 
 end
