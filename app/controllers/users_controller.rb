@@ -1,19 +1,19 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:update, :destroy]
+  before_action :set_user_info, only: [:show, :edit]
   include UsersHelper
 
   # GET /users
   # GET /users.json
   def index
-    @user = User.where(user_name: params[:username]).first
-    @kasas = @user.posts
-    @kasa = Post.new
+    @users = User.all
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
-    @my_kasas = @user.posts
+    @kasas = @user.posts
+    @kasa = Post.new
   end
 
   # GET /users/new
@@ -23,6 +23,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    @my_kasas = @user.posts
   end
 
   # POST /users
@@ -52,7 +53,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update(user_params)
         flash[:notice] = "#{@user.first_name}, you have successfully updated your Makasa Account "
-        format.html { redirect_to user_path(id: @user.id)}
+        format.html { redirect_to "/" + @user.user_name + "/edit"}
         format.json { head :no_content }
       else
         flash[:notice] = "#{@user.first_name}, there was a problem updating your Makasa Account "
@@ -76,11 +77,11 @@ class UsersController < ApplicationController
           else
             flash[:error] = "#{@user.first_name}, photo update fails"
           end
-          format.html { redirect_to user_path(id: @user.id)}
+          format.html { redirect_to "/" + @user.user_name + "/edit"}
           format.json { head :no_content }
         else
           flash[:error] = "#{@user.first_name}, please choose a file to upload"
-          format.html { redirect_to action: 'show' }
+          format.html { redirect_to "/" + @user.user_name + "/edit" }
           format.json { render json: @user.errors, status: :unprocessable_entity }
         end
     end
@@ -97,11 +98,11 @@ class UsersController < ApplicationController
         else
           flash[:error] = "#{@user.first_name}, password update fails, wrong password combinations"
         end
-        format.html { redirect_to user_path(id: @user.id)}
+        format.html { redirect_to "/" + @user.user_name + "/edit"}
         format.json { head :no_content }
       else
         flash[:error] = "#{@user.first_name}, password update failed, wrong password combination"
-        format.html { redirect_to action: 'show', :password => "failed" }
+        format.html { redirect_to "/" + @user.user_name + "/edit?password=failed" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -113,7 +114,7 @@ class UsersController < ApplicationController
     @user.destroy
     respond_to do |format|
       flash[:notice] = "User #{@user.first_name} is deleted from Makasa"
-      format.html { redirect_to users_url }
+      format.html { redirect_to root_path }
       format.json { head :no_content }
     end
   end
@@ -122,6 +123,10 @@ class UsersController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def set_user_info
+    @user = User.where(:user_name => params[:username]).first
   end
 
   def pass_help

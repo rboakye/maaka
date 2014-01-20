@@ -1,0 +1,166 @@
+<ul class="tab-bar grey-tab">
+  <li class="active">
+    <a data-toggle="tab" href="#my_profile">
+      <div class="block text-center">
+        <i class="fa fa-home fa-2x"></i>
+      </div>
+      My Profile
+    </a>
+  </li>
+  <li class="">
+    <a data-toggle="tab" href="#edit">
+      <div class="block text-center">
+        <i class="fa fa-edit fa-2x"></i>
+      </div>
+      Edit Profile
+    </a>
+  </li>
+  <li class="">
+    <a data-toggle="tab" href="#password_edit">
+      <div class="block text-center">
+        <i class="fa fa-key fa-2x"></i>
+      </div>
+      Change Password
+    </a>
+  </li>
+  <li class="">
+    <a data-toggle="tab" href="#message">
+      <div class="block text-center">
+        <i class="fa fa-envelope fa-2x"></i>
+      </div>
+      Messages
+    </a>
+  </li>
+</ul>
+
+<div class="padding-md">
+  <div class="row">
+    <div class="col-md-2">
+      <div class="row">
+        <div class="col-xs-6 col-sm-12 col-md-12 text-center">
+          <div class="personal-image">
+            <% if @user.avatar_file_name?%>
+                <%= image_tag @user.avatar.url(:medium), class: "avatar img-thumbnail", alt: "#{@user.first_name}" %>
+            <% else %>
+                <%= image_tag "mystery_man.jpg", class: "avatar img-thumbnail", alt: "avatar" %>
+            <% end %>
+            <p>Upload a different photo...</p>
+            <%= form_for @user, url: {action: "avatar_update", id: @user.id} do |f|%>
+                <div class="field">
+                  <%= f.file_field :avatar %>
+                </div>
+                <%= f.submit "Update Photo", class: "btn btn-primary" %>
+            <% end %>
+          </div>
+        </div><!-- /.col -->
+        <div></div>
+        <!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.col -->
+    <div class="col-md-10 col-sm-10">
+      <div class="tab-content">
+        <div id="my_profile" class="tab-pane fade active in">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-default fadeInDown animation-delay2">
+                <div class="panel-heading">
+                  About Me
+                </div>
+                <div class="panel-body">
+                  <p><%= @user.about_me %></p>
+                </div>
+              </div><!-- /panel -->
+
+              <div class="panel panel-default fadeInDown animation-delay3">
+                <div class="panel-heading">
+                  <i class="fa fa-globe text-success"></i>
+                  <span class="text-primary">Latest Kasa's</span>
+                </div>
+                <ul class="list-group">
+                  <% @my_kasas.each do |kasa| %>
+                      <li class="list-group-item">
+                        <%= kasa.post_content %>
+                        <small class="text-info">
+                          <i class="fa fa-clock-o"></i>
+                          <%= time_ago_in_words(kasa.created_at)%> ago
+                        </small>
+                      </li>
+                  <% end %>
+                </ul><!-- /list-group -->
+              </div><!-- /panel -->
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /tab1 -->
+        <div id="edit" class="tab-pane fade">
+          <%= render 'edit_user', :locals => @user %>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              About Me
+            </div>
+            <%= form_for @user do |f| %>
+                <div class="panel-body padding-xs">
+                  <%= f.text_area :about_me, rows: "8", :class => 'form-control input-lg no-border no-shadow' %>
+                </div>
+                <div class="panel-footer clearfix">
+                  <%= f.submit 'Save', :class => 'btn btn-sm btn-success pull-right' %>
+                </div>
+                </div><!-- /panel -->
+            <% end %>
+            </div><!-- /tab2 -->
+        <div id="password_edit" class="tab-pane fade">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              Change Password
+            </div>
+            <%= form_for @user, url: {action: "password_update", id: @user.id} do |f| %>
+                <div class="panel-body padding-xs">
+                  <%= error_messages_for(@user) %>
+                  <div class="col-md-10 pass_field">
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Current Password</label>
+                      <div class="col-md-9">
+                        <input class="form-control input-lg" type="password" name="old_password">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-10 pass_field">
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Password</label>
+                      <div class="col-md-9">
+                        <%= f.password_field :password, :class => 'form-control input-lg' %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-10 pass_field">
+                    <div class="form-group">
+                      <label class="control-label col-md-3">Confirm Password</label>
+                      <div class="col-md-9">
+                        <%= f.password_field :password_confirmation, :class => 'form-control input-lg' %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel-footer clearfix">
+                  <%= f.submit "Update",class: "btn btn-primary btn-md pull-right" %>
+                </div>
+            <% end %>
+          </div><!-- /panel -->
+        </div><!-- /tab3 -->
+        <div id="message" class="tab-pane fade">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              Messages
+            </div>
+            <div class="panel-body padding-xs">
+
+            </div>
+            <div class="panel-footer clearfix">
+            </div>
+          </div><!-- /panel -->
+
+
+        </div><!-- /tab4 -->
+      </div><!-- /tab-content -->
+    </div><!-- /.col -->
+  </div><!-- /.row -->
+</div>

@@ -17,11 +17,13 @@ Makasa::Application.routes.draw do
 
   root 'posts#index'
 
+  get ':username/edit' => 'users#edit'
+
   patch 'users/:id/avatar_update' => 'users#avatar_update'
 
   patch 'users/:id/password_update' => 'users#password_update'
 
-  get ":username" => 'users#index'
+  get ":username" => 'users#show'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
