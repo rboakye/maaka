@@ -1,7 +1,7 @@
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="row">
   <% if @user_logged_in == nil %>
-      <div class="col-lg-6">
+      <div class="col-lg-6" id="home_image">
       </div>
       <div class="col-lg-6 sign-up-form">
         <%= render partial: 'users/new'%>

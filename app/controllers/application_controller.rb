@@ -32,6 +32,7 @@ class ApplicationController < ActionController::Base
       @user_session.timed_out = false
       return true
     elsif url == root_url || url == posts_url || url == new_post_url
+      @user_logged_in = false
       false
     else
       flash[:error] = 'login is required to access Makasa'
