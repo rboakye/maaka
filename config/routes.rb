@@ -13,6 +13,10 @@ Makasa::Application.routes.draw do
 
   get "login_access" => 'access#login_access'
 
+  get 'request_access' => 'access#request_access'
+
+  post "password_request" => "access#password_request"
+
   post "access/attempt_login" => 'access#attempt_login'
 
   root 'posts#index'

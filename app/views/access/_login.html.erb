@@ -6,4 +6,7 @@
       <input type="password" name="password" placeholder="Password" class="form-control">
     </div>
     <button type="submit" class="btn btn-success">Sign in</button>
+    <div class="header_links">
+      <%= link_to "Forget Password", {controller: "access", action: "request_access"}, class: "pull-right" %>
+     </div>
 <% end %>

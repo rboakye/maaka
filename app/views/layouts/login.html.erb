@@ -72,6 +72,7 @@
 </div>
 
 <!-- Main jumbotron for a primary marketing message or call to action -->
+<% if request.original_url != url_for(controller: "access",action:"request_access", only_path: false) %>
 <div class="jumbotron">
       <div class="container">
         <h1>Sign in to Ma'kasa</h1>
@@ -80,7 +81,7 @@
         <p><a class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>
       </div>
 </div>
-
+<% end %>
 
 <div class="container" id="main-wrapper">
   <!-- Example row of columns -->

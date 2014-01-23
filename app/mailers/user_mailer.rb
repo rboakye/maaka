@@ -13,7 +13,14 @@ class UserMailer < ActionMailer::Base
     @time = Time.now.to_s.humanize
     attachments['makasa_logo.png'] = File.read(Rails.root.join('app/assets/images/makasa_logo.png'))
     @url = "makasa.herokuapp.com"
-    mail(:to => @user.email, :subject => "Makasa Password Notification")
+    mail(:to => @user.email, :subject => "Makasa Password Change Notification")
+  end
+
+  def password_reset(user,password)
+    @user = user
+    @time = Time.now.to_s.humanize
+    @password = password
+    mail(:to => @user.email, :subject => "Makasa Password Reset Notification")
   end
 
   def user_notification(user)

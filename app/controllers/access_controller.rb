@@ -1,10 +1,30 @@
 class AccessController < ApplicationController
+  require 'bcrypt'
   layout 'login'
 
   def index
   end
 
   def login_access
+  end
+
+  def request_access
+  end
+
+  def password_request
+     @user = User.where(:email => params[:email]).first
+     if @user
+       random_password = Array.new(10).map { (65 + rand(58)).chr }.join
+       @user.password = random_password
+       @user.password_confirmation = random_password
+       @user.save!
+       UserMailer.password_reset(@user,random_password).deliver
+       flash[:notice] = "Email has been sent to you to follow up with accessing Makasa"
+       redirect_to root_path
+     else
+       flash[:error] = "We couldn't find Email '#{params[:email]}' in our records"
+       redirect_to root_path
+     end
   end
 
   def attempt_login
