@@ -92,7 +92,7 @@
 </div>
 
 <!-- Main jumbotron for a primary marketing message or call to action -->
-<% if @user_logged_in == nil %>
+<% if @user_logged_in == nil || @user_logged_in == false %>
 <div class="jumbotron">
       <div id="jumbotron_div" class="container">
         <h1>Sign in to Ma'kasa</h1>

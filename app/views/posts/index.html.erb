@@ -1,6 +1,6 @@
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="row">
-  <% if @user_logged_in == nil %>
+  <% if @user_logged_in == nil || @user_logged_in == false%>
       <div class="col-lg-6" id="home_image">
       </div>
       <div class="col-lg-6 sign-up-form">
