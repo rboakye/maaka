@@ -108,6 +108,22 @@ class UsersController < ApplicationController
     end
   end
 
+  def password_request_update
+    @user = User.find(params[:id])
+    respond_to do |format|
+      if @user.update(user_params)
+        UserMailer.password_change_email(@user).deliver
+        flash[:notice] = "#{@user.first_name}, you have successfully updated your password, please login"
+        format.html { redirect_to root_path}
+        format.json { head :no_content }
+      else
+        flash[:error] = "#{@user.first_name}, password update failed, wrong password combination"
+        format.html { redirect_to root_path }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy

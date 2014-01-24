@@ -72,15 +72,19 @@
 </div>
 
 <!-- Main jumbotron for a primary marketing message or call to action -->
-<% if request.original_url != url_for(controller: "access",action:"request_access", only_path: false) %>
-<div class="jumbotron">
+<% if request.original_url != url_for(controller: "access",action:"request_access", only_path: false)%>
+  <% if @pass_reset == true %>
+
+  <% else %>
+    <div class="jumbotron">
       <div class="container">
         <h1>Sign in to Ma'kasa</h1>
         <p>Makasa! Speak to the world the way you want them to listen. </p>
         <p>Start the engine and run something more unique.</p>
         <p><a class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>
       </div>
-</div>
+    </div>
+<% end %>
 <% end %>
 
 <div class="container" id="main-wrapper">

@@ -27,6 +27,12 @@ class AccessController < ApplicationController
      end
   end
 
+  def password_reset_access
+     @user = User.where(:user_uuid => params[:ref]).first
+     @temp_password = params[:access]
+     @pass_reset = true
+  end
+
   def attempt_login
     if params[:email].present? && params[:password].present?
       found_user = User.where(:email => params[:email]).first

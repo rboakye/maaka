@@ -19,6 +19,10 @@ Makasa::Application.routes.draw do
 
   post "access/attempt_login" => 'access#attempt_login'
 
+  get "access/:access/password_reset_access/:ref" => "access#password_reset_access"
+
+  patch 'users/:id/password_request_update' => 'users#password_request_update'
+
   root 'posts#index'
 
   get ':username/edit' => 'users#edit'
