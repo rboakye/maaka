@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:update, :destroy]
   before_action :set_user_info, only: [:show, :edit]
+  before_action :confirm_valid_session, :except => [:create]
+  before_action :session_active, :except => [:create]
   include UsersHelper
 
   # GET /users
