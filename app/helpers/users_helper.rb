@@ -30,6 +30,12 @@ module UsersHelper
     return name
   end
 
+  def username_id_by_guid(guid)
+    user = User.where(:user_uuid => guid).first
+    user_name = user.user_name
+    return user_name
+  end
+
   def user_by_guid(guid)
      user = User.where(:user_uuid => guid).first
      return user

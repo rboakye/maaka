@@ -38,6 +38,11 @@
 
 }
 
+.username_link:hover{
+  text-decoration: none;
+  color: #0e385a !important;
+}
+
 @media (max-width: 1200px) {
   #user_first_name{
     margin-bottom: 15px;

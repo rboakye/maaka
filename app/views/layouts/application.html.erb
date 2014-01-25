@@ -55,6 +55,9 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li>
+                <a href="/" class="home-icon"><span class="fa fa-home fa-2x"></span></a>
+            </li>
+            <li>
               <a href="/<%= @username %>"><span class="glyphicon glyphicon-user"></span> &nbsp;<%= @user_fullname %></a>
             </li>
             <li class="dropdown">
@@ -115,7 +118,7 @@
   <hr>
 
   <footer>
-    <p>&copy; Makasa Inc, 2013</p>
+    <p>&copy; Makasa Inc, <%= Time.now.year %></p>
   </footer>
 </div> <!-- /container -->
 
