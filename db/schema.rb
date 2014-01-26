@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140117052732) do
+ActiveRecord::Schema.define(version: 20140126091518) do
 
   create_table "posts", force: true do |t|
     t.string   "post_by",                      null: false
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20140117052732) do
     t.string   "post_uuid",                    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_connected", default: false
+    t.integer  "connected_id"
   end
 
   create_table "user_posts", force: true do |t|

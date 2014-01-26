@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   include PostsHelper
+  include UsersHelper
 
   # GET /posts
   # GET /posts.json
@@ -31,8 +32,29 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
         create_join(@post.id, @user_id)
-        flash[:notice] = "#{@user_fullname}, your new kasa was successful"
-        format.html { redirect_to controller: 'posts', action: 'index' }
+       # flash[:notice] = "#{@user_fullname}, your new kasa was successful"
+        format.html { redirect_to "/#{user_by_guid(@post.post_by).user_name}" }
+        format.json { render action: 'show', status: :created, location: @post }
+      else
+        flash[:error] = "#{@user.first_name}, creating new kasa failed "
+        format.html { redirect_to controller: 'posts', action: 'index'}
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # POST /posts
+  # POST /posts.json
+  def connected_post
+    @post = Post.new(post_params)
+    @post.post_uuid = SecureRandom.uuid.to_s
+    @post.is_connected = true
+    @post.connected_id = params[:connected_id]
+    respond_to do |format|
+      if @post.save
+        create_connected_join(@post.id, params[:connected_id])
+      #  flash[:notice] = "#{@user_fullname}, your new kasa was successful"
+        format.html { redirect_to "/#{User.find(@post.connected_id).user_name}" }
         format.json { render action: 'show', status: :created, location: @post }
       else
         flash[:error] = "#{@user.first_name}, creating new kasa failed "
@@ -76,6 +98,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:post_by, :post_content, :is_private, :post_uuid)
+      params.require(:post).permit(:post_by, :post_content, :is_private, :post_uuid, :connected_id)
     end
 end

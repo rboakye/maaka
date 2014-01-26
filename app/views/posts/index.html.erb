@@ -13,6 +13,7 @@
       <div class="col-lg-12">
         <div class="row" id="posts">
           <% @posts.each do |post|%>
+              <% if post.is_connected == false %>
               <div class="timeline-item">
                 <div class="timeline-info">
                   <div class="media">
@@ -21,7 +22,7 @@
                 </div>
                 <div class="panel panel-default timeline-panel">
                   <div class="panel-heading">
-                    <%= link_to username_by_guid(post.post_by),"/" + username_id_by_guid(post.post_by),class: "text-info username_link" %>
+                    <%= link_to username_by_guid(post.post_by),"/" + username_id_by_guid(post.post_by),class: "text-info" %>
                     <small class="pull-right text-muted">
                       <i class="fa fa-clock-o"></i>
                       <%= time_ago_in_words(post.created_at)%> ago
@@ -36,6 +37,7 @@
                   </div>
                 </div><!-- /panel -->
               </div>
+               <% end %>
           <% end %>
         </div>
       </div>

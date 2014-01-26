@@ -33,6 +33,8 @@ Makasa::Application.routes.draw do
 
   get ":username" => 'users#show'
 
+  post 'connected_post/:connected_id' => 'posts#connected_post'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

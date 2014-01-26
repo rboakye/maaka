@@ -53,7 +53,7 @@
           </div>
       <% end %>
      <% else %>
-      <%= form_for @kasa do |f| %>
+      <%= form_for @kasa,url: {controller: 'posts',action: 'connected_post', connected_id: @user.id } do |f| %>
           <%= f.hidden_field :post_by, value: @user_guid  %>
           <div class="panel-body padding-xs">
             <%= f.text_area :post_content, class: "form-control no-border no-shadow", placeholder: "Kasa to #{@user.first_name}", rows: "2" %>
@@ -70,13 +70,17 @@
           <div class="col-md-12 timeline-item">
             <div class="timeline-info">
               <div class="media">
-                <%= user_image(@user,'thumb') %>
+              <%= user_image(user_by_guid(kasa.post_by),'thumb') %>
               </div>
             </div>
             <div class="">
               <div class="panel panel-default timeline-panel">
                 <div class="panel-heading">
-                  <span class="text-info"><%= username_by_guid(kasa.post_by) %></span>
+                  <% if @user.user_uuid == kasa.post_by%>
+                      <span class="text-info"><%= username_by_guid(kasa.post_by) %></span>
+                <% else %>
+                    <%= link_to username_by_guid(kasa.post_by),"/" + username_id_by_guid(kasa.post_by),class: "text-info username_link" %>
+                  <% end %>
                   <small class="pull-right text-muted">
                     <i class="fa fa-clock-o"></i>
                     <%= time_ago_in_words(kasa.created_at)%> ago
