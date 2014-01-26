@@ -50,11 +50,14 @@ class PostsController < ApplicationController
     @post.post_uuid = SecureRandom.uuid.to_s
     @post.is_connected = true
     @post.connected_id = params[:connected_id]
+    @con_user = User.find(@post.connected_id)
+    @current_user = User.find(@user_id)
     respond_to do |format|
       if @post.save
         create_connected_join(@post.id, params[:connected_id])
       #  flash[:notice] = "#{@user_fullname}, your new kasa was successful"
-        format.html { redirect_to "/#{User.find(@post.connected_id).user_name}" }
+        UserMailer.user_notification(@current_user,@con_user).deliver
+        format.html { redirect_to "/#{@con_user.user_name}" }
         format.json { render action: 'show', status: :created, location: @post }
       else
         flash[:error] = "#{@user.first_name}, creating new kasa failed "
