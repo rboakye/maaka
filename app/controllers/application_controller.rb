@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   before_action :session_active, :except => [:attempt_login,:login_access, :logout, :request_access, :password_request, :password_reset_access, :password_request_update]
 
 
-  class UserSession
+  class UserAccessSession
     attr_accessor :user_id, :is_active, :timed_out
     def initialize(user_id)
       @user_id = user_id
@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
     url = request.original_url
     if session[:user_id]
       if session[:user_session] == nil
-        @user_session = UserSession.new(session[:user_id])
+        @user_session = UserAccessSession.new(session[:user_id])
         @user_session.is_active = true
         session[:user_session] = @user_session
       else
@@ -56,7 +56,7 @@ class ApplicationController < ActionController::Base
 
   def session_active
      if session[:last_seen]
-      if session[:last_seen] < 240.minutes.ago
+      if session[:last_seen] < 1440.minutes.ago
         session[:last_seen] = Time.now
         if @user_session
           @user_session.timed_out = true

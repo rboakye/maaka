@@ -52,11 +52,14 @@ class PostsController < ApplicationController
     @post.connected_id = params[:connected_id]
     @con_user = User.find(@post.connected_id)
     @current_user = User.find(@user_id)
+    my_session = @con_user.user_session
     respond_to do |format|
       if @post.save
         create_connected_join(@post.id, params[:connected_id])
       #  flash[:notice] = "#{@user_fullname}, your new kasa was successful"
-        UserMailer.user_notification(@current_user,@con_user).deliver
+        if my_session.is_online == false
+          UserMailer.user_notification(@current_user,@con_user).deliver
+        end
         format.html { redirect_to "/#{@con_user.user_name}" }
         format.json { render action: 'show', status: :created, location: @post }
       else

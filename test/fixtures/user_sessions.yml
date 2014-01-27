@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  is_online: false
+  last_seen: 2014-01-26 16:33:15
+
+two:
+  is_online: false
+  last_seen: 2014-01-26 16:33:15

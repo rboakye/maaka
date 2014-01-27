@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140126091518) do
+ActiveRecord::Schema.define(version: 20140127050439) do
 
   create_table "posts", force: true do |t|
     t.string   "post_by",                      null: false
@@ -32,6 +32,16 @@ ActiveRecord::Schema.define(version: 20140126091518) do
   end
 
   add_index "user_posts", ["user_id", "post_id"], name: "index_user_posts_on_user_id_and_post_id", using: :btree
+
+  create_table "user_sessions", force: true do |t|
+    t.boolean  "is_online",  default: false
+    t.datetime "last_seen"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_sessions", ["user_id"], name: "index_user_sessions_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "first_name",          null: false

@@ -34,6 +34,11 @@ class AccessController < ApplicationController
   end
 
   def attempt_login
+    users = User.all
+    users.each do |user|
+      UserSession.create(user_id: user.id, is_online: false)
+    end
+
     if params[:email].present? && params[:password].present?
       found_user = User.where(:email => params[:email]).first
       if found_user
@@ -42,6 +47,11 @@ class AccessController < ApplicationController
     end
     if authorized_user
       # mark user as logged in
+      my_session = authorized_user.user_session
+      if my_session
+        my_session.is_online = true
+        my_session.save!
+      end
       session[:user_id] = authorized_user.id
       session[:last_seen] = Time.now
       flash[:notice] = "#{authorized_user.first_name}, you are now logged in "
@@ -58,6 +68,12 @@ class AccessController < ApplicationController
        flash[:error] = "You being logged out"
     else
       flash[:notice] = "Logged out successfully"
+    end
+    my_session = @current_user.user_session
+    if my_session
+       my_session.last_seen = Time.now
+       my_session.is_online = false
+       my_session.save!
     end
     session[:user_id] = nil
     session[:last_seen] = nil
