@@ -34,11 +34,6 @@ class AccessController < ApplicationController
   end
 
   def attempt_login
-    users = User.all
-    users.each do |user|
-      UserSession.create(user_id: user.id, is_online: false)
-    end
-
     if params[:email].present? && params[:password].present?
       found_user = User.where(:email => params[:email]).first
       if found_user
