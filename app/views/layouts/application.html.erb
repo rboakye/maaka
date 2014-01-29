@@ -61,7 +61,7 @@
               <a href="/<%= @username %>"><span class="glyphicon glyphicon-user"></span> &nbsp;<%= @user_fullname %></a>
             </li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <b class="caret"></b></a>
+              <a href="#" class="top-menu-dropdown dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="/<%= @username %>/edit"><span class="glyphicon glyphicon-briefcase text-success"></span> Profile Settings</a></li>
                 <li>
@@ -79,7 +79,7 @@
     <% end %>
   </div>
 </div>
-<div id="error_wrapper" class="notice">
+<div id="error_wrapper" class="notice navbar-fixed-top" role="banner">
   <% if !flash[:notice].blank? %>
    <div class="alert alert-success alert-dismissable text-center">
    <button type="button" class="close" data-dismiss="alert" href="#" aria-hidden="true">&times</button>

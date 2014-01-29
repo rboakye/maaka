@@ -1,6 +1,6 @@
 //Application main css
 body{
-  margin-top: 50px;
+  padding-top: 60px;
 }
 
 #startup{
@@ -32,6 +32,10 @@ body{
 
 #main-wrapper{
   margin-top: 0px;
+}
+
+.top-menu-dropdown{
+  padding-top: 20px !important;
 }
 
 #error_message ul{
@@ -72,7 +76,7 @@ body{
 }
 
 #error_wrapper{
-  margin-top: 65px !important;
+ // margin-top: 65px !important;
 }
 /////////
 
