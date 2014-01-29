@@ -58,11 +58,11 @@
                 <a href="/" class="home-icon"><span class="fa fa-home fa-2x"></span></a>
             </li>
             <li>
-              <a href="/<%= @username %>"><span class="glyphicon glyphicon-user"></span> &nbsp;<%= @user_fullname %></a>
+              <a href="/<%= @username %>" class="top-menu-user"><span class="glyphicon glyphicon-user"></span> &nbsp;<%= @user_fullname %></a>
             </li>
             <li class="dropdown">
-              <a href="#" class="top-menu-dropdown dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <b class="caret"></b></a>
-              <ul class="dropdown-menu">
+              <a href="#" class="top-menu-icon dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <b class="caret"></b></a>
+              <ul class="dropdown-menu top-menu-dropdown">
                 <li><a href="/<%= @username %>/edit"><span class="glyphicon glyphicon-briefcase text-success"></span> Profile Settings</a></li>
                 <li>
                   <a href="#" target="_BLANK"><span class="glyphicon glyphicon-question-sign text-info"></span> Help</a>
