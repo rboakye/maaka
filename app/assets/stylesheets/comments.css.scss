@@ -1,0 +1,24 @@
+// Place all the styles related to the Comments controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.comment-media{
+  width: 5.333%;
+  padding-right: 15px; padding-left: 15px; margin-right: -5px;
+}
+
+.comment-block{
+  margin: 5px 10px 5px 10px;
+}
+
+.comment-btn{
+  margin-top: 8px;
+}
+
+.post-comment-block{
+  margin-top: 5px;
+}
+
+.my_single_post .post-comment-block{
+  margin-left: 5px;
+}

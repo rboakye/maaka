@@ -16,6 +16,7 @@ class UsersController < ApplicationController
   def show
     @kasas = @user.posts
     @kasa = Post.new
+    @comment = Comment.new
   end
 
   # GET /users/new

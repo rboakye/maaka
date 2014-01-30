@@ -1,0 +1,11 @@
+<div class="panel panel-default comment-block" style="">
+  <div class="panel-body row">
+    <div class="comment-media col-md-1">
+      <%= user_image_comment(user_by_guid(comment.user_uuid),'thumb') %>
+    </div>
+    <div class="col-md-11 post-comment-block">
+      <%= link_to username_by_guid(comment.user_uuid),"/" + username_id_by_guid(comment.user_uuid), class: "text-primary" %><br>
+      <%= comment.kasa_comment %>
+    </div>
+  </div>
+</div>

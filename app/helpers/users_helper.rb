@@ -24,6 +24,15 @@ module UsersHelper
     return link
   end
 
+  def user_image_comment(user,size)
+    if user.avatar_file_name?
+      link = image_tag user.avatar.url(size), class: "avatar img-rounded", style: "max-height: 52px; max-width: 40px", alt: "#{user.first_name}"
+    else
+      link = image_tag "mystery_man.jpg", class: "avatar img-thumbnail", style: "max-height: 52px; max-width: 40px", alt: "avatar"
+    end
+    return link
+  end
+
   def username_by_guid(guid)
     user = User.where(:user_uuid => guid).first
     name = user.first_name + ' ' + user.last_name

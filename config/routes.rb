@@ -1,4 +1,6 @@
 Makasa::Application.routes.draw do
+  resources :comments
+
   get "my_post/index"
   get "my_post/show"
   get "my_post/new"
