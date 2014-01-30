@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
 
   class UserAccessSession
-    attr_accessor :user_id, :is_active, :timed_out
+    attr_accessor :user_id, :is_active, :timed_out, :logged_out_by_other_device
     def initialize(user_id)
       @user_id = user_id
       @is_active = false
@@ -20,6 +20,12 @@ class ApplicationController < ActionController::Base
 
   def confirm_valid_session
     url = request.original_url
+    if session[:user_id]
+      if User.find(session[:user_id]).user_session.is_online == false
+         @logged_out_by_other_device = true
+         session[:user_id] = nil
+      end
+    end
     if session[:user_id]
       if session[:user_session] == nil
         @user_session = UserAccessSession.new(session[:user_id])
@@ -35,7 +41,11 @@ class ApplicationController < ActionController::Base
       @user_logged_in = false
       false
     else
-      flash[:error] = 'login is required to access Makasa'
+      if @logged_out_by_other_device
+        flash[:error] = 'Security Alert! You logged yourself out with other device.'
+      else
+        flash[:error] = 'login is required to access Makasa'
+      end
       @user_logged_in = false
       redirect_to controller: :access, action: :login_access
       false
@@ -55,7 +65,7 @@ class ApplicationController < ActionController::Base
   end
 
   def session_active
-     if session[:last_seen]
+    if session[:last_seen]
       if session[:last_seen] < 1440.minutes.ago
         session[:last_seen] = Time.now
         if @user_session
