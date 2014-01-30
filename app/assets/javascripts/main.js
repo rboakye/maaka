@@ -12,13 +12,13 @@ $(document).ready(function () {
         $(".alert-success").fadeTo(500, 0).slideUp(500, function(){
             $(this).remove();
         });
-    }, 5000);
+    },5000);
 
     window.setTimeout(function() {
         $(".alert-danger").fadeTo(500, 0).slideUp(500, function(){
             $(this).remove();
         });
-    }, 5000);
+    },5000);
 
 
 /*    $('.content-element-wrapper').mouseover(function (e) {

@@ -18,7 +18,7 @@ body{
 }
 
 .alert-danger, .alert-success{
-  margin-top: 50px;
+  margin-top: 0px;
   margin-bottom: 0px;
 }
 
@@ -84,7 +84,15 @@ body{
 }
 
 #error_wrapper{
- // margin-top: 65px !important;
+ margin-top: 0px !important;
+}
+
+.noticeWrapper1{
+  top: 59px !important;
+}
+
+.noticeWrapper2{
+  top: 70px !important;
 }
 /////////
 
