@@ -47,7 +47,7 @@
                               <%= user_image_comment(user_by_guid(@current_user.user_uuid),'thumb') %>
                             </div>
                             <div class="col-md-10">
-                              <%= f.text_area :kasa_comment, class: "form-control no-border no-shadow", placeholder: "Add comment", rows: "2" %>
+                              <%= f.text_area :kasa_comment, required:"", class: "form-control no-border no-shadow", placeholder: "Add comment", rows: "2" %>
                             </div>
                             <div class="col-md-1">
                               <%= f.submit 'Comment', class: "btn btn-default btn-md comment-btn", remote: true %>

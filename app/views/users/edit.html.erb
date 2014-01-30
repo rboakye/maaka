@@ -99,7 +99,7 @@
             </div>
             <%= form_for @user do |f| %>
                 <div class="panel-body padding-xs">
-                  <%= f.text_area :about_me, rows: "8", :class => 'form-control input-lg no-border no-shadow' %>
+                  <%= f.text_area :about_me, rows: "8", required:"", :class => 'form-control input-lg no-border no-shadow' %>
                 </div>
                 <div class="panel-footer clearfix">
                   <%= f.submit 'Save', :class => 'btn btn-sm btn-success pull-right' %>
