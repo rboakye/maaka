@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-$(document).ready(function () {
+$(document).on('ready page:load', (function () {
 
     window.setTimeout(function() {
         $(".alert-success").fadeTo(500, 0).slideUp(500, function(){
@@ -52,4 +52,4 @@ $(document).ready(function () {
             $(this).children(0).addClass('panel-default');
         }
     })*/
-});
+}));
