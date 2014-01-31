@@ -20,11 +20,16 @@ $(document).ready(function () {
         });
     },5000);
 
-
-/*    $('.content-element-wrapper').mouseover(function (e) {
-        $(this).find('.content-element-controls').css("visibility", "visible");
+    $('.comment-block').mouseover(function (e) {
+        $(this).find('.delete-comment').css("visibility", "visible");
     }).mouseleave(function () {
-            $('.content-element-controls').css("visibility", "hidden");
+            $('.delete-comment').css("visibility", "hidden");
+    });
+
+/*    $('.comment-block').mouseover(function (e) {
+        $(this).find('.delete-comment').css("visibility", "visible");
+    }).mouseleave(function () {
+            $('.delete-comment').css("visibility", "hidden");
         });
 
     $('.note-element-wrapper').mouseover(function (e) {

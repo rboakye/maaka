@@ -22,3 +22,18 @@
 .my_single_post .post-comment-block{
   margin-left: 5px;
 }
+
+.delete-comment{
+  position: relative;
+  left: -8px;
+  top: 1px;
+  visibility: hidden;
+}
+
+.delete-comment{
+  color: #A94442;
+}
+
+.delete-comment:hover{
+  color: #d11e04;
+}
