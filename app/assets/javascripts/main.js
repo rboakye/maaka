@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-$(document).on('ready page:load', (function () {
+$(document).ready(function () {
 
     window.setTimeout(function() {
         $(".alert-success").fadeTo(500, 0).slideUp(500, function(){
@@ -51,5 +51,9 @@ $(document).on('ready page:load', (function () {
         if($(this).children(0).hasClass('cke_focus') && !$(this).children(0).hasClass('kc_error')){
             $(this).children(0).addClass('panel-default');
         }
-    })*/
-}));
+    })
+
+   Good: events are bound outside a $() wrapper.
+    $(document).on('click', 'button', function() { ... })
+    */
+});

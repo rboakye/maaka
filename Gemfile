@@ -53,6 +53,8 @@ gem 'aws-sdk'
 
 gem "font-awesome-rails", "~> 4.0.3.1"
 
+gem 'jquery-turbolinks'
+
 #gem 'devise', '3.0.0.rc'
 
 #gem 'protected_attributes'
