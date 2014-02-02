@@ -1,0 +1,3 @@
+$('#all-kasa-wrapper').prepend("<%= escape_javascript(render partial: 'posts/kasa', :locals => {:kasa => @post, :user => @user, :comment => @comment}) %>");
+
+$('#post_post_content').val("");

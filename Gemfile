@@ -55,6 +55,10 @@ gem "font-awesome-rails", "~> 4.0.3.1"
 
 gem 'jquery-turbolinks'
 
+gem 'will_paginate', '~> 3.0.5'
+
+gem 'will_paginate-bootstrap'
+
 #gem 'devise', '3.0.0.rc'
 
 #gem 'protected_attributes'

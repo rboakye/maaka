@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @kasas = @user.posts
+    @kasas = @user.posts.order('created_at DESC')
     @kasa = Post.new
     @comment = Comment.new
   end
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @my_kasas = @user.posts
+    @my_kasas = @user.posts.order('created_at DESC')
   end
 
   # POST /users

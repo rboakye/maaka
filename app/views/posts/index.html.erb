@@ -14,7 +14,7 @@
         <div class="row" id="posts">
           <% @posts.each do |post|%>
               <% if post.is_connected == false %>
-              <div class="timeline-item">
+              <div id="kasa_<%= post.id %>_post" class="timeline-item">
                 <div class="timeline-info">
                   <div class="media">
                     <%= user_image(user_by_guid(post.post_by),'thumb') %>
@@ -23,6 +23,11 @@
                 <div id="single_post_<%= post.id %>" class="panel panel-default timeline-panel">
                   <div class="panel-heading">
                     <%= link_to username_by_guid(post.post_by),"/" + username_id_by_guid(post.post_by),class: "text-info" %>
+                    <% if post.post_by == @current_user.user_uuid %>
+                        <a href="/posts/delete_modal/<%= post.post_uuid %>" class="pull-right text-danger post-delete" data-remote="true">
+                          <i class="fa fa-trash-o fa-lg"></i>
+                        </a>
+                    <% end %>
                     <small class="pull-right text-muted">
                       <i class="fa fa-clock-o"></i>
                       <%= time_ago_in_words(post.created_at)%> ago
@@ -36,7 +41,25 @@
                   </div>
                   <div class="comments">
                   <% post.comments.each do |comment| %>
-                       <%= render partial:  "comments/new_comment", locals: {:comment => comment} %>
+                        <div id="comment_<%= comment.id  %>_kasa" class="panel panel-default comment-block">
+                          <% if comment.user_uuid == @current_user.user_uuid || @current_user.user_uuid == post.post_by %>
+                              <%= link_to 'x', comment, method: :delete, class: "close delete-comment",
+                                          :"data-toggle" => "tooltip", :"data-placement" => "top", title: "Delete", remote: true %>
+                          <% end %>
+                          <div class="panel-body row">
+                            <div class="comment-media col-md-1">
+                              <%= user_image_comment(user_by_guid(comment.user_uuid),'thumb') %>
+                            </div>
+                            <div class="col-md-11 post-comment-block">
+                              <%= link_to username_by_guid(comment.user_uuid),"/" + username_id_by_guid(comment.user_uuid), class: "text-primary" %><br>
+                              <%= comment.kasa_comment %> &nbsp;
+                              <small class="text-muted text-info">
+                                <i class="fa fa-clock-o"></i>
+                                <%= time_ago_in_words(comment.created_at) %> ago
+                              </small>
+                            </div>
+                          </div>
+                        </div>
                   <% end %>
                  </div>
                   <%= form_for @comment, remote: true do |f| %>
@@ -60,6 +83,7 @@
                <% end %>
           <% end %>
         </div>
+        <div id="delete-modal-wrapper"></div>
       </div>
   <% end %>
 </div>

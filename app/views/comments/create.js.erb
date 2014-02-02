@@ -1,4 +1,5 @@
-$('#single_post_<%= @post.id%>').find('.comments').append("<%= escape_javascript( render :partial => 'new_comment', :locals => {:comment => @comment} )%>");
+$('#single_post_<%= @post.id%>').find('.comments').append("<%= escape_javascript( render :partial => 'new_comment',
+   :locals => {:comment => @comment, :user => @user, :post => @post} )%>");
 
 $('#comment_kasa_comment').val("");
 
@@ -7,3 +8,6 @@ $('.comment-block').mouseover(function (e) {
 }).mouseleave(function () {
             $('.delete-comment').css("visibility", "hidden");
 });
+
+$('.delete-comment').tooltip();
+

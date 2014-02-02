@@ -26,34 +26,10 @@ $(document).ready(function () {
             $('.delete-comment').css("visibility", "hidden");
     });
 
-/*    $('.comment-block').mouseover(function (e) {
-        $(this).find('.delete-comment').css("visibility", "visible");
-    }).mouseleave(function () {
-            $('.delete-comment').css("visibility", "hidden");
-        });
-
-    $('.note-element-wrapper').mouseover(function (e) {
-        $(this).find('.note-controls').css("visibility", "visible");
-    }).mouseleave(function () {
-            $('.note-controls').css("visibility", "hidden");
-        });
-
-    $(document).on('click', '.content-element-wrapper', function(){
-        $('.content-element').removeClass('panel-default');
-        if($(this).children(0).hasClass('cke_focus') && !$(this).children(0).hasClass('kc_error')){
-            $(this).children(0).addClass('panel-default');
-        }
-    })
-
-    $(document).on('click', '.note-element-wrapper', function(){
-        $('.note-element').removeClass('panel-default');
-        $('.note-title-element').removeClass('panel-default');
-        if($(this).children(0).hasClass('cke_focus') && !$(this).children(0).hasClass('kc_error')){
-            $(this).children(0).addClass('panel-default');
-        }
-    })
-
-   Good: events are bound outside a $() wrapper.
-    $(document).on('click', 'button', function() { ... })
-    */
+    $('.delete-comment').tooltip();
 });
+
+/*
+     Good: events are bound outside a $() wrapper.
+     $(document).on('click', 'button', function() { ... })
+ */

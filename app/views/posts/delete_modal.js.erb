@@ -1,0 +1,3 @@
+$("#delete-modal-wrapper").html("<%= escape_javascript( render partial: 'posts/delete_post', :locals => {:post => @post} ) %>");
+
+$('#postDeleteModal').modal('show');
