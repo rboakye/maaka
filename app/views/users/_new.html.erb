@@ -2,8 +2,8 @@
   <h1>Sign Up <small>It is Free and Fun</small></h1>
 </div>
 
-<%= form_for @user, :html => {:class => "new_user form-horizontal"} do |f|%>
-    <%= error_messages_for(@user) %>
+<%= form_for @user, :html => {:class => "new_user form-horizontal"}, remote: true do |f|%>
+    <div class="error"></div>
     <%= render :partial => 'users/form', :locals => {:f => f} %>
     <hr>
     <div class="actions col-lg-8">

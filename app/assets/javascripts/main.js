@@ -27,6 +27,8 @@ $(document).ready(function () {
     });
 
     $('.delete-comment').tooltip();
+
+    $('a.fancybox').fancybox();
 });
 
 /*

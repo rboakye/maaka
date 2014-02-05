@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140130210356) do
+ActiveRecord::Schema.define(version: 20140205191413) do
 
   create_table "comments", force: true do |t|
     t.text     "kasa_comment", null: false
@@ -23,6 +23,18 @@ ActiveRecord::Schema.define(version: 20140130210356) do
 
   add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
 
+  create_table "images", force: true do |t|
+    t.text     "image_description"
+    t.string   "creator"
+    t.string   "image_uuid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+  end
+
   create_table "posts", force: true do |t|
     t.string   "post_by",                      null: false
     t.text     "post_content",                 null: false
@@ -33,6 +45,16 @@ ActiveRecord::Schema.define(version: 20140130210356) do
     t.boolean  "is_connected", default: false
     t.integer  "connected_id"
   end
+
+  create_table "user_images", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "image_id"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_images", ["user_id", "image_id"], name: "index_user_images_on_user_id_and_image_id", using: :btree
 
   create_table "user_posts", force: true do |t|
     t.integer  "user_id"

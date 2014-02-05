@@ -1,4 +1,6 @@
 Makasa::Application.routes.draw do
+  resources :images
+
   resources :comments
 
   get "my_post/index"

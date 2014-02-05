@@ -7,8 +7,8 @@ module UsersHelper
     middle = user.last_name.downcase
     same_name_users = User.search_username(first+middle)
     if same_name_users.size > 0
-      last = same_name_users.size + 1.to_s
-      username = first + middle + last
+      last = same_name_users.size + 1
+      username = first + middle + last.to_s
     else
       username = first + middle
     end

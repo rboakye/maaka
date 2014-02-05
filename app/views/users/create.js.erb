@@ -1,0 +1,5 @@
+<% if @error %>
+  $('.error').html("<%= escape_javascript(error_messages_for(@user))%>");
+<% else %>
+    window.location.href = "<%= @link %>";
+<% end %>

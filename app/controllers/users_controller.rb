@@ -35,16 +35,20 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @user.user_uuid = SecureRandom.uuid.to_s
     @user.user_name = generate_user_name(@user)
+    @error = false
     respond_to do |format|
       if @user.save
         session[:user_id] = @user.id
         UserMailer.welcome_email(@user).deliver
+        UserSession.create(is_online: true, user_id: @user.id)
         flash[:notice] = "Thank you #{@user.first_name}, you have successfully created Makasa Account "
-        format.html { redirect_to root_path }
+        @link = root_url
+        format.js
         format.json { render action: 'index', status: :created, location: @user }
       else
         flash[:error] = "#{@user.first_name}, there were issues creating your Makasa Account. Please fix form errors and try again "
-        format.html { render action: 'index' }
+        @error = true
+        format.js
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end

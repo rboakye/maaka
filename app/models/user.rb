@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   has_many :user_posts, dependent: :destroy
   has_many :posts, through: :user_posts
   has_one :user_session, dependent: :destroy
+  has_many :user_images, dependent: :destroy
+  has_many :images, through: :user_images
 
   EMAIL_REGEX = /\A[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}\Z/i
   validates :first_name, :presence => true,
