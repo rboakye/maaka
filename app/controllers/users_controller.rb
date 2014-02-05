@@ -46,7 +46,6 @@ class UsersController < ApplicationController
         format.js
         format.json { render action: 'index', status: :created, location: @user }
       else
-        flash[:error] = "#{@user.first_name}, there were issues creating your Makasa Account. Please fix form errors and try again "
         @error = true
         format.js
         format.json { render json: @user.errors, status: :unprocessable_entity }
