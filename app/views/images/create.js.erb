@@ -1,0 +1,8 @@
+<% if @image.new_record? %>
+    $('.error').html("<%= escape_javascript(error_messages_for(@image))%>");
+<% else %>
+if ($('#images-wrapper') !== undefined) {
+    $('#images-wrapper').append("<%=j render partial: 'images/loaded', locals: { image: @image } %>");
+}
+<% end %>
+

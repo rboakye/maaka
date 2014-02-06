@@ -23,6 +23,18 @@
         <% end %>
       </a>
     </li>
+    <li class="">
+      <a data-toggle="tab" href="#my_photos">
+        <div class="block text-center">
+          <i class="fa fa-camera fa-2x"></i>
+        </div>
+        <% if @user.id == @user_id %>
+            My Photos
+        <% else %>
+            <%= @user.first_name + " Photos" %>
+        <% end %>
+      </a>
+    </li>
   </ul>
 <div class="tab-content">
 <div id="my_timeline" class="tab-pane fade active in">
@@ -77,4 +89,26 @@
 <div id="my_community" class="tab-pane fade">
 
 </div>
+  <div id="my_photos" class="tab-pane fade">
+    <div id="user_wrapper" class="row">
+    <div class="col-md-2">
+      <div class="thumbnail">
+        <%= user_image(@user,'medium') %>
+        <div class="caption">
+          <h5 class="text-center"><%= username_by_guid(@user.user_uuid) %></h5>
+          <p class="text-center">
+            <a href="#" class="btn btn-primary btn-sm" role="button">Button</a>
+            <a href="#" class="btn btn-default btn-sm" role="button">Button</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-10">
+      <% @images.each do |image| %>
+          <%= render partial: 'images/photo_gallery', locals: {image: image}%>
+      <% end %>
+    </div>
+   </div>
+  </div>
 </div>

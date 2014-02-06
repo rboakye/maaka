@@ -1,29 +1,6 @@
-<%= form_for(@image) do |f| %>
-  <% if @image.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@image.errors.count, "error") %> prohibited this image from being saved:</h2>
-
-      <ul>
-      <% @image.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :image_description %><br>
-    <%= f.text_area :image_description %>
-  </div>
-  <div class="field">
-    <%= f.label :creator %><br>
-    <%= f.text_field :creator %>
-  </div>
-  <div class="field">
-    <%= f.label :image_uuid %><br>
-    <%= f.text_field :image_uuid %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<%= form_for @image, remote: true, :html => {multipart: true} do |f| %>
+    <%= error_messages_for(@image) %>
+    <%= f.file_field :photo, multiple: true, name: 'image[photo]',class: 'btn btn-success' %>
 <% end %>
+<% # jquery upload template # %>
+<script id="template-photo" type="text/x-tmpl"><div class="photo">{%=o.name%}<div class="progress"><div class="progress-bar" role="progressbar" style="width: 0%"></div></div></div></script>

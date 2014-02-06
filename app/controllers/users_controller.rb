@@ -17,6 +17,7 @@ class UsersController < ApplicationController
     @kasas = @user.posts.order('created_at DESC')
     @kasa = Post.new
     @comment = Comment.new
+    @images = @user.images
   end
 
   # GET /users/new
@@ -27,6 +28,8 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @my_kasas = @user.posts.order('created_at DESC')
+    @image = Image.new
+    @images = @user.images
   end
 
   # POST /users

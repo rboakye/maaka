@@ -1,5 +1,6 @@
 class ImagesController < ApplicationController
   before_action :set_image, only: [:show, :edit, :update, :destroy]
+  include UsersHelper
 
   # GET /images
   # GET /images.json
@@ -25,13 +26,16 @@ class ImagesController < ApplicationController
   # POST /images.json
   def create
     @image = Image.new(image_params)
+    @image.creator = @current_user.user_uuid
+    @image.image_uuid = SecureRandom.uuid.to_s
 
     respond_to do |format|
       if @image.save
-        format.html { redirect_to @image, notice: 'Image was successfully created.' }
+        UserImage.create(user_id: @current_user.id, image_id: @image.id)
+        format.js
         format.json { render action: 'show', status: :created, location: @image }
       else
-        format.html { render action: 'new' }
+        format.js
         format.json { render json: @image.errors, status: :unprocessable_entity }
       end
     end
@@ -69,6 +73,6 @@ class ImagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def image_params
-      params.require(:image).permit(:image_description, :creator, :image_uuid)
+      params.require(:image).permit(:image_description, :creator, :image_uuid, :photo)
     end
 end
