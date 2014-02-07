@@ -105,9 +105,11 @@
     </div>
 
     <div class="col-md-10">
+      <div class="row">
       <% @images.each do |image| %>
-          <%= render partial: 'images/photo_gallery', locals: {image: image}%>
+        <%= render partial: 'images/photo_gallery', locals: {image: image}%>
       <% end %>
+     </div>
     </div>
    </div>
   </div>
