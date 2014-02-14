@@ -1,6 +1,7 @@
-<div class="col-xs-6 col-md-3">
-  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-  <a class="fancybox thumbnail" rel="gallery1" href="<%= image.photo.url(:original) %>">
+<div id="image_<%= image.id %>" class="img-add col-xs-6 col-md-3">
+  <%= link_to 'x', image, method: :delete, class: "close img-remove text-danger",
+              :"data-toggle" => "tooltip", :"data-placement" => "top", title: "Delete", remote: true %>
+  <a class="thumbnail" href="<%= image.photo.url(:original) %>">
     <%=image_tag(image.photo.url(:square)) %>
   </a>
 </div>

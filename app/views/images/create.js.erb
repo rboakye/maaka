@@ -3,6 +3,12 @@
 <% else %>
 if ($('#images-wrapper') !== undefined) {
     $('#images-wrapper').append("<%=j render partial: 'images/loaded', locals: { image: @image } %>");
+
+    $('.img-add').mouseover(function (e) {
+        $(this).find('.img-remove').css("visibility", "visible");
+    }).mouseleave(function () {
+                $('.img-remove').css("visibility", "hidden");
+            });
 }
 <% end %>
 

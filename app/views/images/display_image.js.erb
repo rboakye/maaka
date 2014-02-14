@@ -1,0 +1,7 @@
+<% if @error %>
+    $('.error').html("<%= escape_javascript(error_messages_for(@image))%>");
+<% else %>
+    $('#photo-modal-wrapper').html("<%=j render partial: 'images/photo_modal', locals: { image: @image, user: @user } %>");
+    $('#imageModal').modal();
+<% end %>
+

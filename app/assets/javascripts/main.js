@@ -26,13 +26,23 @@ $(document).ready(function () {
             $('.delete-comment').css("visibility", "hidden");
     });
 
+    $('.img-add').mouseover(function (e) {
+        $(this).find('.img-remove').css("visibility", "visible");
+    }).mouseleave(function () {
+            $('.img-remove').css("visibility", "hidden");
+        });
+
     $('.delete-comment').tooltip();
 
-    $(".fancybox").fancybox({
-        openEffect	: 'none',
-        closeEffect	: 'none'
-    });
+    $('.img-remove').tooltip();
+
+    $("a.fancybox").fancybox();
+
 });
+
+/*$(document).on('click', '.next,.prev', function() {
+   $('.modal-backdrop').remove();
+ })*/
 
 /*
      Good: events are bound outside a $() wrapper.

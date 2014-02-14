@@ -91,26 +91,14 @@
 </div>
   <div id="my_photos" class="tab-pane fade">
     <div id="user_wrapper" class="row">
-    <div class="col-md-2">
-      <div class="thumbnail">
-        <%= user_image(@user,'medium') %>
-        <div class="caption">
-          <h5 class="text-center"><%= username_by_guid(@user.user_uuid) %></h5>
-          <p class="text-center">
-            <a href="#" class="btn btn-primary btn-sm" role="button">Button</a>
-            <a href="#" class="btn btn-default btn-sm" role="button">Button</a>
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-10">
+    <div class="col-md-12">
       <div class="row">
       <% @images.each do |image| %>
-        <%= render partial: 'images/photo_gallery', locals: {image: image}%>
+        <%= render partial: 'images/photo_gallery', locals: {image: image, user: @user}%>
       <% end %>
      </div>
     </div>
    </div>
+   <div id="photo-modal-wrapper"></div>
   </div>
 </div>

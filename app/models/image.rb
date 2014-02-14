@@ -1,6 +1,8 @@
 class Image < ActiveRecord::Base
-  has_many :user_images
+  has_many :user_images, dependent: :destroy
   has_many :users, through: :user_images
+  has_many :image_comments, dependent: :destroy
+  has_many :comments, through: :image_comments
 
   # This method associates the attribute ":photo" with a file attachment
   has_attached_file :photo, styles: {

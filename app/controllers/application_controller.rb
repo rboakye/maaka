@@ -70,6 +70,8 @@ class ApplicationController < ActionController::Base
         session[:last_seen] = Time.now
         if @user_session
           @user_session.timed_out = true
+        else
+          session[:timed_out] = true
         end
         redirect_to controller: :access, action: :logout
       else

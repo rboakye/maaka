@@ -34,10 +34,15 @@ class AccessController < ApplicationController
   end
 
   def attempt_login
-    if params[:email].present? && params[:password].present?
-      found_user = User.where(:email => params[:email]).first
+    if params[:user_id].present? && params[:password].present?
+      found_user = User.where(:email => params[:user_id]).first
       if found_user
         authorized_user = found_user.authenticate(params[:password])
+      else
+        found_user = User.where(:user_name => params[:user_id]).first
+        if found_user
+          authorized_user = found_user.authenticate(params[:password])
+        end
       end
     end
     if authorized_user
@@ -52,7 +57,7 @@ class AccessController < ApplicationController
       flash[:notice] = "#{authorized_user.first_name}, you are now logged in "
       redirect_to root_path
     else
-      flash[:error] = "Invalid email/password combination."
+      flash[:error] = "Invalid email or username / password combination."
       redirect_to controller: 'access', action: 'login_access'
     end
   end
@@ -60,7 +65,10 @@ class AccessController < ApplicationController
   def logout
     # mark user as logged out
     if @user_session.timed_out
-       flash[:error] = "You being logged out"
+       flash[:error] = "You being logged out on session timed out"
+    elsif session[:timed_out]
+      flash[:error] = "You being logged out on missing session"
+      session[:timed_out] = nil
     else
       flash[:notice] = "Logged out successfully"
     end

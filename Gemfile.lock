@@ -50,8 +50,6 @@ GEM
     commonjs (0.2.7)
     erubis (2.7.0)
     execjs (2.0.2)
-    fancybox2-rails (0.2.5)
-      railties (>= 3.1.0)
     figaro (0.7.0)
       bundler (~> 1.0)
       rails (>= 3, < 5)
@@ -166,7 +164,6 @@ DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
   bootstrap-sass-rails
   coffee-rails (~> 4.0.0)
-  fancybox2-rails (~> 0.2.4)
   figaro
   font-awesome-rails (~> 4.0.3.1)
   jbuilder (~> 1.2)

@@ -41,6 +41,11 @@ Makasa::Application.routes.draw do
 
   post 'connected_post/:connected_id' => 'posts#connected_post'
 
+  get 'images/:id/display_image/:user' => 'images#display_image'
+
+  get 'images/:id/display_other/:user' => 'images#display_other'
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,3 +1,58 @@
 // Place all the styles related to the Images controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.img-preview{
+  margin: 0 auto;
+}
+
+#imageModal .modal-dialog {
+  width: 60%;
+}
+
+#imageModal .modal-content{
+  border-radius: 0px;
+  border: 3px solid #252525;
+}
+
+.image-view img{
+  max-width: 90%;
+}
+
+.image-view{
+  max-width: 60%;
+}
+
+.image-view .next{
+  position: absolute;
+  left: 94%;
+  top: 50%;
+
+}
+
+.image-view .prev{
+  position: absolute;
+  top: 50%;
+
+}
+
+.modal-backdrop.in
+{
+  opacity: .90;
+}
+
+.img-comment{
+  margin-top: 50px;
+}
+
+.img-remove{
+  position: relative;
+  left: -6px;
+  top: -3px;
+  visibility: hidden;
+  color: #842917;
+}
+
+.img-remove:hover{
+  color: #ea061a;
+}
