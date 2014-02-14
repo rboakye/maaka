@@ -2,9 +2,12 @@
      class="modal fade bs-modal-lg">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
+      <a aria-hidden="true" data-dismiss="modal" href="#" class=" imageModalClose" type="button">
+        <i class="fa fa-times-circle fa-3x"></i>
+      </a>
       <div class="modal-body">
         <div class="row">
-          <div class="image-view col-md-7">
+          <div class="image-view col-md-6">
           <% if @next_img_id %>
             <a class="next" href="/images/<%= @next_img_id %>/display_other/<%= user.id %>" data-remote="true"><i class="fa fa-chevron-circle-right fa-2x"></i></a>
           <% end %>
@@ -13,8 +16,7 @@
           <% end %>
            <%= image_tag(image.photo.url(:original), class: 'img-preview img-responsive') %>
           </div>
-          <div class="col-md-5">
-            <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+          <div class="col-md-6">
             <div class="img-comment">Comment goes here</div>
           </div>
         </div>

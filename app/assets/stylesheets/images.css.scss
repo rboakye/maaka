@@ -10,13 +10,31 @@
   width: 60%;
 }
 
+#imageModal .modal-content .modal-body {
+  padding: 0px;
+}
+
 #imageModal .modal-content{
   border-radius: 0px;
   border: 3px solid #252525;
 }
 
 .image-view img{
-  max-width: 90%;
+  max-width: 100%;
+}
+
+.imageModalClose{
+  position: relative;
+  top: -29px;
+  left: 28px;
+  z-index: 8040;
+  color: #efefef;
+  float: right;
+  opacity: 1;
+}
+
+.imageModalClose:hover{
+  color: white;
 }
 
 .image-view{
@@ -25,7 +43,7 @@
 
 .image-view .next{
   position: absolute;
-  left: 94%;
+  left: 90%;
   top: 50%;
 
 }
@@ -33,16 +51,17 @@
 .image-view .prev{
   position: absolute;
   top: 50%;
+  left: 30px;
 
 }
 
 .modal-backdrop.in
 {
-  opacity: .90;
+  opacity: .87;
 }
 
 .img-comment{
-  margin-top: 50px;
+  margin-top: 10px;
 }
 
 .img-remove{
