@@ -36,8 +36,6 @@ $(document).ready(function () {
 
     $('.img-remove').tooltip();
 
-    $("a.fancybox").fancybox();
-
 });
 
 /*$(document).on('click', '.next,.prev', function() {
