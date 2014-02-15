@@ -30,7 +30,7 @@ $(document).ready(function () {
         $(this).find('.img-remove').css("visibility", "visible");
     }).mouseleave(function () {
             $('.img-remove').css("visibility", "hidden");
-        });
+    });
 
     $('.delete-comment').tooltip();
 
@@ -38,9 +38,15 @@ $(document).ready(function () {
 
 });
 
-/*$(document).on('click', '.next,.prev', function() {
-   $('.modal-backdrop').remove();
- })*/
+     $(document).on('mouseover', '.image-view', function() {
+         $(this).find('.next').css("visibility", "visible");
+         $(this).find('.prev').css("visibility", "visible");
+     });
+
+    $(document).on('mouseleave', '.image-view', function() {
+        $('.next').css("visibility", "hidden");
+        $('.prev').css("visibility", "hidden");
+    });
 
 /*
      Good: events are bound outside a $() wrapper.
