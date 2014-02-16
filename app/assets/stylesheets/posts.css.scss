@@ -56,3 +56,35 @@
 .post-delete{
  margin-left: 20px;
 }
+
+@media (max-width: 480px){
+  .timeline-info .media img{
+    width: 35px;
+  }
+  .timeline-panel, .my_single_post .timeline-panel{
+    margin-left: 0px;
+  }
+  .text-muted{
+    font-size: 65%;
+    margin-top: 5px;
+  }
+  .header_logo{
+    width: 25%;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 750px){
+  .timeline-info{
+    display: block !important;
+  }
+  .header_logo{
+    width: 20%;
+  }
+  .timeline-info .media img, .timeline-info{
+    width: 35px;
+  }
+  .timeline-panel{
+    margin-left: 40px;
+  }
+}
+

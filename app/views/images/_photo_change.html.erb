@@ -1,14 +1,16 @@
 <div class="row">
-  <div class="image-view col-md-6">
+  <div class="image-view col-md-6 col-sm-12 col-xs-12">
   <% if @next_img_id %>
-    <a class="next" href="/images/<%= @next_img_id %>/display_other/<%= user.id %>" data-remote="true"><i class="fa fa-chevron-circle-right fa-2x"></i></a>
+    <a class="next" href="/images/<%= @next_img_id %>/display_other/<%= user.id %>" data-remote="true"><i class="fa fa-chevron-circle-right fa-3x"></i></a>
   <% end %>
   <% if @previous_img_id %>
-    <a class="prev" href="/images/<%= @previous_img_id %>/display_other/<%= user.id%>" data-remote="true"><i class="fa fa-chevron-circle-left fa-2x"></i></a>
+    <a class="prev" href="/images/<%= @previous_img_id %>/display_other/<%= user.id%>" data-remote="true"><i class="fa fa-chevron-circle-left fa-3x"></i></a>
   <% end %>
    <%= image_tag(image.photo.url(:original), class: 'img-preview img-responsive') %>
   </div>
-  <div class="col-md-6">
-    <div class="img-comment">Comment goes here</div>
+  <div class="col-md-6 col-sm-12 col-xs-12">
+    <div class="img-comment">
+      <%= render partial: 'comments/new_image_comment', :locals => {:image => image, user: @current_user, :comment => comment} %>
+    </div>
   </div>
 </div>

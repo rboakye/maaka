@@ -60,6 +60,7 @@ class ImagesController < ApplicationController
   def display_image
     @image = Image.find(params[:id])
     @user = User.find(params[:user])
+    @comment = Comment.new
     images_size = @user.images.count
     img = UserImage.where(user_id: @user.id, image_id: @image.id).first
     img_pos = img.position
@@ -92,6 +93,7 @@ class ImagesController < ApplicationController
   def display_other
     @image = Image.find(params[:id])
     @user = User.find(params[:user])
+    @comment = Comment.new
     images_size = @user.images.count
     img = UserImage.where(user_id: @user.id, image_id: @image.id).first
     img_pos = img.position

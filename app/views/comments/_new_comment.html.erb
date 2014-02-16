@@ -4,10 +4,10 @@
       :"data-toggle" => "tooltip", :"data-placement" => "top", title: "Delete", remote: true %>
   <% end %>
   <div class="panel-body row">
-    <div class="comment-media col-xs-3 col-md-1">
+    <div class="hidden-xs comment-media col-sm-2 col-md-1">
       <%= user_image_comment(user_by_guid(comment.user_uuid),'thumb') %>
     </div>
-    <div class="col-xs-9 col-sm-10 col-md-11 post-comment-block">
+    <div class="col-xs-12 col-sm-10 col-md-11 post-comment-block">
       <%= link_to username_by_guid(comment.user_uuid),"/" + username_id_by_guid(comment.user_uuid), class: "text-primary" %><br>
       <%= comment.kasa_comment %> &nbsp;
       <small class="text-muted text-info">

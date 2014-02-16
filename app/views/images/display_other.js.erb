@@ -2,7 +2,7 @@
     $('.error').html("<%= escape_javascript(error_messages_for(@image))%>");
 <% else %>
     $('#imageModal .modal-body').fadeOut(1000, function() {
-        $('#imageModal .modal-body').html("<%=j render partial: 'images/photo_change', locals: { image: @image, user: @user } %>");
+        $('#imageModal .modal-body').html("<%=j render partial: 'images/photo_change', locals: { image: @image, user: @user, comment: @comment } %>");
     });
     $('#imageModal .modal-body').fadeIn(1500);
 <% end %>

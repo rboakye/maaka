@@ -42,17 +42,34 @@
   .comment-media{
     width: 45px;
   }
+  .image-modal-comment{
+    width: 45px;
+  }
 }
 
-
-@media (min-width: 750px) and (max-width: 1200px){
+@media (min-width: 750px) and (max-width: 1170px){
+  .image-modal-comment{
+    width: 45px;
+  }
   .comment-media{
     width: 45px;
+  }
+}
+
+@media (min-width: 992px){
+  .comment-block img{
+    width: 28px;
   }
 }
 
 @media (max-width: 480px){
   .comment-media{
     width: 45px;
+  }
+}
+
+@media (min-width: 1300px){
+  .comment-block{
+    width: auto;
   }
 }
