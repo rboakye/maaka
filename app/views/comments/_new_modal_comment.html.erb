@@ -1,0 +1,21 @@
+<div id="comment_<%= comment.id  %>_kasa" class="panel panel-default comment-modal-block">
+  <% if comment.user_uuid == user.user_uuid || user.id == @user.id || user.id == post.connected_id %>
+    <%= link_to 'x', comment, method: :delete, class: "close delete-comment",
+      :"data-toggle" => "tooltip", :"data-placement" => "top", title: "Delete", remote: true %>
+  <% end %>
+  <div class="panel-body img-commented">
+      <div class="timeline-info hidden-xs">
+        <div class="media">
+          <%= user_image_comment(user_by_guid(comment.user_uuid),'thumb') %>
+        </div>
+      </div>
+    <div class="">
+      <%= link_to username_by_guid(comment.user_uuid),"/" + username_id_by_guid(comment.user_uuid), class: "text-primary" %><br>
+      <%= comment.kasa_comment %> &nbsp;
+      <small class="text-muted text-info">
+        <i class="fa fa-clock-o"></i>
+        <%= time_ago_in_words(comment.created_at) %> ago
+      </small>
+    </div>
+  </div>
+</div>

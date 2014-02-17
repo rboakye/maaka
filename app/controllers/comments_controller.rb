@@ -1,6 +1,8 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
   include CommentsHelper
+  include UsersHelper
+
 
   # GET /comments
   # GET /comments.json
@@ -40,6 +42,22 @@ class CommentsController < ApplicationController
     end
   end
 
+  # POST /image_comment
+  def image_comment
+    @user = @current_user
+    @comment = Comment.new
+    @comment.kasa_comment = params[:comment][:kasa_comment]
+    @comment.user_uuid = @current_user.user_uuid
+    respond_to do |format|
+      if @comment.save
+        ImageComment.create(image_id: params[:comment][:image_id], comment_id: @comment.id)
+        format.js
+      else
+        format.js
+      end
+    end
+  end
+
   # PATCH/PUT /comments/1
   # PATCH/PUT /comments/1.json
   def update
@@ -72,6 +90,6 @@ class CommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.require(:comment).permit(:kasa_comment, :post_id)
+      params.require(:comment).permit(:kasa_comment, :post_id, :image_id)
     end
 end

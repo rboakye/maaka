@@ -45,6 +45,9 @@ Makasa::Application.routes.draw do
 
   get 'images/:id/display_other/:user' => 'images#display_other'
 
+  post 'comments/image_comment' => 'comments#image_comment'
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

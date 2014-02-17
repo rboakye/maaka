@@ -10,6 +10,22 @@
   </div>
   <div class="col-md-6 col-sm-12 col-xs-12">
     <div class="img-comment">
+      <div class="timeline-info hidden-xs">
+        <div class="media">
+          <%= user_image(user_by_guid(image.creator),'thumb') %>
+        </div>
+      </div>
+      <div class="img-dated">
+        <span class="text-primary"><%= link_to username_by_guid(image.creator),"/" + username_id_by_guid(image.creator), class: "text-primary" %></span> <br>
+        <small class="text-muted">
+          <i class="fa fa-clock-o"></i>
+          Last Updated at:
+          <%= time_ago_in_words(image.updated_at)%> ago
+        </small>
+      </div>
+      <% if image.image_description %>
+          <div class="modal-img-desc text-info col-md-12"><%= image.image_description %></div>
+      <% end %>
       <%= render partial: 'comments/new_image_comment', :locals => {:image => image, user: @current_user, :comment => comment} %>
     </div>
   </div>

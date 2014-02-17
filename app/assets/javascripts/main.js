@@ -48,6 +48,16 @@ $(document).ready(function () {
         $('.prev').css("visibility", "hidden");
     });
 
+    $(document).on('mouseover', '.comment-modal-block', function() {
+        $(this).find('.delete-comment').css("visibility", "visible");
+        $('.delete-comment').tooltip();
+
+    });
+
+    $(document).on('mouseleave', '.comment-modal-block', function() {
+        $('.delete-comment').css("visibility", "hidden");
+    });
+
 /*
      Good: events are bound outside a $() wrapper.
      $(document).on('click', 'button', function() { ... })
