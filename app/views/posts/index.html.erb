@@ -35,7 +35,7 @@
                   </div>
                   <div class="panel-body">
                     <p>
-                      <%= simple_format(post.post_content) %>
+                      <%= simple_format(post.post_content, {}, wrapper_tag: "span") %>
                     </p>
                     <a class="btn btn-xs btn-default">Read more</a>
                   </div>
@@ -52,7 +52,7 @@
                             </div>
                             <div class="col-xs-12 col-sm-10 col-md-11 post-comment-block">
                               <%= link_to username_by_guid(comment.user_uuid),"/" + username_id_by_guid(comment.user_uuid), class: "text-primary" %><br>
-                              <%= simple_format(comment.kasa_comment) %> &nbsp;
+                              <%= simple_format(comment.kasa_comment, {}, wrapper_tag: "span") %> &nbsp;
                               <small class="text-muted text-info">
                                 <i class="fa fa-clock-o"></i>
                                 <%= time_ago_in_words(comment.created_at) %> ago

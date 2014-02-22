@@ -24,7 +24,7 @@
       </div>
       <div class="panel-body">
         <p>
-          <%= simple_format(kasa.post_content) %>
+          <%= simple_format(kasa.post_content, {}, wrapper_tag: "span") %>
         </p>
         <a class="btn btn-xs btn-default">Read more</a>
       </div>
