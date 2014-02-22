@@ -11,7 +11,7 @@
       </div>
     <div class="">
       <%= link_to username_by_guid(comment.user_uuid),"/" + username_id_by_guid(comment.user_uuid), class: "text-primary" %><br>
-      <%= comment.kasa_comment %> &nbsp;
+      <%= simple_format(comment.kasa_comment, {}, wrapper_tag: "span") %> &nbsp;
       <small class="text-muted text-info">
         <i class="fa fa-clock-o"></i>
         <%= time_ago_in_words(comment.created_at) %> ago

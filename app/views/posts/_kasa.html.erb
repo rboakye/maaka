@@ -5,8 +5,8 @@
     </div>
   </div>
   <div class="my_single_post">
-    <div id="single_post_<%= kasa.id %>" class="panel panel-default timeline-panel">
-      <div class="panel-heading">
+    <div id="single_post_<%= kasa.id %>" class="panel panel-default timeline-panel kasa-panel">
+      <div class="panel-heading kasa-heading">
         <% if user.user_uuid == kasa.post_by%>
             <span class="text-info"><%= username_by_guid(kasa.post_by) %></span>
         <% else %>
@@ -24,7 +24,7 @@
       </div>
       <div class="panel-body">
         <p>
-          <%= kasa.post_content %>
+          <%= simple_format(kasa.post_content) %>
         </p>
         <a class="btn btn-xs btn-default">Read more</a>
       </div>

@@ -20,8 +20,8 @@
                     <%= user_image(user_by_guid(post.post_by),'thumb') %>
                   </div>
                 </div>
-                <div id="single_post_<%= post.id %>" class="panel panel-default timeline-panel">
-                  <div class="panel-heading">
+                <div id="single_post_<%= post.id %>" class="panel panel-default timeline-panel kasa-panel">
+                  <div class="panel-heading kasa-heading">
                     <%= link_to username_by_guid(post.post_by),"/" + username_id_by_guid(post.post_by),class: "text-info" %>
                     <% if post.post_by == @current_user.user_uuid %>
                         <a href="/posts/delete_modal/<%= post.post_uuid %>" class="pull-right text-danger post-delete" data-remote="true">
@@ -35,7 +35,7 @@
                   </div>
                   <div class="panel-body">
                     <p>
-                      <%= post.post_content %>
+                      <%= simple_format(post.post_content) %>
                     </p>
                     <a class="btn btn-xs btn-default">Read more</a>
                   </div>
@@ -52,7 +52,7 @@
                             </div>
                             <div class="col-xs-12 col-sm-10 col-md-11 post-comment-block">
                               <%= link_to username_by_guid(comment.user_uuid),"/" + username_id_by_guid(comment.user_uuid), class: "text-primary" %><br>
-                              <%= comment.kasa_comment %> &nbsp;
+                              <%= simple_format(comment.kasa_comment) %> &nbsp;
                               <small class="text-muted text-info">
                                 <i class="fa fa-clock-o"></i>
                                 <%= time_ago_in_words(comment.created_at) %> ago

@@ -47,6 +47,10 @@ Makasa::Application.routes.draw do
 
   post 'comments/image_comment' => 'comments#image_comment'
 
+  get 'notify/:sender_id/request/:user_id' => 'users#connection_request'
+
+  get 'users/connect/:response/:transaction_id' => 'users#connect_response'
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

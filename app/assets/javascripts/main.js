@@ -36,6 +36,16 @@ $(document).ready(function () {
 
     $('.img-remove').tooltip();
 
+    $('.kasa-heading').mouseover(function (e) {
+        $(this).find('.post-delete').css("display", "block");
+    }).mouseleave(function () {
+        $('.post-delete').css("display", "none");
+    });
+
+    $('.friend-pop').popover();
+
+    $('.user-pop').popover();
+
 });
 
      $(document).on('mouseover', '.image-view', function() {
@@ -51,7 +61,6 @@ $(document).ready(function () {
     $(document).on('mouseover', '.comment-modal-block', function() {
         $(this).find('.delete-comment').css("visibility", "visible");
         $('.delete-comment').tooltip();
-
     });
 
     $(document).on('mouseleave', '.comment-modal-block', function() {

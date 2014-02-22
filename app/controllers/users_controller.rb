@@ -14,10 +14,16 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @kasas = @user.posts.order('created_at DESC')
-    @kasa = Post.new
-    @comment = Comment.new
-    @images = @user.images
+    @can_view = in_my_community(@user,@current_user)
+    if @can_view || @user.id == @current_user.id
+      @kasas = @user.posts.order('created_at DESC')
+      @kasa = Post.new
+      @comment = Comment.new
+      @images = @user.images
+      @can_view = true
+      @community_list = @user.communities
+      @messages = @user.messages
+    end
   end
 
   # GET /users/new
@@ -27,9 +33,15 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @my_kasas = @user.posts.order('created_at DESC')
-    @image = Image.new
-    @images = @user.images
+    if @current_user.id == @user.id
+      @my_kasas = @user.posts.order('created_at DESC')
+      @image = Image.new
+      @images = @user.images
+    elsif @user && in_my_community(@user,@current_user)
+      redirect_to "/" + @user.user_name
+    else
+      redirect_to root_path
+    end
   end
 
   # POST /users
@@ -144,6 +156,55 @@ class UsersController < ApplicationController
     end
   end
 
+  # GET 'notify/:sender_id/request/:user_id'
+  def connection_request
+    @receiver = User.where(user_uuid: params[:user_id]).first
+    @sender = User.where(user_uuid: params[:sender_id]).first
+    @new_message = Message.new
+    @new_message.message_type = 'connect'
+    @new_message.user_id = @receiver.id
+    @new_message.sender_uuid = @sender.user_uuid
+    @new_message.transaction_id = gen_transaction_id
+    @new_message.message_content = ''
+    @new_message.status = 'respond'
+    respond_to do |format|
+      if @new_message.save!
+        flash[:notice] = "#{@sender.first_name}! your request has been sent to #{@receiver.first_name}, thank you"
+        format.html { redirect_to root_path }
+      else
+        flash[:error] = "Request Failed"
+        format.html { redirect_to root_path }
+      end
+    end
+  end
+
+  # GET get 'users/connect/:response/:transaction_id'
+  def connect_response
+    if params[:response] == 'approve'
+      @message = Message.where(transaction_id: params[:transaction_id]).first
+      if @message
+         @owner = User.find(@message.user_id)
+         @sender = User.where(:user_uuid => @message.sender_uuid).first
+       if @owner && @sender
+         @community = Community.create(owner:@owner.user_uuid, member_uuid: @sender.user_uuid)
+         @community_2 = Community.create(owner: @sender.user_uuid, member_uuid: @owner.user_uuid)
+         if @community && @community_2
+            UserCommunity.create(user_id: @owner.id, community_id: @community.id)
+            UserCommunity.create(user_id: @sender.id, community_id: @community_2.id)
+         end
+       end
+      end
+    else
+      @message = Message.where(transaction_id: params[:transaction_id]).first
+    end
+    respond_to do |format|
+      if @message
+        @message.destroy
+      end
+      format.js
+    end
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_user
@@ -164,6 +225,6 @@ class UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :user_name, :user_uuid, :old_password, :password, :password_confirmation, :about_me, :phone, :current_city, :gender, :avatar, :birth_date)
+    params.require(:user).permit(:first_name, :last_name, :email, :user_name, :user_uuid, :old_password, :password, :password_confirmation, :about_me, :phone, :current_city, :gender, :avatar, :birth_date, :transaction_id, :sender_id, :user_id, :response )
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140214095316) do
+ActiveRecord::Schema.define(version: 20140222053548) do
 
   create_table "comments", force: true do |t|
     t.text     "kasa_comment", null: false
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(version: 20140214095316) do
   end
 
   add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
+
+  create_table "communities", force: true do |t|
+    t.string   "owner",        null: false
+    t.boolean  "family"
+    t.string   "relationship"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "member_uuid",  null: false
+  end
 
   create_table "image_comments", force: true do |t|
     t.integer  "image_id"
@@ -44,6 +53,19 @@ ActiveRecord::Schema.define(version: 20140214095316) do
     t.datetime "photo_updated_at"
   end
 
+  create_table "messages", force: true do |t|
+    t.string   "message_type"
+    t.integer  "user_id",         null: false
+    t.string   "sender_uuid",     null: false
+    t.string   "transaction_id",  null: false
+    t.text     "message_content", null: false
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
+
   create_table "posts", force: true do |t|
     t.string   "post_by",                      null: false
     t.text     "post_content",                 null: false
@@ -54,6 +76,15 @@ ActiveRecord::Schema.define(version: 20140214095316) do
     t.boolean  "is_connected", default: false
     t.integer  "connected_id"
   end
+
+  create_table "user_communities", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "community_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_communities", ["user_id", "community_id"], name: "index_user_communities_on_user_id_and_community_id", using: :btree
 
   create_table "user_images", force: true do |t|
     t.integer  "user_id"

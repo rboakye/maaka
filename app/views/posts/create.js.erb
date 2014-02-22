@@ -1,3 +1,9 @@
 $('#all-kasa-wrapper').prepend("<%= escape_javascript(render partial: 'posts/kasa', :locals => {:kasa => @post, :user => @user, :comment => @comment}) %>");
 
 $('#post_post_content').val("");
+
+$('.kasa-heading').mouseover(function (e) {
+    $(this).find('.post-delete').css("display", "block");
+}).mouseleave(function () {
+    $('.post-delete').css("display", "none");
+});

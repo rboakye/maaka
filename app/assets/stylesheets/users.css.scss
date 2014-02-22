@@ -49,3 +49,116 @@
   }
 }
 
+//community css
+
+.friends-box *, .friends-box *:after, .friends-box *:before {
+  -moz-box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-rendering: optimizelegibility;
+}
+.friends-box-list {
+  display: inline-block;
+  padding: 5px;
+  position: relative;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  //width: 12.5%;
+  //width: 6.3%;
+}
+.friends-box-list.active:before {
+  bottom: -34px;
+  color: #222222;
+  content: "";
+  display: block;
+  font-family: FontAwesome;
+  font-size: 45px;
+  left: 43%;
+  position: absolute;
+  text-align: center;
+  z-index: 2;
+}
+.friends-box-img {
+  cursor: pointer;
+  max-width: 100%;
+  width: 100%;
+}
+
+.friends-box-list a:hover {
+  opacity: 0.8;
+}
+
+.popover{
+  z-index: 8080 !important;
+  max-width: 400px;
+}
+
+.user_info_image{
+  width: auto;
+}
+
+//messages
+
+.inbox-body .table-wrap {
+  background: none repeat scroll 0 0 #FFFFFF;
+  margin-left: 200px;
+  padding: 10px 14px 7px;
+  position: relative;
+}
+.table-wrap {
+  overflow: auto;
+}
+
+#inbox-table {
+  border-left-color: rgba(0, 0, 0, 0) !important;
+  border-right-color: rgba(0, 0, 0, 0) !important;
+  border-top: 0 none;
+  font-size: 13px;
+}
+#inbox-table tbody tr:hover {
+  background: none repeat scroll 0 0 #E4E4E4;
+  cursor: pointer;
+}
+#inbox-table tr td {
+  border-left: 0 none;
+  border-right: 0 none;
+  line-height: 26px;
+  padding: 6px 4px 7px !important;
+}
+
+#inbox-table tbody tr th {
+  overflow: hidden;
+}
+#inbox-table.table tbody > tr > td {
+  border-color: #FFFFFF !important;
+}
+
+.inbox-data-from {
+}
+.inbox-data-from > *:first-child {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.inbox-data-date {
+  padding-left: 7px !important;
+  padding-right: 0 !important;
+}
+.inbox-data-message > *:first-child {
+  color: #8A8A8A;
+  height: 27px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+.inbox-data-message > *:first-child span {
+  color: #111111;
+}
+.inbox-data-message > *:first-child span.label {
+  color: #FFFFFF;
+}
+.inbox-data-message > *:first-child > *:first-child:after {
+  content: " - ";
+}

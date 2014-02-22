@@ -1,3 +1,4 @@
+<% if @can_view %>
   <ul class="tab-bar grey-tab">
     <li class="active">
       <a data-toggle="tab" href="#my_timeline">
@@ -35,6 +36,16 @@
         <% end %>
       </a>
     </li>
+    <% if @user.id == @user_id %>
+    <li class="">
+      <a data-toggle="tab" href="#message">
+        <div class="block text-center">
+          <i class="fa fa-envelope fa-2x"></i>
+        </div>
+        Messages
+      </a>
+    </li>
+    <% end %>
   </ul>
 <div class="tab-content">
 <div id="my_timeline" class="tab-pane fade active in">
@@ -87,7 +98,19 @@
  </div>
 </div>
 <div id="my_community" class="tab-pane fade">
-
+  <div class="row">
+   <div class="friends-box col-sm-12">
+     <% @community_list.each do |friend| %>
+     <div class="friends-box-list">
+       <a href="/<%= username_id_by_guid(friend.member_uuid)%>" rel="popover" data-placement="left auto" data-container="body"
+          data-trigger="hover" class="friend-pop" data-title="<%= username_by_guid(friend.member_uuid) %>"
+          data-html="true" data-content="<%= recent_post(friend.member_uuid) %>">
+       <%= friend_image(user_by_guid(friend.member_uuid),'thumb') %>
+       </a>
+     </div>
+     <% end %>
+   </div>
+   </div>
 </div>
   <div id="my_photos" class="tab-pane fade">
     <div id="user_wrapper" class="row">
@@ -101,4 +124,75 @@
    </div>
    <div id="photo-modal-wrapper"></div>
   </div>
+
+  <% if @user.id == @user_id %>
+   <div id="message" class="tab-pane fade">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Messages
+      </div>
+      <div class="panel-body padding-xs">
+        <% @messages.each do |message| %>
+        <%= render partial: 'users/messages', :locals => {:message => message, :user => @user} %>
+        <% end %>
+      </div>
+      <div class="panel-footer clearfix">
+      </div>
+    </div><!-- /panel -->
+  </div><!-- /tab4 -->
+  <% end %>
 </div>
+<% elsif request_sent(@current_user) %>
+    <div id="my_timeline" class="tab-pane fade active in">
+      <div id="user_wrapper" class="row">
+        <div class="col-md-2">
+          <div class="thumbnail">
+            <%= user_image(@user,'medium') %>
+            <div class="caption">
+              <h5 class="text-center"><%= username_by_guid(@user.user_uuid) %></h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-10">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <h3 class="text-info">Request to connect was sent on <i class="fa fa-clock-o"></i> <%= time_ago_in_words(request_sent(@current_user).created_at) %> ago, waiting on <%= @user.first_name %>'s response</h3>
+            </div>
+          </div><!-- /panel -->
+
+          <div id="all-kasa-wrapper" class="row">
+
+          </div>
+          <div id="delete-modal-wrapper"></div>
+        </div>
+      </div>
+    </div>
+<% else %>
+    <div id="my_timeline" class="tab-pane fade active in">
+      <div id="user_wrapper" class="row">
+        <div class="col-md-2">
+          <div class="thumbnail">
+            <%= user_image(@user,'medium') %>
+            <div class="caption">
+              <h5 class="text-center"><%= username_by_guid(@user.user_uuid) %></h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-10">
+          <div class="panel panel-default">
+              <div class="panel-body">
+                <a href="/notify/<%= @current_user.user_uuid + "/request/" + @user.user_uuid%>" class="btn btn-primary btn-lg pull-right"><span class="fa fa-compress"></span> Connect</a>
+              </div>
+          </div><!-- /panel -->
+
+          <div id="all-kasa-wrapper" class="row">
+
+          </div>
+          <div id="delete-modal-wrapper"></div>
+        </div>
+      </div>
+    </div>
+
+<% end %>

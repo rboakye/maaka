@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  notification_type: MyString
+  sender_uuid: MyString
+  receiver_uuid: MyString
+  transaction_id: MyString
+
+two:
+  notification_type: MyString
+  sender_uuid: MyString
+  receiver_uuid: MyString
+  transaction_id: MyString

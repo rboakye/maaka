@@ -8,6 +8,9 @@ class User < ActiveRecord::Base
   has_one :user_session, dependent: :destroy
   has_many :user_images, dependent: :destroy
   has_many :images, through: :user_images
+  has_many :user_communities, dependent: :destroy
+  has_many :communities, through: :user_communities
+  has_many :messages, dependent: :destroy
 
   EMAIL_REGEX = /\A[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}\Z/i
   validates :first_name, :presence => true,
