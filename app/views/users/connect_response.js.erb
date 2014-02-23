@@ -1,1 +1,6 @@
 $('#msg_<%= @message.id %>').remove();
+<% if @messages.count < 1 %>
+$('.noti-badge').remove();
+<% else %>
+$('.noti-badge').html("<%= @messages.count%>");
+<% end %>

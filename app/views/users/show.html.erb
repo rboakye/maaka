@@ -37,13 +37,16 @@
       </a>
     </li>
     <% if @user.id == @user_id %>
-    <li class="">
+    <li class="message-box">
       <a data-toggle="tab" href="#message">
         <div class="block text-center">
           <i class="fa fa-envelope fa-2x"></i>
         </div>
         Messages
       </a>
+      <% if @messages.count > 0 %>
+      <b class="badge noti-badge"><%= @messages.count %></b>
+     <% end %>
     </li>
     <% end %>
   </ul>
@@ -163,6 +166,34 @@
 
           <div id="all-kasa-wrapper" class="row">
 
+          </div>
+          <div id="delete-modal-wrapper"></div>
+        </div>
+      </div>
+    </div>
+<% elsif request_receive(@current_user) %>
+    <% message = request_receive(@current_user) %>
+    <div id="my_timeline" class="tab-pane fade active in">
+      <div id="user_wrapper" class="row">
+        <div class="col-md-2">
+          <div class="thumbnail">
+            <%= user_image(@user,'medium') %>
+            <div class="caption">
+              <h5 class="text-center"><%= username_by_guid(@user.user_uuid) %></h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-10">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <h3 class="text-info"><%= @user.first_name %> sent you a connection request at <i class="fa fa-clock-o"></i> <%= time_ago_in_words(message.created_at) %> ago, Approve to continue</h3>
+            </div>
+            <br>
+          </div><!-- /panel -->
+
+          <div id="all-kasa-wrapper">
+            <a href="/users/connect_other/approve/<%= message.transaction_id %>" class="btn btn-success btn-lg"><span class="fa fa-thumbs-up"></span> Approve </a>
           </div>
           <div id="delete-modal-wrapper"></div>
         </div>

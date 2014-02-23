@@ -37,6 +37,7 @@ class UsersController < ApplicationController
       @my_kasas = @user.posts.order('created_at DESC')
       @image = Image.new
       @images = @user.images
+      @messages = @user.messages
     elsif @user && in_my_community(@user,@current_user)
       redirect_to "/" + @user.user_name
     else
@@ -196,12 +197,42 @@ class UsersController < ApplicationController
       end
     else
       @message = Message.where(transaction_id: params[:transaction_id]).first
+      if @message
+        @owner = User.find(@message.user_id)
+      end
     end
     respond_to do |format|
       if @message
         @message.destroy
       end
+      @messages = @owner.messages
       format.js
+    end
+  end
+
+  # GET get 'users/connect_other/:response/:transaction_id'
+  def connect_response_other
+    if params[:response] == 'approve'
+      @message = Message.where(transaction_id: params[:transaction_id]).first
+      if @message
+        @owner = User.find(@message.user_id)
+        @sender = User.where(:user_uuid => @message.sender_uuid).first
+        if @owner && @sender
+          @community = Community.create(owner:@owner.user_uuid, member_uuid: @sender.user_uuid)
+          @community_2 = Community.create(owner: @sender.user_uuid, member_uuid: @owner.user_uuid)
+          if @community && @community_2
+            UserCommunity.create(user_id: @owner.id, community_id: @community.id)
+            UserCommunity.create(user_id: @sender.id, community_id: @community_2.id)
+          end
+        end
+      end
+    end
+    respond_to do |format|
+      if @message
+        @message.destroy
+      end
+      flash[:notice] = "#{@owner.first_name}! is now connected with #{@sender.first_name}"
+      format.html { redirect_to "/#{username_id_by_guid(@message.sender_uuid)}" }
     end
   end
 

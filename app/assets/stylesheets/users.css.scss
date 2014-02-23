@@ -153,7 +153,7 @@
   white-space: nowrap;
   width: 100%;
 }
-.inbox-data-message > *:first-child span {
+/*.inbox-data-message > *:first-child span {
   color: #111111;
 }
 .inbox-data-message > *:first-child span.label {
@@ -161,4 +161,15 @@
 }
 .inbox-data-message > *:first-child > *:first-child:after {
   content: " - ";
+}*/
+
+.message-box{
+  height: 65px;
+}
+
+.noti-badge{
+  position: relative;
+  top:-65px;
+  left: 45px;
+  background-color: #ff2b14;
 }

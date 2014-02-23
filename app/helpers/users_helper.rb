@@ -105,4 +105,13 @@ module UsersHelper
      end
   end
 
+  def request_receive(user)
+    message = Message.where(user_id: user.id, message_type: :connect).first
+    if message
+      return message
+    else
+      return false
+    end
+  end
+
 end

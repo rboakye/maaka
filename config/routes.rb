@@ -51,6 +51,9 @@ Makasa::Application.routes.draw do
 
   get 'users/connect/:response/:transaction_id' => 'users#connect_response'
 
+  get 'users/connect_other/:response/:transaction_id' => 'users#connect_response_other'
+
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.
