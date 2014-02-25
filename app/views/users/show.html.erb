@@ -106,8 +106,8 @@
      <% @community_list.each do |friend| %>
      <div class="friends-box-list">
        <a href="/<%= username_id_by_guid(friend.member_uuid)%>" rel="popover" data-placement="left auto" data-container="body"
-          data-trigger="hover" class="friend-pop" data-title="<%= username_by_guid(friend.member_uuid) %>"
-          data-html="true" data-content="<%= recent_post(friend.member_uuid) %>">
+          class="friend-pop" data-title="<%= username_by_guid(friend.member_uuid) %>"
+          data-content="<%= recent_post(friend.member_uuid) %>">
        <%= friend_image(user_by_guid(friend.member_uuid),'thumb') %>
        </a>
      </div>
