@@ -49,6 +49,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
+    @user.email = params[:user][:email].to_s.downcase
     @user.user_uuid = SecureRandom.uuid.to_s
     @user.user_name = generate_user_name(@user)
     @error = false
@@ -78,8 +79,8 @@ class UsersController < ApplicationController
         format.html { redirect_to "/" + @user.user_name + "/edit"}
         format.json { head :no_content }
       else
-        flash[:notice] = "#{@user.first_name}, there was a problem updating your Makasa Account "
-        format.html { render action: 'show' }
+        flash[:error] = "#{@user.first_name}, there was a problem updating your Makasa Account "
+        format.html { redirect_to "/" + @user.user_name + "/edit"}
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
