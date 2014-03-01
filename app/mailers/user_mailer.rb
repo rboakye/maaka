@@ -20,7 +20,7 @@ class UserMailer < ActionMailer::Base
     @user = user
     @time = Time.now.to_s.humanize
     attachments['makasa_logo_title_sm.png'] = File.read(Rails.root.join('app/assets/images/makasa_logo_title_sm.png'))
-    @access_link = url_for(controller:"access", action:"password_reset_access",access:password,ref:@user.user_uuid, only_path: false, :protocol => "https")
+    @access_link = url_for(controller:"access", action:"password_reset_access",access:password,ref:@user.user_uuid, only_path: false, :protocol => 'https://')
     mail(:to => @user.email, :subject => "Makasa Password Reset Notification")
   end
 
