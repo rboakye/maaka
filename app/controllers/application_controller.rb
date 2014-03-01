@@ -2,8 +2,8 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  before_action :confirm_valid_session, :except => [:attempt_login, :login_access, :request_access, :password_request, :password_reset_access, :password_request_update]
-  before_action :session_active, :except => [:attempt_login,:login_access, :logout, :request_access, :password_request, :password_reset_access, :password_request_update]
+  before_action :confirm_valid_session, :except => [:attempt_login, :login_access, :request_access, :password_request, :password_reset_access]
+  before_action :session_active, :except => [:attempt_login,:login_access, :logout, :request_access, :password_request, :password_reset_access]
 
 
   class UserAccessSession

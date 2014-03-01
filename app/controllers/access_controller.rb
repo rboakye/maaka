@@ -30,7 +30,12 @@ class AccessController < ApplicationController
   def password_reset_access
      @user = User.where(:user_uuid => params[:ref]).first
      @temp_password = params[:access]
-     @pass_reset = true
+     @pass_reset = false
+     if @user
+       if @user.authenticate(@temp_password)
+          @pass_reset = true
+       end
+     end
   end
 
   def attempt_login
