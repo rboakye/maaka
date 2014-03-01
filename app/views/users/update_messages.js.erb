@@ -1,0 +1,11 @@
+<% if @messages.count < 1 %>
+$('.noti-badge').remove();
+<% else %>
+$('.noti-badge').html("<%= @messages.count%>");
+$('.messages-wrapper').html("");
+    <% @messages.each do |message| %>
+    $('.messages-wrapper').append(<%= escape_javascript(render partial: 'users/messages', locals: {:message => message, :user => @user})%>);
+    <% end %>
+<% end %>
+
+

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  <style>
+      #email {
+          background-color: #e8f0eb;
+      }
+  </style>
+</head>
+</head>
+<body>
+<div>
+    <table width="600" bgcolor="#e8f0eb" id="email" cellpadding="5" cellspacing="2" border="0">
+      <tr><td>
+      <div><%= image_tag attachments['makasa_logo_title_sm.png'].url, class: 'img-rounded' %></div>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <h1>Recent Notification</h1>
+      <h3>Hello <%= @con_user.first_name + " " + @con_user.last_name %></h3>
+      <p></p>
+      <p><%= @user.first_name + " " + @user.last_name %> wants to conect with you</p>
+      <p>Click on the link to login to Makasa and approve <%= @user.first_name %></p>
+      <table cellspacing="0" cellpadding="0"> <tr>
+        <td align="center" width="80" height="40" bgcolor="#357EBD" style="-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; color: #ffffff; display: block;">
+          <a href="<%= @url %>" style="color: #ffffff; font-size:16px; font-weight: bold;
+                  font-family: Helvetica, Arial, sans-serif; text-decoration: none; line-height:40px; width:100%; display:inline-block">Log In</a>
+        </td>
+      </tr>
+      </table>
+      <p></p>
+      <h3>If link is not working, copy and paste link below into your browser</h3>
+      <a href="<%= @url %>"><%= @url %></a>
+  <p></p>
+  <p>Notification Time: <%= @time  %></p>
+   </td></tr>
+  </table>
+
+</div>
+</body>
+</html>

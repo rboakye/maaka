@@ -33,6 +33,15 @@ class UserMailer < ActionMailer::Base
     mail(:to => @con_user.email, :subject => "#{@user.first_name} Kasa on your timeline")
   end
 
+  def request_connect(receiver,sender)
+    @user = sender
+    @con_user = receiver
+    @time = Time.now.to_s.humanize
+    attachments['makasa_logo_title_sm.png'] = File.read(Rails.root.join('app/assets/images/makasa_logo_title_sm.png'))
+    @url = "makasa.herokuapp.com"
+    mail(:to => @con_user.email, :subject => "#{@user.first_name} wants to connect with you on Makasa")
+  end
+
   def user_activation(user)
 
   end

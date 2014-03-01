@@ -171,8 +171,9 @@ class UsersController < ApplicationController
     @new_message.status = 'respond'
     respond_to do |format|
       if @new_message.save!
+        UserMailer.request_connect(@receiver,@sender).deliver
         flash[:notice] = "#{@sender.first_name}! your request has been sent to #{@receiver.first_name}, thank you"
-        format.html { redirect_to root_path }
+        format.html { redirect_to "/#{User.find(@new_message.user_id).user_name}" }
       else
         flash[:error] = "Request Failed"
         format.html { redirect_to root_path }
@@ -234,6 +235,27 @@ class UsersController < ApplicationController
       end
       flash[:notice] = "#{@owner.first_name}! is now connected with #{@sender.first_name}"
       format.html { redirect_to "/#{username_id_by_guid(@message.sender_uuid)}" }
+    end
+  end
+
+  # GET get 'users/connect_other/:response/:transaction_id'
+  def cancel_request
+    @message = Message.where(transaction_id: params[:transaction_id]).first
+    respond_to do |format|
+      if @message
+        @message.destroy
+      end
+      flash[:notice] = "Request to connect with #{User.find(@message.user_id).first_name} is cancel"
+      format.html { redirect_to "/#{User.find(@message.user_id).user_name}" }
+    end
+  end
+
+  # GET get 'users/update_messages'
+  def update_messages
+    @user = @current_user
+    @messages = @current_user.messages
+    respond_to do |format|
+      format.js
     end
   end
 
