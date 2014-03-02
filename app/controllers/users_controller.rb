@@ -49,7 +49,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-    @user.email = params[:user][:email].to_s.downcase
+    @user.email = params[:user][:email].to_s.downcase.gsub(/\s+/,"")
     @user.user_uuid = SecureRandom.uuid.to_s
     @user.user_name = generate_user_name(@user)
     @error = false
@@ -73,13 +73,15 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    params[:user][:email] = params[:user][:email].to_s.downcase.gsub(/\s+/,"")
+    params[:user][:user_name] = params[:user][:user_name].to_s.downcase.gsub(/\s+/,"")
     respond_to do |format|
       if @user.update(user_params)
         flash[:notice] = "#{@user.first_name}, you have successfully updated your Makasa Account "
         format.html { redirect_to "/" + @user.user_name + "/edit"}
         format.json { head :no_content }
       else
-        flash[:error] = "#{@user.first_name}, there was a problem updating your Makasa Account "
+        flash[:error] = "#{@user.first_name}, there was a problem updating your Makasa Account - #{@user.errors.full_messages.to_sentence}"
         format.html { redirect_to "/" + @user.user_name + "/edit"}
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end

@@ -12,7 +12,7 @@ class AccessController < ApplicationController
   end
 
   def password_request
-     @user = User.where(:email => params[:email]).first
+     @user = User.where(:email => params[:email].to_s.downcase.gsub(/\s+/,"")).first
      if @user
        random_password = Array.new(10).map { (65 + rand(58)).chr }.join
        @user.password = random_password
@@ -40,11 +40,11 @@ class AccessController < ApplicationController
 
   def attempt_login
     if params[:user_id].present? && params[:password].present?
-      found_user = User.where(:email => params[:user_id].to_s.downcase).first
+      found_user = User.where(:email => params[:user_id].to_s.downcase.gsub(/\s+/,"")).first
       if found_user
         authorized_user = found_user.authenticate(params[:password])
       else
-        found_user = User.where(:user_name => params[:user_id].to_s.downcase).first
+        found_user = User.where(:user_name => params[:user_id].to_s.downcase.gsub(/\s+/,"")).first
         if found_user
           authorized_user = found_user.authenticate(params[:password])
         end

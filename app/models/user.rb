@@ -25,6 +25,8 @@ class User < ActiveRecord::Base
 
   validates_format_of :email, without: /NOSPAM/
 
+  validates_numericality_of :phone, :message => "can have only numbers"
+
   validates_uniqueness_of :user_name, :message => "has already been taken"
 
   validates :password, length: { minimum: 6 },
