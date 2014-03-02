@@ -25,7 +25,9 @@ class User < ActiveRecord::Base
 
   validates_format_of :email, without: /NOSPAM/
 
-  validates_numericality_of :phone, :message => "can have only numbers"
+  validates_numericality_of :phone, :allow_blank => true, :message => "can have only numbers"
+
+  validates_length_of :phone, :minimum => 10
 
   validates_uniqueness_of :user_name, :message => "has already been taken"
 
