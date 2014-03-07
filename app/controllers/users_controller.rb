@@ -52,6 +52,7 @@ class UsersController < ApplicationController
     @user.email = params[:user][:email].to_s.downcase.gsub(/\s+/,"")
     @user.user_uuid = SecureRandom.uuid.to_s
     @user.user_name = generate_user_name(@user)
+    @user.phone = ''
     @error = false
     respond_to do |format|
       if @user.save

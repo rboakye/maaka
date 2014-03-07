@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
       medium: '300x300>'
   }
 
-  validates_attachment :avatar, :size => { :in => 0..10.megabytes }
+  validates_attachment :avatar, :size => { :in => 0..3.megabytes }
 
 
   scope :search_username, lambda{ |query| where(["user_name LIKE ?", "#{query}%"])}
