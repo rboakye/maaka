@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
 
   validates_numericality_of :phone, :allow_blank => true, :message => "can have only numbers"
 
-  validates_length_of :phone, :minimum => 10
+  validates_length_of :phone, :allow_blank => true, :minimum => 10
 
   validates_uniqueness_of :user_name, :message => "has already been taken"
 
