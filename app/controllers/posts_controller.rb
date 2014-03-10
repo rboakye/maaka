@@ -119,6 +119,16 @@ class PostsController < ApplicationController
       end
     end
 
+   def find_momentable
+      params.each do |name, value|
+        if name =- /(.+)_id$/
+          return $1.classify.constantize.find(value)
+        end
+      end
+     nil
+   end
+
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:post).permit(:post_by, :post_content, :is_private, :post_uuid, :connected_id, :post_uuid)

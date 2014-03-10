@@ -28,11 +28,10 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @user = @current_user
-    @comment = Comment.new(comment_params)
-    @comment.user_uuid = @current_user.user_uuid
     @post = Post.find(params[:comment][:post_id])
+    @comment = @post.comments.create(kasa_comment: params[:comment][:kasa_comment], user_uuid: @current_user.user_uuid)
     respond_to do |format|
-      if @comment.save
+      if @comment
         format.js
         format.json { render action: 'show', status: :created, location: @comment }
       else
@@ -45,12 +44,10 @@ class CommentsController < ApplicationController
   # POST /image_comment
   def image_comment
     @user = @current_user
-    @comment = Comment.new
-    @comment.kasa_comment = params[:comment][:kasa_comment]
-    @comment.user_uuid = @current_user.user_uuid
+    @image = Image.find(params[:comment][:image_id])
+    @comment = @image.comments.create(kasa_comment: params[:comment][:kasa_comment], user_uuid: @current_user.user_uuid)
     respond_to do |format|
-      if @comment.save
-        ImageComment.create(image_id: params[:comment][:image_id], comment_id: @comment.id)
+      if @comment
         format.js
       else
         format.js
