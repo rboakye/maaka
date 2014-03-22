@@ -55,6 +55,20 @@ class CommentsController < ApplicationController
     end
   end
 
+  # POST /image_comment
+  def image_tl_comment
+    @user = @current_user
+    @image = Image.find(params[:comment][:image_id])
+    @comment = @image.comments.create(kasa_comment: params[:comment][:kasa_comment], user_uuid: @current_user.user_uuid)
+    respond_to do |format|
+      if @comment
+        format.js
+      else
+        format.js
+      end
+    end
+  end
+
   # PATCH/PUT /comments/1
   # PATCH/PUT /comments/1.json
   def update

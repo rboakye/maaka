@@ -1,0 +1,3 @@
+$("#delete-modal-wrapper").html("<%= escape_javascript( render partial: 'images/delete_image', :locals => {:image => @image} ) %>");
+
+$('#imageDeleteModal').modal('show');

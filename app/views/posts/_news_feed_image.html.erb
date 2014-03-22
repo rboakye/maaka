@@ -1,0 +1,67 @@
+    <div id="image_post_<%= image.id %>" class="timeline-item">
+      <div class="timeline-info hidden-xs">
+        <div class="media">
+          <%= user_image(user_by_guid(image.creator),'thumb') %>
+        </div>
+      </div>
+      <div id="image_<%= image.id %>" class="panel panel-default timeline-panel kasa-panel">
+        <div class="panel-heading kasa-heading">
+          <%= link_to username_by_guid(image.creator),"/" + username_id_by_guid(image.creator),class: "text-info" %>  added a new photo
+          <% if image.creator == user.user_uuid %>
+              <a href="/images/delete_image_modal/<%= image.image_uuid %>" class="pull-right text-danger post-delete" data-remote="true">
+                <i class="fa fa-trash-o fa-lg"></i>
+              </a>
+          <% end %>
+          <small class="pull-right text-muted">
+            <i class="fa fa-clock-o"></i>
+            <%= time_ago_in_words(image.created_at)%> ago
+          </small>
+        </div>
+        <div class="panel-body">
+          <div class="image-pane" >
+            <%= image_tag(image.photo.url(:medium), id: "timeline-image_#{image.id}", class: 'img-responsive') %>
+          </div>
+        </div>
+        <div class="timeline-img">
+        <div class="comments">
+          <% image.comments.each do |comment| %>
+              <div id="comment_<%= comment.id  %>_kasa" class="panel panel-default comment-block">
+                <% if comment.user_uuid == user.user_uuid || user.user_uuid == image.creator %>
+                    <%= link_to 'x', comment, method: :delete, class: "close delete-comment",
+                                :"data-toggle" => "tooltip", :"data-placement" => "top", title: "Delete", remote: true %>
+                <% end %>
+                <div class="panel-body row">
+                  <div class="hidden-xs comment-media col-sm-3 col-md-1">
+                    <%= user_image_comment(user_by_guid(comment.user_uuid),'thumb') %>
+                  </div>
+                  <div class="col-xs-12 col-sm-10 col-md-11 post-comment-block">
+                    <%= link_to username_by_guid(comment.user_uuid),"/" + username_id_by_guid(comment.user_uuid), class: "text-primary" %><br>
+                    <%= simple_format(comment.kasa_comment, {}, wrapper_tag: "span") %> &nbsp;
+                    <small class="text-muted text-info">
+                      <i class="fa fa-clock-o"></i>
+                      <%= time_ago_in_words(comment.created_at) %> ago
+                    </small>
+                  </div>
+                </div>
+              </div>
+          <% end %>
+        </div>
+        </div>
+        <%= form_for comment, url: {controller: 'comments', action: 'image_tl_comment'}, remote: true do |f| %>
+            <%= f.hidden_field :image_id, value: image.id  %>
+            <div class="panel panel-default comment-block">
+              <div class="panel-body row">
+                <div class="hidden-xs comment-media col-sm-3 col-md-1">
+                  <%= user_image_comment(user_by_guid(user.user_uuid),'thumb') %>
+                </div>
+                <div class="col-xs-12 col-sm-9 col-md-9">
+                  <%= f.text_area :kasa_comment, required:"", class: "form-control no-border no-shadow", placeholder: "Add comment", rows: "2" %>
+                </div>
+                <div class="col-xs-12 col-sm-1 col-md-1">
+                  <%= f.submit 'Comment', class: "btn btn-default btn-md comment-btn", remote: true %>
+                </div>
+              </div>
+            </div>
+        <% end %>
+      </div><!-- /panel -->
+    </div>

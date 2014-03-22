@@ -39,6 +39,9 @@ Makasa::Application.routes.draw do
 
   get "posts/delete_modal/:post_uuid" => 'posts#delete_modal'
 
+  get "images/delete_image_modal/:image_uuid" => 'images#delete_image_modal'
+
+
   post 'connected_post/:connected_id' => 'posts#connected_post'
 
   get 'images/:id/display_image/:user' => 'images#display_image'
@@ -46,6 +49,9 @@ Makasa::Application.routes.draw do
   get 'images/:id/display_other/:user' => 'images#display_other'
 
   post 'comments/image_comment' => 'comments#image_comment'
+
+  post 'comments/image_tl_comment' => 'comments#image_tl_comment'
+
 
   get 'notify/:sender_id/request/:user_id' => 'users#connection_request'
 

@@ -1,1 +1,7 @@
-$('#image_<%= @image.id %>').remove().sliding();
+
+if ($("#imageDeleteModal").length > 0){
+    $('#imageDeleteModal').modal('hide');
+    $('#image_post_<%= @image.id %>').remove().sliding();
+}else{
+    $('#image_<%= @image.id %>').remove().sliding();
+}

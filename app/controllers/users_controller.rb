@@ -16,7 +16,8 @@ class UsersController < ApplicationController
   def show
     @can_view = in_my_community(@user,@current_user)
     if @can_view || @user.id == @current_user.id
-      @kasas = @user.posts.order('created_at DESC')
+      @kasas = Timeline.where(is_public: true).order('updated_at DESC')
+
       @kasa = Post.new
       @comment = Comment.new
       @images = @user.images

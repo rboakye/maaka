@@ -93,7 +93,13 @@
 
     <div id="all-kasa-wrapper" class="row">
       <% @kasas.each do |kasa|%>
-          <%= render partial: 'posts/kasa', :locals => {:kasa => kasa, user: @current_user, :comment => @comment} %>
+          <% if kasa.momentable_type == 'Post' %>
+              <%= render partial: 'posts/kasa', :locals => {:kasa => find_momentable(kasa.momentable_id, 'Post'), user: @current_user, :comment => @comment} %>
+          <% elsif kasa.momentable_type == 'Image'  %>
+              <%= render partial: 'posts/my_image', :locals => {:image => find_momentable(kasa.momentable_id, 'Image'), user: @current_user, :comment => @comment} %>
+          <% else %>
+
+          <% end %>
       <% end %>
     </div>
     <div id="delete-modal-wrapper"></div>

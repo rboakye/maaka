@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all.order('created_at DESC')
+    @posts = Timeline.where(is_public: true).order('updated_at DESC')
     @user = User.new
     @comment = Comment.new
   end
@@ -35,6 +35,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
         create_join(@post.id, @user_id)
+        @post.timelines.create(user_id: @user.id, is_public:true)
        # flash[:notice] = "#{@user_fullname}, your new kasa was successful"
         format.js
         format.json { render action: 'show', status: :created, location: @post }
@@ -61,7 +62,8 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
         create_connected_join(@post.id, params[:connected_id])
-      #  flash[:notice] = "#{@user_fullname}, your new kasa was successful"
+        @post.timelines.create(user_id: @user.id, is_public:true)
+        #  flash[:notice] = "#{@user_fullname}, your new kasa was successful"
         if con_user_session.is_online == false
           UserMailer.user_notification(@current_user,@con_user).deliver
         end
@@ -118,15 +120,6 @@ class PostsController < ApplicationController
         @post = Post.find(params[:id])
       end
     end
-
-   def find_momentable
-      params.each do |name, value|
-        if name =- /(.+)_id$/
-          return $1.classify.constantize.find(value)
-        end
-      end
-     nil
-   end
 
 
     # Never trust parameters from the scary internet, only allow the white list through.
