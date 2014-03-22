@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Timeline.where(is_public: true).order('updated_at DESC')
+    @posts = Timeline.all.where(is_public: true).order('updated_at DESC')
     @user = User.new
     @comment = Comment.new
   end
@@ -62,7 +62,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
         create_connected_join(@post.id, params[:connected_id])
-        @post.timelines.create(user_id: @user.id, is_public:true)
+        @post.timelines.create(user_id: @con_user.id, is_public:false)
         #  flash[:notice] = "#{@user_fullname}, your new kasa was successful"
         if con_user_session.is_online == false
           UserMailer.user_notification(@current_user,@con_user).deliver
