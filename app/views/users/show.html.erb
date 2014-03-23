@@ -82,7 +82,7 @@
       <%= form_for @kasa,url: {controller: 'posts',action: 'connected_post', connected_id: @user.id }, remote: true do |f| %>
           <%= f.hidden_field :post_by, value: @user_guid  %>
           <div class="panel-body padding-xs">
-            <%= f.text_area :post_content, required:"", class: "form-control no-border no-shadow", placeholder: "Kasa to #{@user.first_name}", rows: "2" %>
+            <%= f.text_area :post_content, required:"", class: "form-control no-border no-shadow", placeholder: "Kasa to #{@user.first_name}", rows: "1" %>
           </div>
           <div class="panel-footer clearfix">
             <%= f.submit 'Kasa', class: "btn btn-md btn-info pull-right" %>
