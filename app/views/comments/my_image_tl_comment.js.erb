@@ -1,4 +1,4 @@
-$('#image_post_<%= @image.id %>').find('.comments').append("<%= escape_javascript( render :partial => 'new_comment', :locals => {:comment => @comment, :user => @user} )%>");
+$('#image_post_<%= @image.id %>').find('.comments').append("<%= escape_javascript( render :partial => 'image_comment', :locals => {:comment => @comment, :user => @user} )%>");
 
 $('#image_post_<%= @image.id %>').find('#comment_kasa_comment').val("");
 

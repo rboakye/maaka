@@ -52,6 +52,7 @@ Makasa::Application.routes.draw do
 
   post 'comments/image_tl_comment' => 'comments#image_tl_comment'
 
+  post 'comments/my_image_tl_comment' => 'comments#my_image_tl_comment'
 
   get 'notify/:sender_id/request/:user_id' => 'users#connection_request'
 

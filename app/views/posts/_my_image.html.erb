@@ -27,12 +27,14 @@
           <%= image_tag(image.photo.url(:medium), id: "timeline-image_#{image.id}", class: 'img-responsive') %>
         </div>
       </div>
+      <div class="my_image">
       <div class="comments">
         <% image.comments.each do |comment| %>
-            <%= render partial:  "comments/new_image_comment", locals: {:comment => comment, :user => user, :image => image} %>
+            <%= render partial:  "comments/image_comment", locals: {:comment => comment, :user => user, :image => image} %>
         <% end %>
       </div>
-      <%= form_for comment,url: {controller: 'comments', action: 'image_tl_comment'}, remote: true do |f| %>
+      </div>
+      <%= form_for Comment.new,url: {controller: 'comments', action: 'my_image_tl_comment'}, remote: true do |f| %>
           <%= f.hidden_field :image_id, value: image.id  %>
           <div class="panel panel-default comment-block">
             <div class="panel-body row">
