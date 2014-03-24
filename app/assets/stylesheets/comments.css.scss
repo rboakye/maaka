@@ -152,12 +152,16 @@
 
 .comment-panel .comment-header{
   border: 1px solid #d0dde5;
-  margin: 0px 15px 10px 15px;
+  margin-bottom:10px;
 }
 
 .comment-panel .comment-header a{
   font-size: 16px;
   font-weight: bold;
+}
+
+.comment-panel .comment-body{
+  padding: 5px 0px !important;
 }
 
 
