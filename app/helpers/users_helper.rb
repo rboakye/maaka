@@ -114,4 +114,17 @@ module UsersHelper
     end
   end
 
+  def user_gender(id)
+    user = User.find(id)
+    if user
+      if user.gender == 'Male'
+        return 'his'
+      end
+      if user.gender == 'Female'
+        return 'her'
+      end
+    end
+    return 'own'
+  end
+
 end

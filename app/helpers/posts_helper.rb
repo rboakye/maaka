@@ -40,4 +40,20 @@ module PostsHelper
     end
   end
 
+  def find_comment_item(id, type)
+    if type == 'Post'
+      item = Post.find(id)
+      if item
+        return item
+      end
+    elsif type == 'Image'
+      item = Image.find(id)
+      if item
+        return item
+      end
+    else
+       return nil
+    end
+  end
+
 end

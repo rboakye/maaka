@@ -32,6 +32,7 @@ class CommentsController < ApplicationController
     @comment = @post.comments.create(kasa_comment: params[:comment][:kasa_comment], user_uuid: @current_user.user_uuid)
     respond_to do |format|
       if @comment
+        @comment.timelines.create(user_id: @current_user.id)
         format.js
         format.json { render action: 'show', status: :created, location: @comment }
       else
@@ -48,6 +49,7 @@ class CommentsController < ApplicationController
     @comment = @image.comments.create(kasa_comment: params[:comment][:kasa_comment], user_uuid: @current_user.user_uuid)
     respond_to do |format|
       if @comment
+        @comment.timelines.create(user_id: @current_user.id)
         format.js
       else
         format.js
@@ -62,6 +64,7 @@ class CommentsController < ApplicationController
     @comment = @image.comments.create(kasa_comment: params[:comment][:kasa_comment], user_uuid: @current_user.user_uuid)
     respond_to do |format|
       if @comment
+        @comment.timelines.create(user_id: @current_user.id)
         format.js
       else
         format.js
@@ -76,6 +79,7 @@ class CommentsController < ApplicationController
     @comment = @image.comments.create(kasa_comment: params[:comment][:kasa_comment], user_uuid: @current_user.user_uuid)
     respond_to do |format|
       if @comment
+        @comment.timelines.create(user_id: @current_user.id)
         format.js
       else
         format.js
