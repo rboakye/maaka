@@ -131,7 +131,6 @@
      </div>
     </div>
    </div>
-   <div id="photo-modal-wrapper"></div>
   </div>
 
   <% if @user.id == @user_id %>
@@ -233,4 +232,7 @@
       </div>
     </div>
 
+<% end %>
+<% if @can_view %>
+<div id="photo-modal-wrapper"></div>
 <% end %>

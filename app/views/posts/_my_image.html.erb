@@ -24,7 +24,8 @@
       </div>
       <div class="panel-body">
         <div class="image-pane" >
-          <%= image_tag(image.photo.url(:medium), id: "timeline-image_#{image.id}", class: 'img-responsive') %>
+          <%= link_to image_tag(image.photo.url(:medium), class: 'img-responsive', id: "timeline-image_#{image.id}"),
+                      {action: 'display_image', controller: 'images', id: image.id, user: user.id}, remote: true %>
         </div>
       </div>
       <div class="my_image">
