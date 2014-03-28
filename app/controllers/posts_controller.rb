@@ -6,9 +6,15 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Timeline.all.where(is_public: true).order('updated_at DESC')
+    @posts = Timeline.where(is_public: true).order('updated_at DESC').paginate(page: params[:page] || 1)
     @user = User.new
     @comment = Comment.new
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.js
+    end
+
   end
 
   # GET /posts/1

@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   def show
     @can_view = in_my_community(@user,@current_user)
     if @can_view || @user.id == @current_user.id
-      @kasas = @user.timelines.order('updated_at DESC')
+      @kasas = @user.timelines.order('updated_at DESC').paginate(page: params[:page] || 1)
 
       @kasa = Post.new
       @comment = Comment.new
@@ -24,6 +24,10 @@ class UsersController < ApplicationController
       @can_view = true
       @community_list = @user.communities
       @messages = @user.messages
+    end
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 

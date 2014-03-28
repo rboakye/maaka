@@ -1,0 +1,7 @@
+$('#loading').show();
+$('#all-kasa-wrapper').append('<%= escape_javascript(render partial: "users/posts", :locals => { :kasas => @kasas, :comment => @comment })%>');
+$('a.load-more-posts').attr('href', '<%= "/" + @user.user_name + "?page=" + @kasas.next_page.to_s %>');
+<% unless @kasas.next_page %>
+    $('a.load-more-posts').remove();
+    $('#loading').hide();
+<% end %>

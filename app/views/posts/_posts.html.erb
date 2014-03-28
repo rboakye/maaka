@@ -1,0 +1,11 @@
+<% @posts.each do |post|%>
+    <% if post.momentable_type == 'Post' %>
+        <%= render partial: 'posts/news_feed_kasa', :locals => {:post => find_momentable(post.momentable_id, 'Post'), user: @current_user, :comment => comment} %>
+    <% elsif post.momentable_type == 'Image'  %>
+        <%= render partial: 'posts/news_feed_image', :locals => {:image => find_momentable(post.momentable_id, 'Image'), user: @current_user, :comment => comment} %>
+    <% elsif post.momentable_type == 'Comment' %>
+        <%= render partial: 'posts/comment_feed', :locals => {:comment_type => find_momentable(post.momentable_id, 'Comment'), user: @current_user, :comment => comment} %>
+    <% else %>
+
+    <% end %>
+<% end %>

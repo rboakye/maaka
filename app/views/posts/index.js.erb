@@ -1,0 +1,7 @@
+$('#loading').show();
+$('#posts').append('<%= escape_javascript(render partial: "posts/posts", :locals => { :posts => @posts, :comment => @comment })%>');
+$('a.load-more-posts').attr('href', '<%= posts_path(:page => @posts.next_page) %>');
+<% unless @posts.next_page %>
+    $('a.load-more-posts').remove();
+    $('#loading').hide();
+<% end %>

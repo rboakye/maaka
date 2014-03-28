@@ -16,5 +16,6 @@
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
 //= require twitter/bootstrap
+//= require jquery.inview.min
 //= require turbolinks
 //= require_tree .

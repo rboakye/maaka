@@ -3,7 +3,7 @@
     <% if comment_type.commentable_type == 'Post' %>
       <% if item.is_connected == false %>
           <div id="kasa_<%= item.id %>_post" class="timeline-item">
-              <div id="single_post_<%= item.id %>" class="panel panel-default timeline-panel kasa-panel">
+              <div id="single_post_<%= item.id %>" class="panel comment-panel kasa-panel">
                 <div class="panel-heading kasa-heading comment-header">
                   <span class="fa fa-comment-o pull-right text-info"></span>
                   <% if @current_user.user_uuid == item.post_by %>
@@ -18,7 +18,7 @@
                   </small>
                 </div>
                 <div class="panel-body comment-body">
-                      <%= render partial: 'posts/kasa', :locals => {:kasa => item, user: @current_user, :comment => comment} %>
+                      <%= render partial: 'posts/home_kasa', :locals => {:kasa => item, user: @current_user, :comment => comment} %>
                 </div>
               </div><!-- /panel -->
             </div>
