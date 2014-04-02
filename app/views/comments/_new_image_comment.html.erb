@@ -10,11 +10,8 @@
           <div class="hidden-xs comment-modal-avatar">
             <%= user_image_comment(user_by_guid(@current_user.user_uuid),'thumb') %>
           </div>
-          <div class="col-xs-9 col-sm-8 col-md-8 comment-modal-input">
+          <div class="col-xs-9 col-sm-11 col-md-11 comment-modal-input">
             <%= f.text_area :kasa_comment, required:"", class: "form-control no-border no-shadow", placeholder: "Add comment", rows: "1" %>
-          </div>
-          <div class="col-xs-3 col-sm-3 col-md-2 comment-modal-submit">
-            <%= f.submit 'Add', class: "btn btn-primary btn-sm comment-btn" %>
           </div>
         </div>
       </div>

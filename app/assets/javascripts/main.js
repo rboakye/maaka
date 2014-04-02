@@ -72,6 +72,14 @@ $(document).ready(function () {
 
 });
 
+    $(document).on('keypress', '#comment_kasa_comment', function(event) {
+        if(event.which == 13){
+            event.preventDefault();
+            $(this).closest('form').submit();
+            $(this).val('');
+        }
+    });
+
      $(document).on('mouseover', '.image-view', function() {
          $(this).find('.next').css("visibility", "visible");
          $(this).find('.prev').css("visibility", "visible");
