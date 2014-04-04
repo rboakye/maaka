@@ -111,6 +111,51 @@ class CommentsController < ApplicationController
     end
   end
 
+  # GET /update_post_comments/1/2
+  def update_post_comments
+    @user = @current_user
+    @post = Post.find(params[:post_id])
+    @comments = @post.comments
+    if @comments.size > 0
+      if @comments.last.id == params[:id]
+        @comments = []
+      end
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  # GET /update_image_comments/1/2
+  def update_image_comments
+    @user = @current_user
+    @image = Image.find(params[:image_id])
+    @comments = @image.comments
+    if @comments.size > 0
+      if @comments.last.id == params[:id]
+        @comments = []
+      end
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  # GET /update_modal_comments/1/2
+  def update_modal_comments
+    @user = @current_user
+    @image = Image.find(params[:image_id])
+    @comments = @image.comments
+    if @comments.size > 0
+      if @comments.last.id == params[:id]
+        @comments = []
+      end
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_comment

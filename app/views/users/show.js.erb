@@ -5,3 +5,56 @@ $('a.load-more-posts').attr('href', '<%= "/" + @user.user_name + "?page=" + @kas
     $('a.load-more-posts').remove();
     $('#loading').hide();
 <% end %>
+
+var currentId = "";
+$('.kasa-panel').mouseover(function(event) {
+    myflag = doAjax(this.id);
+    if(myflag){
+        var post_id = this.id.replace(/[^0-9]/g,'');
+        var comment = $(this).find('.comments').children().last();
+        if(comment.length > 0){
+            var comment_id = comment.attr('id').replace(/[^0-9]/g,'');
+        }else{
+            var comment_id = '-1'
+        }
+        var url = "/comments/update_post_comments/" + post_id + "/" + comment_id;
+        $.ajax({
+            url: url,
+            context: document.body,
+            success: function(content,msg){
+                flag = false;
+            }
+        });
+    }
+});
+
+$('.image-panel').mouseover(function(event) {
+    myflag = doAjax(this.id);
+    if(myflag){
+        var image_id = this.id.replace(/[^0-9]/g,'');
+        var comment = $(this).find('.comments').children().last();
+        if(comment.length > 0){
+            var comment_id = comment.attr('id').replace(/[^0-9]/g,'');
+        }else{
+            var comment_id = '-1'
+        }
+        var url = "/comments/update_image_comments/" + image_id + "/" + comment_id;
+        $.ajax({
+            url: url,
+            context: document.body,
+            success: function(content,msg){
+                flag = false;
+            }
+        });
+    }
+});
+
+function doAjax(id){
+    if(currentId == id){
+        flag = false;
+    }else{
+        flag = true;
+        currentId = id;
+    }
+    return flag;
+}

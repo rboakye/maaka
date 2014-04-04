@@ -1,0 +1,18 @@
+<% if @comments.size > 1 %>
+    var comment_wrapper = $('#image_<%= @image.id%>').find('.comments');
+    comment_wrapper.html('');
+    <% @comments.each do |comment| %>
+       comment_wrapper.append("<%= escape_javascript( render :partial => 'image_comment',
+       :locals => {:comment => comment, :user => @user, :image => @image} )%>");
+    <% end %>
+
+    $('.comment-block').mouseover(function (e) {
+        $(this).find('.delete-comment').css("visibility", "visible");
+    }).mouseleave(function () {
+        $('.delete-comment').css("visibility", "hidden");
+     });
+
+    $('.delete-comment').tooltip();
+<% end %>
+
+

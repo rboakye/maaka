@@ -4,7 +4,7 @@
           <%= user_image(user_by_guid(image.creator),'thumb') %>
         </div>
       </div>
-      <div id="image_<%= image.id %>" class="panel panel-default timeline-panel kasa-panel">
+      <div id="image_<%= image.id %>" class="panel panel-default timeline-panel image-panel">
         <div class="panel-heading kasa-heading">
           <%= link_to username_by_guid(image.creator),"/" + username_id_by_guid(image.creator),class: "text-info" %>  added a new photo
           <% if image.creator == user.user_uuid %>

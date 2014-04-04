@@ -5,7 +5,7 @@
     </div>
   </div>
   <div class="my_single_post">
-    <div id="image_<%= image.id %>" class="panel panel-default timeline-panel kasa-panel">
+    <div id="image_<%= image.id %>" class="panel panel-default timeline-panel image-panel">
       <div class="panel-heading kasa-heading">
         <% if user.user_uuid == image.creator%>
             <span class="text-info"><%= username_by_guid(image.creator) %></span>

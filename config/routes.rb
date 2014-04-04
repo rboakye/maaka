@@ -64,6 +64,12 @@ Makasa::Application.routes.draw do
 
   get 'update_messages' => 'users#update_messages'
 
+  get 'comments/update_post_comments/:post_id/:id' => 'comments#update_post_comments'
+
+  get 'comments/update_image_comments/:image_id/:id' => 'comments#update_image_comments'
+
+  get 'comments/update_modal_comments/:image_id/:id' => 'comments#update_modal_comments'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

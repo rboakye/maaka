@@ -17,7 +17,7 @@
            <%= image_tag(image.photo.url(:original), class: 'img-preview img-responsive') %>
           </div>
           <div class="col-md-6 col-sm-12 col-xs-12">
-            <div class="img-comment">
+            <div id="image_<%= image.id %>" class="img-comment">
                 <div class="timeline-info hidden-xs">
                 <div class="media">
                   <%= user_image(user_by_guid(image.creator),'thumb') %>
