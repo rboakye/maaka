@@ -6,7 +6,6 @@ $('a.load-more-posts').attr('href', '<%= posts_path(:page => @posts.next_page) %
     $('#loading').hide();
 <% end %>
 
-var flag = true;
 var currentId = "";
 $('.kasa-panel').mouseover(function(event) {
     myflag = doAjax(this.id);
