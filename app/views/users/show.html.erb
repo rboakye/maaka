@@ -97,9 +97,11 @@
     <div class="row text-center">
       <%= link_to 'Get Older Post', "/" + @user.user_name + "?page=" + @kasas.next_page.to_s, :class => 'load-more-posts btn btn-default', :remote => true if @kasas.next_page %>
     </div>
+    <% if @kasas.size > 9 %>
     <div class="row text-center" id="loading">
       <%= image_tag('loading.gif') %>
     </div>
+    <% end %>
     <div id="delete-modal-wrapper"></div>
   </div>
  </div>

@@ -17,9 +17,11 @@
         <div class="row text-center">
           <%= link_to 'Get Older Post', posts_path(:page => @posts.next_page), :class => 'load-more-posts text-center btn btn-default', :remote => true if @posts.next_page %>
         </div>
+        <% if @posts.size > 9 %>
         <div class="row text-center" id="loading">
           <%= image_tag('loading.gif') %>
         </div>
+        <% end %>
         <div id="delete-modal-wrapper"></div>
       </div>
       <div id="photo-modal-wrapper" class="col-lg-12"></div>
