@@ -241,3 +241,28 @@ form.form-border .form-group {
   background-color: #f0f0f0;
 }
 
+//main search input box
+#bloodhound{
+  margin-top: 12px;
+  margin-right: 20px;
+  width: 500px;
+}
+
+@media (min-width: 992px) and (max-width: 1200px){
+  #bloodhound{
+    width: 350px;
+  }
+}
+
+@media (min-width: 750px) and (max-width: 991px){
+  #bloodhound{
+    width: 230px;
+  }
+}
+
+@media (max-width: 750px){
+  #bloodhound{
+    width: 100%;
+  }
+}
+

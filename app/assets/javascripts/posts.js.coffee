@@ -7,5 +7,3 @@ $ ->
     return unless visible
 
     $.getScript $(this).attr('href')
-
-    $('#loading').hide()
