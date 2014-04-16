@@ -71,9 +71,7 @@
               </ul>
             </li>
           </ul>
-          <div id="bloodhound" class="navbar-form navbar-right">
-            <input class="typeahead form-control" type="text" placeholder="Search for People">
-          </div>
+          <%= render partial: 'users/searchform' %>
         </div>
     <% else %>
         <div class="navbar-collapse collapse">
@@ -116,7 +114,7 @@
 
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <% if @user_logged_in == nil || @user_logged_in == false %>
-<div class="jumbotron">
+<div class="jumbotron main-billboard">
       <div id="jumbotron_div" class="container">
         <h1>Sign in to Ma'kasa</h1>
         <p>Makasa! Speak to the world the way you want them to listen. </p>

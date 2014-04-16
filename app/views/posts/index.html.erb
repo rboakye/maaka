@@ -1,7 +1,8 @@
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="row">
   <% if @user_logged_in == nil || @user_logged_in == false%>
-      <div class="col-lg-6" id="home_image">
+      <div class="col-lg-6 hidden.sm hidden-xs text-center" id="home_image">
+        <%= image_tag 'makasa_network.jpg', class: 'img-thumbnail img-responsive' %>
       </div>
       <div class="col-lg-6 sign-up-form">
         <%= render partial: 'users/new'%>

@@ -5,6 +5,14 @@ body{
  // background: #f8f8f0;
 }
 
+.main-billboard{
+  background-color: #cfd6d7;
+}
+
+.login-email-field{
+  width: 230px;
+}
+
 #startup{
  //margin-top: 2px;
 }
@@ -264,5 +272,26 @@ form.form-border .form-group {
   #bloodhound{
     width: 100%;
   }
+}
+
+@media (max-width: 750px){
+  .login-email-field{
+    width: 100%;
+  }
+}
+
+.right-inner-addon{
+  position: relative;
+}
+
+.right-inner-addon input{
+  padding-right: 30px;
+}
+
+.right-inner-addon span{
+  position: absolute;
+  right: 0px;
+  padding: 10px 25px;
+  pointer-events: none;
 }
 
