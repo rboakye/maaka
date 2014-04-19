@@ -53,4 +53,28 @@ class User < ActiveRecord::Base
 
   scope :search_username, lambda{ |query| where(["user_name LIKE ?", "#{query}%"])}
 
+  scope :search_users, lambda{ |query|
+    return nil  if query.blank?
+
+    # condition query, parse into individual keywords
+    terms = query.downcase.split(/\s+/)
+
+    # replace "*" with "%" for wildcard searches,
+    # append '%', remove duplicate '%'s
+    terms = terms.map { |e|
+      (e.gsub('*', '%') + '%').gsub(/%+/, '%')
+    }
+    # configure number of OR conditions for provision
+    # of interpolation arguments. Adjust this if you
+    # change the number of OR conditions.
+    num_or_conds = 2
+    where(
+        terms.map { |term|
+          "(LOWER(first_name) LIKE ? OR LOWER(last_name) LIKE ?)"
+        }.join(' AND '),
+        *terms.map { |e| [e] * num_or_conds }.flatten
+    )
+  }
+
+
 end

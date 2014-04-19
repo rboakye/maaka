@@ -31,6 +31,22 @@ class UsersController < ApplicationController
     end
   end
 
+  # GET /users/all_users.json
+  def all_users
+    @my_users = get_my_contacts(@current_user.communities)
+    respond_to do |format|
+        format.json
+    end
+  end
+
+  # GET /users/all_users.json
+  def alt_users
+    @other_users = User.search_users(params[:search])
+    respond_to do |format|
+      format.json
+    end
+  end
+
   # GET /users/new
   def new
     @user = User.new

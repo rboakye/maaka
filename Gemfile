@@ -61,6 +61,9 @@ gem 'will_paginate-bootstrap'
 
 gem 'jquery-fileupload-rails'
 
+# Use for typaheads functions
+gem 'twitter-typeahead-rails'
+
 #gem 'devise', '3.0.0.rc'
 
 #gem 'protected_attributes'

@@ -250,26 +250,137 @@ form.form-border .form-group {
 }
 
 //main search input box
-#bloodhound{
+#search-people{
   margin-top: 12px;
   margin-right: 20px;
   width: 500px;
 }
 
+.right-inner-addon{
+  position: relative;
+}
+
+.right-inner-addon .typeahead{
+  padding-right: 30px;
+}
+
+.right-inner-addon i{
+  position: absolute;
+  right: 0px;
+  padding: 10px 25px;
+  z-index: 1098;
+}
+
+.typeahead, .tt-query, .tt-hint {
+  line-height: 30px;
+  outline: medium none;
+  width: 470px;
+}
+.typeahead {
+  background-color: #FFFFFF;
+  -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+}
+.typeahead:focus {
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  border: 1px solid rgba(81, 203, 238, 1);
+}
+
+.tt-query {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+}
+.tt-hint {
+  color: #cbcbcb;
+}
+.tt-dropdown-menu {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  margin-top: 12px;
+  padding: 8px 0;
+  width: 470px;
+}
+.tt-suggestion {
+  font-size: 24px;
+  line-height: 24px;
+  padding: 3px 20px;
+}
+.tt-suggestion.tt-cursor {
+  background-color: #0097CF;
+  color: #FFFFFF;
+}
+.tt-suggestion p {
+  margin: 0;
+}
+
+.empty-message{
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+//responsive utilities
+
 @media (min-width: 992px) and (max-width: 1200px){
-  #bloodhound{
+  #search-people{
     width: 350px;
   }
 }
 
+@media (min-width: 992px) and (max-width: 1200px){
+  .tt-dropdown-menu {
+    width: 320px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1200px){
+  .typeahead, .tt-query, .tt-hint {
+    width: 320px;
+  }
+}
+
 @media (min-width: 750px) and (max-width: 991px){
-  #bloodhound{
+  #search-people{
     width: 230px;
   }
 }
 
+@media (min-width: 750px) and (max-width: 991px){
+  .tt-dropdown-menu {
+    width: 200px;
+  }
+}
+
+@media (min-width: 750px) and (max-width: 991px){
+  .typeahead, .tt-query, .tt-hint {
+    width: 200px;
+  }
+}
+
 @media (max-width: 750px){
-  #bloodhound{
+  #search-people{
+    width: 100%;
+    margin-right: 0px;
+    margin-bottom: 800px;
+  }
+}
+
+@media (max-width: 750px){
+  .tt-dropdown-menu {
+    width: 100%;
+  }
+}
+
+@media (max-width: 750px){
+  .right-inner-addon i{
+    display: none;
+  }
+}
+
+@media (max-width: 750px){
+  .typeahead, .tt-query, .tt-hint {
     width: 100%;
   }
 }
@@ -280,18 +391,4 @@ form.form-border .form-group {
   }
 }
 
-.right-inner-addon{
-  position: relative;
-}
-
-.right-inner-addon input{
-  padding-right: 30px;
-}
-
-.right-inner-addon span{
-  position: absolute;
-  right: 0px;
-  padding: 10px 25px;
-  pointer-events: none;
-}
 

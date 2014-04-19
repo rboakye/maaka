@@ -31,6 +31,10 @@ Makasa::Application.routes.draw do
 
   get ':username/edit' => 'users#edit'
 
+  get 'all_users' => 'users#all_users'
+
+  get 'alt_users/find/:search' => 'users#alt_users'
+
   patch 'users/:id/avatar_update' => 'users#avatar_update'
 
   patch 'users/:id/password_update' => 'users#password_update'
