@@ -139,4 +139,12 @@ module UsersHelper
     return list
   end
 
+  def get_user_ids(communities)
+     list = []
+     communities.each do |community|
+       list << User.find_by_user_uuid(community.member_uuid).id
+     end
+     return list
+  end
+
 end

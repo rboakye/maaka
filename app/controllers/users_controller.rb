@@ -41,7 +41,8 @@ class UsersController < ApplicationController
 
   # GET /users/all_users.json
   def alt_users
-    @other_users = User.search_users(params[:search])
+    @prefetch_ids = get_user_ids(@current_user.communities)
+    @other_users = User.search_users(params[:search]).where.not(id: @prefetch_ids)
     respond_to do |format|
       format.json
     end
