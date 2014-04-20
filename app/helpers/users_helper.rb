@@ -147,4 +147,13 @@ module UsersHelper
      return list
   end
 
+  def user_search_info(user)
+    if user.avatar_file_name?
+      link = user.avatar.url('thumb')
+    else
+      link = "assets/mystery_man.jpg"
+    end
+    return link
+  end
+
 end

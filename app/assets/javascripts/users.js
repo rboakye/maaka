@@ -31,7 +31,12 @@ $(document).ready(function () {
                 '<div class="empty-message text-info">',
                 'no user matches your current entry',
                 '</div>'
-            ].join('\n')
+            ].join('\n'),
+            suggestion: Handlebars.compile('<a class="list-group-item search_link" href="{{url}}">' +
+                    '<img src="{{image_link}}" class="search_img img-rounded" >' +
+                    '<span class="search_text text-info">{{name}}</span>' +
+             '</a>')
+
     }
    });
 });

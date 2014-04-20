@@ -64,6 +64,9 @@ gem 'jquery-fileupload-rails'
 # Use for typaheads functions
 gem 'twitter-typeahead-rails'
 
+# Use pre-compling templates
+gem 'handlebars_assets'
+
 #gem 'devise', '3.0.0.rc'
 
 #gem 'protected_attributes'
