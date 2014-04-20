@@ -151,7 +151,7 @@ module UsersHelper
     if user.avatar_file_name?
       link = user.avatar.url('thumb')
     else
-      link = "assets/mystery_man.jpg"
+      link = asset_path "mystery_man.jpg"
     end
     return link
   end
