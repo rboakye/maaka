@@ -18,4 +18,42 @@ module PostsHelper
     user_name = User.find(kasa.connected_id).user_name
     return "/#{user_name}"
   end
+
+  def find_momentable(id, type)
+    if type == 'Post'
+      item = Post.find(id)
+      if item
+        return item
+      end
+    elsif type == 'Image'
+      item = Image.find(id)
+      if item
+        return item
+      end
+    elsif type == 'Comment'
+      item = Comment.find(id)
+      if item
+        return item
+      end
+    else
+      return nil
+    end
+  end
+
+  def find_comment_item(id, type)
+    if type == 'Post'
+      item = Post.find(id)
+      if item
+        return item
+      end
+    elsif type == 'Image'
+      item = Image.find(id)
+      if item
+        return item
+      end
+    else
+       return nil
+    end
+  end
+
 end

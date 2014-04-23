@@ -1,0 +1,12 @@
+$('#image_post_<%= @image.id %>').find('.comments').append("<%= escape_javascript( render :partial => 'new_comment', :locals => {:comment => @comment, :user => @user} )%>");
+
+$('#image_post_<%= @image.id %>').find('#comment_kasa_comment').val("");
+
+$('.comment-block').mouseover(function (e) {
+    $(this).find('.delete-comment').css("visibility", "visible");
+}).mouseleave(function () {
+    $('.delete-comment').css("visibility", "hidden");
+});
+
+$('.delete-comment').tooltip();
+

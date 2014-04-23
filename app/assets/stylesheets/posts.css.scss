@@ -7,16 +7,18 @@
 }
 
 #home_image{
-  background-image: image-url("makasa_network.jpg");
-  background-repeat: no-repeat;
-  height: 621px;
-  left: 0;
-  bottom: 30px;
+  margin-bottom: 30px;
+}
+
+#home_image img{
+  border: 5px solid #dedcde;
 }
 
 #jumbotron_div{
+}
 
-
+.kasa-panel .panel-body{
+  padding: 5px 15px;
 }
 
 .timeline-info {

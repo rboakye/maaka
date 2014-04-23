@@ -16,13 +16,35 @@ class UsersController < ApplicationController
   def show
     @can_view = in_my_community(@user,@current_user)
     if @can_view || @user.id == @current_user.id
-      @kasas = @user.posts.order('created_at DESC')
+      @kasas = @user.timelines.order('updated_at DESC').paginate(page: params[:page] || 1)
+
       @kasa = Post.new
       @comment = Comment.new
       @images = @user.images
       @can_view = true
       @community_list = @user.communities
       @messages = @user.messages
+    end
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  # GET /users/all_users.json
+  def all_users
+    @my_users = get_my_contacts(@current_user.communities)
+    respond_to do |format|
+        format.json
+    end
+  end
+
+  # GET /users/all_users.json
+  def alt_users
+    @prefetch_ids = get_user_ids(@current_user.communities)
+    @other_users = User.search_users(params[:search]).where.not(id: @prefetch_ids)
+    respond_to do |format|
+      format.json
     end
   end
 

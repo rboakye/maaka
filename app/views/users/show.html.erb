@@ -1,4 +1,5 @@
 <% if @can_view %>
+<div id="user-show" class="row">
   <ul class="tab-bar grey-tab">
     <li class="active">
       <a data-toggle="tab" href="#my_timeline">
@@ -85,7 +86,7 @@
       <%= form_for @kasa,url: {controller: 'posts',action: 'connected_post', connected_id: @user.id }, remote: true do |f| %>
           <%= f.hidden_field :post_by, value: @user_guid  %>
           <div class="panel-body padding-xs">
-            <%= f.text_area :post_content, required:"", class: "form-control no-border no-shadow", placeholder: "Kasa to #{@user.first_name}", rows: "2" %>
+            <%= f.text_area :post_content, required:"", class: "form-control no-border no-shadow", placeholder: "Kasa to #{@user.first_name}", rows: "1" %>
           </div>
           <div class="panel-footer clearfix">
             <%= f.submit 'Kasa', class: "btn btn-md btn-info pull-right" %>
@@ -96,12 +97,17 @@
       <% end %>
      <% end %>
     </div><!-- /panel -->
-
     <div id="all-kasa-wrapper" class="row">
-      <% @kasas.each do |kasa|%>
-          <%= render partial: 'posts/kasa', :locals => {:kasa => kasa, user: @current_user, :comment => @comment} %>
-      <% end %>
+      <%= render partial: "users/posts", :locals => { :kasas => @kasas, :comment => @comment } %>
     </div>
+    <div class="row text-center">
+      <%= link_to 'Get Older Post', "/" + @user.user_name + "?page=" + @kasas.next_page.to_s, :class => 'load-more-posts btn btn-default', :remote => true if @kasas.next_page %>
+    </div>
+    <% if @kasas.next_page %>
+    <div class="row text-center" id="myloading">
+      <%= image_tag('loading.gif') %>
+    </div>
+    <% end %>
     <div id="delete-modal-wrapper"></div>
   </div>
  </div>
@@ -131,7 +137,6 @@
      </div>
     </div>
    </div>
-   <div id="photo-modal-wrapper"></div>
   </div>
 
   <% if @user.id == @user_id %>
@@ -232,5 +237,8 @@
         </div>
       </div>
     </div>
-
 <% end %>
+<% if @can_view %>
+<div id="photo-modal-wrapper"></div>
+<% end %>
+</div>

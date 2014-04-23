@@ -31,6 +31,10 @@ Makasa::Application.routes.draw do
 
   get ':username/edit' => 'users#edit'
 
+  get 'all_users' => 'users#all_users'
+
+  get 'alt_users/find/:search' => 'users#alt_users'
+
   patch 'users/:id/avatar_update' => 'users#avatar_update'
 
   patch 'users/:id/password_update' => 'users#password_update'
@@ -39,6 +43,9 @@ Makasa::Application.routes.draw do
 
   get "posts/delete_modal/:post_uuid" => 'posts#delete_modal'
 
+  get "images/delete_image_modal/:image_uuid" => 'images#delete_image_modal'
+
+
   post 'connected_post/:connected_id' => 'posts#connected_post'
 
   get 'images/:id/display_image/:user' => 'images#display_image'
@@ -46,6 +53,10 @@ Makasa::Application.routes.draw do
   get 'images/:id/display_other/:user' => 'images#display_other'
 
   post 'comments/image_comment' => 'comments#image_comment'
+
+  post 'comments/image_tl_comment' => 'comments#image_tl_comment'
+
+  post 'comments/my_image_tl_comment' => 'comments#my_image_tl_comment'
 
   get 'notify/:sender_id/request/:user_id' => 'users#connection_request'
 
@@ -56,6 +67,12 @@ Makasa::Application.routes.draw do
   get 'users/cancel/request/:transaction_id' => 'users#cancel_request'
 
   get 'update_messages' => 'users#update_messages'
+
+  get 'comments/update_post_comments/:post_id/:id' => 'comments#update_post_comments'
+
+  get 'comments/update_image_comments/:image_id/:id' => 'comments#update_image_comments'
+
+  get 'comments/update_modal_comments/:image_id/:id' => 'comments#update_modal_comments'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  item_type: MyString
+  item_uuid: MyString
+  creator: MyString
+  feed_uuid: MyString
+  other_content: MyText
+  feeder: MyString
+  user_id: 
+
+two:
+  item_type: MyString
+  item_uuid: MyString
+  creator: MyString
+  feed_uuid: MyString
+  other_content: MyText
+  feeder: MyString
+  user_id: 

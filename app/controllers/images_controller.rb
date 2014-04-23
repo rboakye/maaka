@@ -33,6 +33,7 @@ class ImagesController < ApplicationController
       if @image.save
         UserImage.create(user_id: @current_user.id, image_id: @image.id, position: size = @current_user.images.size + 1)
         set_image_pos
+        @image.timelines.create(user_id: @current_user.id)
         format.js
         format.json { render action: 'show', status: :created, location: @image }
       else
@@ -130,6 +131,18 @@ class ImagesController < ApplicationController
     respond_to do |format|
       format.js
       format.json { head :no_content }
+    end
+  end
+
+  #get /images/delete_modal/uuid
+  def delete_image_modal
+    @image = Image.where(image_uuid: params[:image_uuid]).first
+    respond_to do |format|
+      if @image
+        format.js
+      else
+        format.js
+      end
     end
   end
 

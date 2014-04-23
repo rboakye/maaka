@@ -11,17 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140222053548) do
+ActiveRecord::Schema.define(version: 20140308082728) do
 
   create_table "comments", force: true do |t|
-    t.text     "kasa_comment", null: false
-    t.integer  "post_id"
+    t.text     "kasa_comment",     null: false
+    t.integer  "commentable_id",   null: false
+    t.string   "commentable_type", null: false
+    t.string   "user_uuid",        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "user_uuid",    null: false
   end
 
-  add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
+  add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
 
   create_table "communities", force: true do |t|
     t.string   "owner",        null: false
@@ -31,15 +32,6 @@ ActiveRecord::Schema.define(version: 20140222053548) do
     t.datetime "updated_at"
     t.string   "member_uuid",  null: false
   end
-
-  create_table "image_comments", force: true do |t|
-    t.integer  "image_id"
-    t.integer  "comment_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "image_comments", ["comment_id", "image_id"], name: "index_image_comments_on_comment_id_and_image_id", using: :btree
 
   create_table "images", force: true do |t|
     t.text     "image_description"
@@ -76,6 +68,18 @@ ActiveRecord::Schema.define(version: 20140222053548) do
     t.boolean  "is_connected", default: false
     t.integer  "connected_id"
   end
+
+  create_table "timelines", force: true do |t|
+    t.integer  "momentable_id",                  null: false
+    t.string   "momentable_type",                null: false
+    t.integer  "user_id",                        null: false
+    t.boolean  "is_public",       default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "timelines", ["momentable_id", "momentable_type"], name: "index_timelines_on_momentable_id_and_momentable_type", using: :btree
+  add_index "timelines", ["user_id"], name: "index_timelines_on_user_id", using: :btree
 
   create_table "user_communities", force: true do |t|
     t.integer  "user_id"

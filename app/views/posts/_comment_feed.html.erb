@@ -1,0 +1,48 @@
+<% if comment_type %>
+    <% item = find_comment_item(comment_type.commentable_id,comment_type.commentable_type) %>
+    <% if comment_type.commentable_type == 'Post' %>
+      <% if item.is_connected == false %>
+          <div id="kasa_<%= item.id %>_post" class="timeline-item">
+              <div id="single_post_<%= item.id %>" class="panel comment-panel">
+                <div class="panel-heading kasa-heading comment-header">
+                  <span class="fa fa-comment-o pull-right text-info"></span>
+                  <% if @current_user.user_uuid == item.post_by %>
+                      <%= link_to username_by_guid(comment_type.user_uuid),"/" + username_id_by_guid(comment_type.user_uuid),class: "text-info" %> commented on <%= user_gender(@current_user.id)%> post
+                  <% else %>
+                      <%= link_to username_by_guid(comment_type.user_uuid),"/" + username_id_by_guid(comment_type.user_uuid),class: "text-info" %> commented on
+                      <%= link_to username_by_guid(item.post_by),"/" + username_id_by_guid(item.post_by),class: "text-info" %> post
+                  <% end %>
+                  <small class="text-muted">
+                    <i class="fa fa-clock-o fa-lg"></i>
+                    <%= time_ago_in_words(comment_type.created_at)%> ago
+                  </small>
+                </div>
+                <div class="panel-body comment-body">
+                      <%= render partial: 'posts/home_kasa', :locals => {:kasa => item, user: @current_user, :comment => comment} %>
+                </div>
+              </div><!-- /panel -->
+            </div>
+      <% end %>
+    <% else %>
+        <div id="kasa_<%= item.id %>_post" class="timeline-item">
+          <div id="single_post_<%= item.id %>" class="panel comment-panel">
+            <div class="panel-heading kasa-heading comment-header">
+              <span class="fa fa-comment-o fa-lg pull-right text-info"></span>
+              <% if @current_user.user_uuid == item.creator %>
+                  <%= link_to username_by_guid(comment_type.user_uuid),"/" + username_id_by_guid(comment_type.user_uuid),class: "text-info" %> commented on <%= user_gender(@current_user.id)%> photo
+              <% else %>
+                  <%= link_to username_by_guid(comment_type.user_uuid),"/" + username_id_by_guid(comment_type.user_uuid),class: "text-info" %> commented on
+                  <%= link_to username_by_guid(item.creator),"/" + username_id_by_guid(item.creator),class: "text-info" %> photo
+              <% end %>
+              <small class="text-muted">
+                <i class="fa fa-clock-o"></i>
+                <%= time_ago_in_words(comment_type.created_at)%> ago
+              </small>
+            </div>
+            <div class="panel-body comment-body">
+               <%= render partial: 'posts/news_feed_image', :locals => {:image => item, user: @current_user, :comment => comment} %>
+            </div>
+          </div><!-- /panel -->
+        </div>
+    <% end %>
+<% end %>

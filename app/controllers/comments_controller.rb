@@ -28,11 +28,11 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @user = @current_user
-    @comment = Comment.new(comment_params)
-    @comment.user_uuid = @current_user.user_uuid
     @post = Post.find(params[:comment][:post_id])
+    @comment = @post.comments.create(kasa_comment: params[:comment][:kasa_comment], user_uuid: @current_user.user_uuid)
     respond_to do |format|
-      if @comment.save
+      if @comment
+        @comment.timelines.create(user_id: @current_user.id)
         format.js
         format.json { render action: 'show', status: :created, location: @comment }
       else
@@ -45,12 +45,41 @@ class CommentsController < ApplicationController
   # POST /image_comment
   def image_comment
     @user = @current_user
-    @comment = Comment.new
-    @comment.kasa_comment = params[:comment][:kasa_comment]
-    @comment.user_uuid = @current_user.user_uuid
+    @image = Image.find(params[:comment][:image_id])
+    @comment = @image.comments.create(kasa_comment: params[:comment][:kasa_comment], user_uuid: @current_user.user_uuid)
     respond_to do |format|
-      if @comment.save
-        ImageComment.create(image_id: params[:comment][:image_id], comment_id: @comment.id)
+      if @comment
+        @comment.timelines.create(user_id: @current_user.id)
+        format.js
+      else
+        format.js
+      end
+    end
+  end
+
+  # POST /image_comment
+  def image_tl_comment
+    @user = @current_user
+    @image = Image.find(params[:comment][:image_id])
+    @comment = @image.comments.create(kasa_comment: params[:comment][:kasa_comment], user_uuid: @current_user.user_uuid)
+    respond_to do |format|
+      if @comment
+        @comment.timelines.create(user_id: @current_user.id)
+        format.js
+      else
+        format.js
+      end
+    end
+  end
+
+  # POST /image_comment
+  def my_image_tl_comment
+    @user = @current_user
+    @image = Image.find(params[:comment][:image_id])
+    @comment = @image.comments.create(kasa_comment: params[:comment][:kasa_comment], user_uuid: @current_user.user_uuid)
+    respond_to do |format|
+      if @comment
+        @comment.timelines.create(user_id: @current_user.id)
         format.js
       else
         format.js
@@ -79,6 +108,51 @@ class CommentsController < ApplicationController
     respond_to do |format|
       format.js
       format.json { head :no_content }
+    end
+  end
+
+  # GET /update_post_comments/1/2
+  def update_post_comments
+    @user = @current_user
+    @post = Post.find(params[:post_id])
+    @comments = @post.comments
+    if @comments.size > 0
+      if @comments.last.id == params[:id]
+        @comments = []
+      end
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  # GET /update_image_comments/1/2
+  def update_image_comments
+    @user = @current_user
+    @image = Image.find(params[:image_id])
+    @comments = @image.comments
+    if @comments.size > 0
+      if @comments.last.id == params[:id]
+        @comments = []
+      end
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  # GET /update_modal_comments/1/2
+  def update_modal_comments
+    @user = @current_user
+    @image = Image.find(params[:image_id])
+    @comments = @image.comments
+    if @comments.size > 0
+      if @comments.last.id == params[:id]
+        @comments = []
+      end
+    end
+    respond_to do |format|
+      format.js
     end
   end
 

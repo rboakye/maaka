@@ -1,0 +1,53 @@
+<div id="image_post_<%= image.id %>" class="col-md-12 timeline-item">
+<div class="hidden-xs timeline-info">
+    <div class="media">
+      <%= user_image(user_by_guid(image.creator),'thumb') %>
+    </div>
+  </div>
+  <div class="my_single_post">
+    <div id="image_<%= image.id %>" class="panel panel-default timeline-panel image-panel">
+      <div class="panel-heading kasa-heading">
+        <% if user.user_uuid == image.creator%>
+            <span class="text-info"><%= username_by_guid(image.creator) %></span>
+        <% else %>
+            <%= link_to username_by_guid(image.creator),"/" + username_id_by_guid(image.creator),class: "text-info username_link" %>
+        <% end %>
+        <% if image.creator == user.user_uuid %>
+        <a href="/images/delete_image_modal/<%= image.image_uuid %>" class="pull-right text-danger post-delete" data-remote="true">
+          <i class="fa fa-trash-o fa-lg"></i>
+        </a>
+        <% end %>
+        <small class="pull-right text-muted">
+          <i class="fa fa-clock-o"></i>
+          <%= time_ago_in_words(image.created_at)%> ago
+        </small>
+      </div>
+      <div class="panel-body">
+        <div class="image-pane" >
+          <%= link_to image_tag(image.photo.url(:medium), class: 'img-responsive', id: "timeline-image_#{image.id}"),
+                      {action: 'display_image', controller: 'images', id: image.id, user: user.id}, remote: true %>
+        </div>
+      </div>
+      <div class="my_image">
+      <div class="comments">
+        <% image.comments.each do |comment| %>
+            <%= render partial:  "comments/image_comment", locals: {:comment => comment, :user => user, :image => image} %>
+        <% end %>
+      </div>
+      </div>
+      <%= form_for Comment.new,url: {controller: 'comments', action: 'my_image_tl_comment'}, remote: true do |f| %>
+          <%= f.hidden_field :image_id, value: image.id  %>
+          <div class="panel panel-default comment-block">
+            <div class="panel-body row">
+              <div class="hidden-xs comment-media col-xs-3 col-md-1">
+                <%= user_image_comment(user_by_guid(@current_user.user_uuid),'thumb') %>
+              </div>
+              <div class="col-xs-12 col-sm-11 col-md-11">
+                <%= f.text_area :kasa_comment, required:"", class: "form-control no-border no-shadow", placeholder: "Add comment", rows: "1" %>
+              </div>
+            </div>
+          </div>
+      <% end %>
+    </div><!-- /panel -->
+  </div>
+</div>

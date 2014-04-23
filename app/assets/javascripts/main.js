@@ -7,6 +7,7 @@
  */
 
 $(document).ready(function () {
+    var currentId = '';
 
     window.setTimeout(function() {
         $(".alert-success").fadeTo(500, 0).slideUp(500, function(){
@@ -70,7 +71,101 @@ $(document).ready(function () {
             }, 50);
         });
 
+    $('.kasa-panel').mouseover(function(event) {
+        myflag = doAjax(this.id);
+        if(myflag){
+            var post_id = this.id.replace(/[^0-9]/g,'');
+            var comment = $(this).find('.comments').children().last();
+            if(comment.length > 0){
+                var comment_id = comment.attr('id').replace(/[^0-9]/g,'');
+            }else{
+                var comment_id = '-1'
+            }
+            var url = "/comments/update_post_comments/" + post_id + "/" + comment_id;
+            $.ajax({
+                url: url,
+                context: document.body,
+                success: function(content,msg){
+                    flag = false;
+                }
+            });
+        }
+    });
+
+    $('.image-panel').mouseover(function(event) {
+        myflag = doAjax(this.id);
+        if(myflag){
+            var image_id = this.id.replace(/[^0-9]/g,'');
+            var comment = $(this).find('.comments').children().last();
+            if(comment.length > 0){
+                var comment_id = comment.attr('id').replace(/[^0-9]/g,'');
+            }else{
+                var comment_id = '-1'
+            }
+            var url = "/comments/update_image_comments/" + image_id + "/" + comment_id;
+            $.ajax({
+                url: url,
+                context: document.body,
+                success: function(content,msg){
+                    flag = false;
+                }
+            });
+        }
+    });
+
+    function doAjax(id){
+        if(currentId == id){
+           flag = false;
+        }else{
+           flag = true;
+           currentId = id;
+        }
+        return flag;
+    }
+
 });
+    $(document).on('mouseover', '.img-comment', function(event) {
+        myflag = doAjax(this.id);
+        if(myflag){
+            var image_id = this.id.replace(/[^0-9]/g,'');
+            var comment = $(this).find('.comments').children().last();
+            if(comment.length > 0){
+                var comment_id = comment.attr('id').replace(/[^0-9]/g,'');
+            }else{
+                var comment_id = '-1'
+            }
+            var url = "/comments/update_image_comments/" + image_id + "/" + comment_id;
+            $.ajax({
+                url: url,
+                context: document.body,
+                success: function(content,msg){
+                    flag = false;
+                }
+            });
+        }
+
+
+        function doAjax(id){
+            if(currentId == id){
+                flag = false;
+            }else{
+                flag = true;
+                currentId = id;
+            }
+            return flag;
+        }
+    });
+
+    var currentId = '';
+
+    $(document).on('keypress', '#comment_kasa_comment', function(event) {
+        if(event.which == 13){
+            event.preventDefault();
+            $(this).closest('form').submit();
+            $(this).val('');
+        }
+    });
+
 
      $(document).on('mouseover', '.image-view', function() {
          $(this).find('.next').css("visibility", "visible");

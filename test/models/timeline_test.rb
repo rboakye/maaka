@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ImageCommentTest < ActiveSupport::TestCase
+class TimelineTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

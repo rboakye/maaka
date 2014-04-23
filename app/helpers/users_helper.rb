@@ -24,6 +24,10 @@ module UsersHelper
     return link
   end
 
+  def full_name_link(user)
+    return "<a href='/#{user.user_name}'>#{user.first_name + ' ' + user.last_name}</a>"
+  end
+
   def friend_image(user,size)
     if user.avatar_file_name?
       link = image_tag user.avatar.url(size), class: "friends-box-img", alt: "#{user.first_name}"
@@ -112,6 +116,44 @@ module UsersHelper
     else
       return false
     end
+  end
+
+  def user_gender(id)
+    user = User.find(id)
+    if user
+      if user.gender == 'Male'
+        return 'his'
+      end
+      if user.gender == 'Female'
+        return 'her'
+      end
+    end
+    return 'own'
+  end
+
+  def get_my_contacts(communities)
+     list = []
+     communities.each do |community|
+       list << User.find_by_user_uuid(community.member_uuid)
+     end
+    return list
+  end
+
+  def get_user_ids(communities)
+     list = []
+     communities.each do |community|
+       list << User.find_by_user_uuid(community.member_uuid).id
+     end
+     return list
+  end
+
+  def user_search_info(user)
+    if user.avatar_file_name?
+      link = user.avatar.url('thumb')
+    else
+      link = asset_path "mystery_man.jpg"
+    end
+    return link
   end
 
 end
