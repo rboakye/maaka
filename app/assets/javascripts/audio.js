@@ -8,7 +8,6 @@
 
 $(document).ready(function () {
 
-
 });
 
  $(document).on('click', '.set_recorder', function() {
@@ -38,12 +37,13 @@ $(document).ready(function () {
          });
      } else alert('Browser does not support audio, use firefox or chrome.');
 
-     $('.record').click(function(){
+     function record(word){
          recording = true;
         // reset the buffers for the new recording
          leftchannel.length = rightchannel.length = 0;
          recordingLength = 0;
 
+         // after 2 seconds it stop recording and process audio
          var timer = setInterval(function(){
              recording = false;
              // we flat the left and right channels down
@@ -88,11 +88,21 @@ $(document).ready(function () {
              // our final binary blob that we can hand off
              var blob = new Blob ( [ view ], { type : 'audio/wav' } );
 
+             //set next element spinner
+             var current_word = $('.audio-sentence span').find('.show');
+             current_word.toggleClass("hide show");
+
+             var next_word = $('.audio-sentence').find('.next');
+
+             if(next_word.length){
+                 next_word.find('i').toggleClass("hide show");
+             }
+
              // let's save it locally
              var url = (window.URL || window.webkitURL).createObjectURL(blob);
              var link = window.document.createElement('a');
              link.href = url;
-             link.download = 'output.wav';
+             link.download = word + '.wav';
              var text = document.createTextNode("Download");
              link.appendChild(text)
              link.title = 'Download';
@@ -102,9 +112,10 @@ $(document).ready(function () {
              link.addEventListener('click', function (e){
              }, false);
              link.dispatchEvent(click);
+
              clearInterval(timer);
          },2000);
-     });
+     }
 
      function mergeBuffers(channelBuffer, recordingLength){
          var result = new Float32Array(recordingLength);
@@ -173,12 +184,39 @@ $(document).ready(function () {
          // we connect the recorder
          volume.connect (recorder);
          recorder.connect (context.destination);
+
+         //initiate the recorder button
+         $('.record').addClass('start');
+         $('.set_recorder').addClass('disabled');
+         if($('.audio-sentence').children().length > 1){
+             $('.record').removeClass('disabled');
+             var current_word = $('.audio-sentence').find('.next');
+             current_word.find('i').toggleClass("hide show");
+         }
      }
+
+     $('.record').click(function(){
+         var current_word = $('.audio-sentence').find('.next');
+         var next_word = current_word.next('span');
+         if(next_word.length){
+             current_word.removeClass("next");
+             next_word.addClass('next');
+         }else{
+             current_word.removeClass("next");
+             $('.record').addClass('disabled');
+         }
+
+         record(current_word.text().trim());
+
+     });
  });
 
     $(document).on('click', '.download-wav', function() {
        $('.download-wav').html("");
     });
+
+
+
 
 
 /*

@@ -1,0 +1,21 @@
+<div class="row set-recorder-btn">
+  <a class="set_recorder btn btn-md btn-default pull-right"><i class="fa fa-microphone"></i> Start Recorder</a>
+</div>
+<div class="row">
+<div class="panel panel-default">
+  <div id="sentence_list">
+    <div class="audio-sentence text-info">
+    </div>
+  </div>
+  <%= form_tag( '/my_audio_library_post', method: "post", class: 'audio_sentence', remote: true) do %>
+    <div class="panel-body padding-xs">
+      <%= text_area_tag(:kasa_sentence, '', placeholder: 'Write a Sentence to Record', rows:'2',class: 'form-control no-border no-shadow', required: 'required', maxlength: 255)%>
+    </div>
+    <div class="panel-footer clearfix">
+      <%= submit_tag('New Sentence',class: 'btn btn-md btn-primary pull-right') %>
+      <a class="record btn btn-md btn-default disabled"><i class="fa fa-circle text-danger"></i> Record</a>
+      <span class="download-wav"></span>
+    </div>
+  <% end %>
+</div>
+</div>

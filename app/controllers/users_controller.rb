@@ -284,6 +284,22 @@ class UsersController < ApplicationController
     end
   end
 
+  #GET :username/my_audio_library_post
+  def my_audio_library
+
+  end
+
+  #POST /my_audio_library_post
+  def my_audio_library_post
+    if params[:kasa_sentence]
+      array = params[:kasa_sentence].downcase.split(' ')
+      @kasa_sentence = array.uniq
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_user
@@ -304,6 +320,6 @@ class UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :user_name, :user_uuid, :old_password, :password, :password_confirmation, :about_me, :phone, :current_city, :gender, :avatar, :birth_date, :transaction_id, :sender_id, :user_id, :response )
+    params.require(:user).permit(:first_name, :last_name, :email, :user_name, :user_uuid, :old_password, :password, :password_confirmation, :about_me, :phone, :current_city, :gender, :avatar, :birth_date, :transaction_id, :sender_id, :user_id, :response, :kasa_sentence )
   end
 end

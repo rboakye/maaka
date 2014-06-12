@@ -74,6 +74,11 @@ Makasa::Application.routes.draw do
 
   get 'comments/update_modal_comments/:image_id/:id' => 'comments#update_modal_comments'
 
+  get ':username/my_audio_library' => 'users#my_audio_library'
+
+  post 'my_audio_library_post' => 'users#my_audio_library_post'
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,0 +1,6 @@
+$('.audio-sentence').html("<%= escape_javascript(render partial: 'audio_partial', locals: {audio_sentence: @kasa_sentence})%>")
+$("#kasa_sentence").val('');
+if($('.record').hasClass('start')){
+   $('.record').removeClass('disabled');
+}
+$('.audio-sentence').children(':first-child').addClass('next');
