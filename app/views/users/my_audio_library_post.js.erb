@@ -4,3 +4,5 @@ if($('.record').hasClass('start')){
    $('.record').removeClass('disabled');
 }
 $('.audio-sentence').children(':first-child').addClass('next');
+var current_word = $('.audio-sentence').find('.next');
+current_word.find('i').toggleClass("hide show");

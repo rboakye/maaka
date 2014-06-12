@@ -191,7 +191,9 @@ $(document).ready(function () {
          if($('.audio-sentence').children().length > 1){
              $('.record').removeClass('disabled');
              var current_word = $('.audio-sentence').find('.next');
-             current_word.find('i').toggleClass("hide show");
+             if(current_word.find('i').hasClass('hide')){
+                current_word.find('i').toggleClass("hide show");
+             }
          }
      }
 
