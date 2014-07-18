@@ -11,7 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140308082728) do
+ActiveRecord::Schema.define(version: 20140614001609) do
+
+  create_table "audio_pieces", force: true do |t|
+    t.string   "category"
+    t.string   "audio_uuid",         null: false
+    t.integer  "user_id",            null: false
+    t.string   "audio_file_name"
+    t.string   "audio_content_type"
+    t.integer  "audio_file_size"
+    t.datetime "audio_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "audio_pieces", ["audio_uuid"], name: "index_audio_pieces_on_audio_uuid", using: :btree
+  add_index "audio_pieces", ["user_id"], name: "index_audio_pieces_on_user_id", using: :btree
 
   create_table "comments", force: true do |t|
     t.text     "kasa_comment",     null: false
@@ -26,11 +41,11 @@ ActiveRecord::Schema.define(version: 20140308082728) do
 
   create_table "communities", force: true do |t|
     t.string   "owner",        null: false
+    t.string   "member_uuid",  null: false
     t.boolean  "family"
     t.string   "relationship"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "member_uuid",  null: false
   end
 
   create_table "images", force: true do |t|

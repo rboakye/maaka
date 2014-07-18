@@ -37,7 +37,7 @@ $(document).ready(function () {
          });
      } else alert('Browser does not support audio, use firefox or chrome.');
 
-     function record(word){
+     function record(elem, word){
          recording = true;
         // reset the buffers for the new recording
          leftchannel.length = rightchannel.length = 0;
@@ -91,11 +91,16 @@ $(document).ready(function () {
              //set next element spinner
              var current_word = $('.audio-sentence span').find('.show');
              current_word.toggleClass("hide show");
+             elem.toggleClass("label-success label-info");
+             elem.toggleClass("word-item-tall word-item-short");
+
 
              var next_word = $('.audio-sentence').find('.next');
 
              if(next_word.length){
                  next_word.find('i').toggleClass("hide show");
+                 next_word.toggleClass("word-item-tall word-item-short");
+                 next_word.toggleClass("label-info label-success");
              }
 
              // let's save it locally
@@ -208,7 +213,7 @@ $(document).ready(function () {
              $('.record').addClass('disabled');
          }
 
-         record(current_word.text().trim());
+         record(current_word, current_word.text().trim());
 
      });
  });

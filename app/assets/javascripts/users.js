@@ -15,7 +15,10 @@ $(document).ready(function () {
 
     },
     limit: 5,
-    prefetch: 'all_users.json',
+    prefetch: {
+        url: 'all_users.json',
+        ttl: 10000
+    },
     remote: 'alt_users/find/%QUERY.json'
     });
 

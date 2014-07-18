@@ -12,6 +12,7 @@ Makasa::Application.routes.draw do
   get "access/index"
   get "access/login"
   resources :users
+  resources :audio_pieces
 
   get "logout" => 'access#logout'
 

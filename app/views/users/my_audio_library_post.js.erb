@@ -5,4 +5,6 @@ if($('.record').hasClass('start')){
 }
 $('.audio-sentence').children(':first-child').addClass('next');
 var current_word = $('.audio-sentence').find('.next');
+current_word.toggleClass("word-item-short word-item-tall");
+current_word.toggleClass("label-info label-success");
 current_word.find('i').toggleClass("hide show");
